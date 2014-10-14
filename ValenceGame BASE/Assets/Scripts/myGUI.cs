@@ -29,6 +29,7 @@ public class myGUI : MonoBehaviour {
 
 		GUI.Label(new Rect(Screen.width/2-50,Screen.height/2-50,100,100), cursorPic);
         if (player.GetComponent<GunScript>().eqBalanced)
+			//if (player.GetComponent<GunScript>().balanced || !player.GetComponent<GunScript>().isEquation)
         {
             GUI.Box(new Rect(10, (Screen.height - 10) - length1, 30, length1), "", "redbar");
 			GUI.Box(new Rect(50, (Screen.height - (30 * player.GetComponent<GunScript>().tank1Rate)), 30, (30 * player.GetComponent<GunScript>().tank1Rate) - 10), "", "whitebar");

@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{8BD2D9B3-BF01-D75E-7EBB-AACE959AE3CB}</ProjectGuid>
+	<ProjectGuid>{E8A7CA07-784C-9252-A8F9-B06E9CAFE76D}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,7 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CatchFire.cs" />
+     <Compile Include="Assets\Scripts\CatchFire.cs" />
      <Compile Include="Assets\Scripts\CharContScript.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Compounds\CarbDiox.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Compounds\Compound.cs" />
@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Chemicals\Reactions\Reaction.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Reactions\WaterReac.cs" />
      <Compile Include="Assets\Scripts\Cursor.cs" />
+     <Compile Include="Assets\Scripts\ElementScript.cs" />
      <Compile Include="Assets\Scripts\EndCondition.cs" />
      <Compile Include="Assets\Scripts\Extinguished.cs" />
      <Compile Include="Assets\Scripts\FireOut.cs" />
@@ -86,9 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{6123D0F1-F506-69F3-7A01-298F6D87C7A6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{80226DF3-2BE1-B2C3-9992-310742C978C7}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{34BDC753-00B9-593A-1030-05DD04AE0755}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+      <Project>{844BA6A1-EB78-D74C-B055-F643E18F4909}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

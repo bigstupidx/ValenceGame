@@ -3,13 +3,16 @@ using System.Collections;
 
 public class GunScript : MonoBehaviour {
 	public int power;
+		//never used in GunScript
 	public int numclicks;
+		//what is this for?
 	
     public GameObject emitter;
 	
     public bool isEmitting;
 	public bool isEmpty;
-
+	"public bool isEquation;     //is there a specific equation that is being used to get elements
+		//what does this do?
 	public bool eqBalanced;		//was 'balanced'
 
     public GameObject effect;
@@ -36,6 +39,15 @@ public class GunScript : MonoBehaviour {
 
 	public Chemical.Reaction activeReact;
 
+
+
+	//can only absorb 2 things (for now)
+    "public GameObject absorb1;
+    "public GameObject shoot1;
+    "public GameObject absorb2;
+    "public GameObject shoot2;
+
+
 	// Use this for initialization
 	void Start () {
 		isEmpty = true;
@@ -43,10 +55,10 @@ public class GunScript : MonoBehaviour {
 		eqBalanced = false;
 		combineCap = 0;
 		cursorName = " ";
-		tank1Name = "O2";
-		tank2Name = "H2";
-		tank1Rate = 1;
-		tank2Rate = 2;
+		tank1Name = "O2";	//not brookes. MUST REMOVE HARD CODE
+		tank2Name = "H2";	//not brookes. 
+		tank1Rate = 1;		//not brookes. 
+		tank2Rate = 2;		//not brookes. 
 		//perhaps include tankElem3 at some point?
 
 		sprayDamage = 0;
@@ -71,6 +83,8 @@ public class GunScript : MonoBehaviour {
             if (hit.distance < 8)
             {
 				cursorName = hit.transform.name;
+				'elemName = hit.transform.GetComponent<ElementScript>().name;
+					//i suppose she sets elementScripts name for each object it's attached to
             }
         }
         else
@@ -136,6 +150,36 @@ public class GunScript : MonoBehaviour {
 							tank2Cap += 1;
                         }
                     }
+
+					
+
+					'if (isEquation && balanced)
+                    '{
+                    '    if (hit2.transform.GetComponent<ElementScript>().name == elem1Name)
+							//where is elem1name set?
+                    '    {
+                    '        if (Elem1capacity < fullCap)
+                    '        {
+                    '            Elem1capacity += 1;
+                    '        }
+                    '    }
+                    '    if (hit2.transform.GetComponent<ElementScript>().name == elem2Name)
+                    '    {
+                    '        if (Elem2capacity < fullCap)
+                    '        {
+                    '            Elem2capacity += 1;
+                    '        }
+                    '    }
+                    '}
+                    'else if (!isEquation)
+                    '{
+                    '    elem1Name = hit2.transform.GetComponent<ElementScript>().name;
+                    '    if (Elem1capacity < fullCap)
+                    '    {
+                    '        Elem1capacity += 1;
+                    '    }
+                    '}
+
 				}
 			}
 		}
@@ -143,6 +187,7 @@ public class GunScript : MonoBehaviour {
 
 		//shooting
         if (eqBalanced)
+			'if (balanced || !isEquation)
         {
             if (Input.GetButtonDown("Fire1"))
             {

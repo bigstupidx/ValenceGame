@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CharContScript : MonoBehaviour {
 
+
+	//CURRENTLY UNUSED
+
 	// Use this for initialization
 	void Start () {
 	
