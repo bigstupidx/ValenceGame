@@ -101,6 +101,8 @@ public class GunScript : MonoBehaviour {
 
 			activeReact = new WaterReac();
 
+			//prodChem = this.gameObject.AddComponent<Water>();
+
 		}
 
 		//identifying objects (for damaging)
@@ -139,15 +141,16 @@ public class GunScript : MonoBehaviour {
 
 					//if (reactSelected)	//specific absorb if specific reaction selected
 
-					//if (hit2.transform.GetComponent<ElementScript>().name == tank1Name)
-					if (hit2.transform.name == tank1Name)
+					if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank1Name)
+					//if (hit2.transform.name == tank1Name)
                     {
 						if (tank1Cap < fullCap)
                         {
 							tank1Cap += 1;
                         }
                     }
-					if (hit2.transform.name == tank2Name)
+					if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank2Name)
+					//if (hit2.transform.name == tank2Name)
                     {
 						if (tank2Cap < fullCap)
                         {

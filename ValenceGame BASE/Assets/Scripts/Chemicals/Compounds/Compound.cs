@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Chemical {
 
+	//[System.Serializable]
 	public abstract class Compound {
 
 		protected string formula;
