@@ -11,7 +11,7 @@ public class GunScript : MonoBehaviour {
 	
     public bool isEmitting;
 	public bool isEmpty;
-	"public bool isEquation;     //is there a specific equation that is being used to get elements
+	public bool reactSelected;    //was 'isEquation' //is there a specific equation that is being used to get elements
 		//what does this do?
 	public bool eqBalanced;		//was 'balanced'
 
@@ -41,11 +41,11 @@ public class GunScript : MonoBehaviour {
 
 
 
-	//can only absorb 2 things (for now)
-    "public GameObject absorb1;
-    "public GameObject shoot1;
-    "public GameObject absorb2;
-    "public GameObject shoot2;
+	//used for different particle emitters
+    public GameObject absorb1;		//for compound 1
+    public GameObject shoot1;		//for compound 1
+    public GameObject absorb2;		//for compound 2
+    public GameObject shoot2;		//for compound 2
 
 
 	// Use this for initialization
@@ -83,7 +83,7 @@ public class GunScript : MonoBehaviour {
             if (hit.distance < 8)
             {
 				cursorName = hit.transform.name;
-				'elemName = hit.transform.GetComponent<ElementScript>().name;
+				//cursorName = hit.transform.GetComponent<ElementScript>().name;
 					//i suppose she sets elementScripts name for each object it's attached to
             }
         }
@@ -136,49 +136,30 @@ public class GunScript : MonoBehaviour {
 					q.eulerAngles = new Vector3(hit2.normal.x - ray.direction.x, hit2.normal.y - ray.direction.y, hit2.normal.z - ray.direction.z);
 					Instantiate(effect, hit2.point, q);
 					isEmpty = false;
-					if (hit.transform.name == tank1Name)
+
+					//if (reactSelected)	//specific absorb if specific reaction selected
+
+					//if (hit2.transform.GetComponent<ElementScript>().name == tank1Name)
+					if (hit2.transform.name == tank1Name)
                     {
 						if (tank1Cap < fullCap)
                         {
 							tank1Cap += 1;
                         }
                     }
-					if (hit.transform.name == tank2Name)
+					if (hit2.transform.name == tank2Name)
                     {
 						if (tank2Cap < fullCap)
                         {
 							tank2Cap += 1;
                         }
                     }
-
 					
 
-					'if (isEquation && balanced)
-                    '{
-                    '    if (hit2.transform.GetComponent<ElementScript>().name == elem1Name)
-							//where is elem1name set?
-                    '    {
-                    '        if (Elem1capacity < fullCap)
-                    '        {
-                    '            Elem1capacity += 1;
-                    '        }
-                    '    }
-                    '    if (hit2.transform.GetComponent<ElementScript>().name == elem2Name)
-                    '    {
-                    '        if (Elem2capacity < fullCap)
-                    '        {
-                    '            Elem2capacity += 1;
-                    '        }
-                    '    }
-                    '}
-                    'else if (!isEquation)
-                    '{
-                    '    elem1Name = hit2.transform.GetComponent<ElementScript>().name;
-                    '    if (Elem1capacity < fullCap)
-                    '    {
-                    '        Elem1capacity += 1;
-                    '    }
-                    '}
+					//else (!reactSelected)	//to absorb anything without specific reaction selected
+					
+
+					
 
 				}
 			}
@@ -187,7 +168,7 @@ public class GunScript : MonoBehaviour {
 
 		//shooting
         if (eqBalanced)
-			'if (balanced || !isEquation)
+			//if (eqBalanced || !reactSelected)	//to allow to shoot if no reaction selected
         {
             if (Input.GetButtonDown("Fire1"))
             {
