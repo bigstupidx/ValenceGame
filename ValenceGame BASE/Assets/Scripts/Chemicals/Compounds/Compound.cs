@@ -6,19 +6,23 @@ using System.Collections.Generic;
 namespace Chemical {
 
 	//[System.Serializable]
-	public abstract class Compound {
+	public class Compound : MonoBehaviour {
 
-		protected string formula;
-		protected Dictionary<Element, int> atoms;
+		public string formula;
+		public Dictionary<Element, int> atoms;
 		//protected GameObject accessor;
+
+
+		public ParticleSystem absorber;
+		public ParticleSystem shooter;
 
 		//need frozen + hot properties
 
 
-		protected Compound(string f) {
-			formula = f;
-
-		}
+//		protected Compound(string f) {
+//			formula = f;
+//
+//		}
 
 
 		public string getFormula() {
@@ -30,12 +34,12 @@ namespace Chemical {
 		}
 
 
-		public abstract int damage (string obstacleName);		//"damages" the object
+		public virtual int damage (string obstacleName) {return 0;}		//"damages" the object
 			//pass the name of the object that the ray is pointing at
 			//this function will return damage if the compound removes the object
 				//otherwise returns 0
 		
-		public abstract int heal (string obstacleName);
+		public virtual int heal (string obstacleName) {return 0;}
 			//pass the name of the object that the ray is pointing at
 			//this function will return NEGATIVE damage if the compound feeds or increases the object
 				//otherwise returns 0
@@ -90,9 +94,9 @@ namespace Chemical {
 	//	}
 
 		// Use this for initialization
-		//public abstract void Start ();
+		public virtual void Start () {}
 		
 		// Update is called once per frame
-		//public abstract void Update ();
+		public virtual void Update () {}
 	}
 }

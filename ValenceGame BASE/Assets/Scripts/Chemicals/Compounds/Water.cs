@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class Water : Chemical.Compound {
 
 
-	public Water() : base("H2O") {
-
-		atoms = new Dictionary<Chemical.Element, int>();
-		atoms.Add (new Hydrogen(), 2);
-		atoms.Add (new Oxygen (), 1);
-	}
+//	public Water() : base("H2O") {
+//
+//		atoms = new Dictionary<Chemical.Element, int>();
+//		atoms.Add (new Hydrogen(), 2);
+//		atoms.Add (new Oxygen (), 1);
+//	}
 
 
 
@@ -57,12 +57,18 @@ public class Water : Chemical.Compound {
 	*/
 
 	// Use this for initialization
-	///public override void Start () {
+	public override void Start () {
+		formula = "H2O";
 
-	//}
+		atoms = new Dictionary<Chemical.Element, int>();
+		atoms.Add (new Hydrogen(), 2);
+		atoms.Add (new Oxygen (), 1);
+
+
+	}
 	
 	// Update is called once per frame
-	//public override void Update () {
+	public override void Update () {
 //	
-	//}
+	}
 }

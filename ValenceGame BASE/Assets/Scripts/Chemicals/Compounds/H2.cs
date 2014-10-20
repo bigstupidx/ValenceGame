@@ -6,12 +6,12 @@ public class H2 : Chemical.Compound {
 
 
 
-	public H2() : base("H2") {
+//	public H2() : base("H2") {
 		
-		atoms = new Dictionary<Chemical.Element, int>();
-		atoms.Add (new Hydrogen(), 2);
-		
-	}
+//		atoms = new Dictionary<Chemical.Element, int>();
+//		atoms.Add (new Hydrogen(), 2);
+//		
+//	}
 
 
 	public override int damage (string obstacleName) {
@@ -40,5 +40,14 @@ public class H2 : Chemical.Compound {
 	}
 
 	*/
+
+	public override void Start() {
+		formula = "H2";
+
+		atoms = new Dictionary<Chemical.Element, int>();
+		atoms.Add (new Hydrogen(), 2);
+	}
+
+	public override void Update() {}
 
 }

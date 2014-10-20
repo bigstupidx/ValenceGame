@@ -6,17 +6,21 @@ public class Methane : Chemical.Compound {
 
 
 
-	public Methane() : base("CH4") {
-		
-		atoms = new Dictionary<Chemical.Element, int>();
-		atoms.Add (new Carbon(), 1);
-		atoms.Add (new Hydrogen (), 4);
-	}
+//	public Methane() : base("CH4") {
+//		
+//		atoms = new Dictionary<Chemical.Element, int>();
+//		atoms.Add (new Carbon(), 1);
+//		atoms.Add (new Hydrogen (), 4);
+//	}
 
 
 
 	public override int damage (string obstacleName) {
-		
+
+		if(obstacleName == "Firewall") {
+			return -2;
+		}
+
 		return 0;
 	}
 	
@@ -43,5 +47,15 @@ public class Methane : Chemical.Compound {
 	
 */
 
+	public override void Start() {
+		formula = "CH4";
+			
+			atoms = new Dictionary<Chemical.Element, int>();
+			atoms.Add (new Carbon(), 1);
+			atoms.Add (new Hydrogen (), 4);
+
+	}
+
+	public override void Update() {}
 
 }

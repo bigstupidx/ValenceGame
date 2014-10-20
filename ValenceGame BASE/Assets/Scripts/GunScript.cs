@@ -37,7 +37,7 @@ public class GunScript : MonoBehaviour {
 
 	public Chemical.Compound prodChem;
 
-	public Chemical.Reaction activeReact;
+//	public Chemical.Reaction activeReact;
 
 
 
@@ -56,9 +56,9 @@ public class GunScript : MonoBehaviour {
 		combineCap = 0;
 		cursorName = " ";
 		tank1Name = "O2";	//not brookes. MUST REMOVE HARD CODE
-		tank2Name = "H2";	//not brookes. 
-		tank1Rate = 1;		//not brookes. 
-		tank2Rate = 2;		//not brookes. 
+		tank2Name = "H2";	//not brookes. HARD CODE
+		tank1Rate = 1;		//not brookes. HARD CODED
+		tank2Rate = 2;		//not brookes. HARD CODED
 		//perhaps include tankElem3 at some point?
 
 		sprayDamage = 0;
@@ -92,21 +92,33 @@ public class GunScript : MonoBehaviour {
 			cursorName = " ";
         }
 
-		if (eqBalanced) {
-			prodChem = new Water();		//obviously change this to not be hardcoded water, but current compound
+		if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null) {
+			//prodChem = new Water();		//obviously change this to not be hardcoded water, but current compound
 				//THIS DOESN'T WORK WITH MONOBEHAVIOURS! must "AddComponent()", but don't know how that works.
 				//I'm going to try and make Compounds just a regular class.
 			//works with Compounds being a regular class! :)
 
+//			activeReact = new WaterReac();
 
-			activeReact = new WaterReac();
 
-			//prodChem = this.gameObject.AddComponent<Water>();
+
+			prodChem = this.gameObject.AddComponent<Water>();
+
+
+			//prodChem = this.gameObject.AddComponent<Methane>();	//RETRIEVE FROM ACTIVE REACTION
+				//HARDCODE
+	
+			//tank1Name = "CH4";	//not brookes. MUST REMOVE HARD CODE
+			//tank2Name = "CH4";	//not brookes. HARD CODE
+			//tank1Rate = 4;		//not brookes. HARD CODED
+			//tank2Rate = 4;		//not brookes. HARD CODED
+
 
 		}
 
 		//identifying objects (for damaging)
-		if(prodChem != null && !isEmpty) {
+		//if(prodChem != null && !isEmpty) {
+		if(this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty) {
 
 			//foreach(Chemical.Compound comp in activeReact.Products) {
 			//	sprayDamage = comp.damage(hit.transform.name);
@@ -141,7 +153,8 @@ public class GunScript : MonoBehaviour {
 
 					//if (reactSelected)	//specific absorb if specific reaction selected
 
-					if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank1Name)
+					//if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank1Name)
+					if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank1Name)
 					//if (hit2.transform.name == tank1Name)
                     {
 						if (tank1Cap < fullCap)
@@ -149,7 +162,8 @@ public class GunScript : MonoBehaviour {
 							tank1Cap += 1;
                         }
                     }
-					if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank2Name)
+					//if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank2Name)
+					if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank2Name)
 					//if (hit2.transform.name == tank2Name)
                     {
 						if (tank2Cap < fullCap)

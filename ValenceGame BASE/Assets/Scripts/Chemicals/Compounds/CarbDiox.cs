@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class CarbDiox : Chemical.Compound {
 
-	public CarbDiox() : base("CO2") {
+//	public CarbDiox() : base("CO2") {
 
-		atoms = new Dictionary<Chemical.Element, int>();
-		atoms.Add (new Oxygen(), 2);
-		atoms.Add (new Carbon (), 1);
+//		atoms = new Dictionary<Chemical.Element, int>();
+//		atoms.Add (new Oxygen(), 2);
+//		atoms.Add (new Carbon (), 1);
 	
-	}
+//	}
 
 	public override int damage (string obstacleName) {
 		
@@ -45,6 +45,15 @@ public class CarbDiox : Chemical.Compound {
 	}
 
 	*/
-	
 
+	public override void Start() {
+		formula = "CO2";
+
+		atoms = new Dictionary<Chemical.Element, int>();
+		atoms.Add (new Oxygen(), 2);
+		atoms.Add (new Carbon (), 1);
+	
+	}
+	
+	public override void Update() {}
 }
