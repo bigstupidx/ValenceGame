@@ -22,7 +22,7 @@ public class GunScript : MonoBehaviour {
 	public int tank1Cap;		//was 'elem1capacity'
 	public int tank2Cap;		//was 'elem2capacity'
 	public int tank3Cap;
-	const int fullCap = 400;
+	private int fullCap = 400; //needs to be private to be accessed  by gui
 
 	//compound names
     public string cursorName;	//was "elemName"
@@ -47,6 +47,10 @@ public class GunScript : MonoBehaviour {
     public GameObject absorb2;		//for compound 2
     public GameObject shoot2;		//for compound 2
 
+    public int getFullCap()
+    {
+        return fullCap;
+    }
 
 	// Use this for initialization
 	void Start () {
