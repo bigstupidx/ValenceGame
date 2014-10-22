@@ -1,6 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Chemicals/Reactions/WaterReac.cs">
+    <Files>
+      <File FileName="Assets/Scripts/GunScript.cs" Line="112" Column="32" />
+      <File FileName="Assets/Scripts/Chemicals/Compounds/Compound.cs" Line="9" Column="8" />
+      <File FileName="Assets/Scripts/GunScript.cs" Line="244" Column="1" />
+      <File FileName="Assets/Scripts/Chemicals/Reactions/WaterReac.cs" Line="29" Column="15" />
+      <File FileName="Assets/Scripts/Chemicals/Reactions/Reaction.cs" Line="129" Column="20" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

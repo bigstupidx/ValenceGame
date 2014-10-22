@@ -37,7 +37,7 @@ public class GunScript : MonoBehaviour {
 
 	public Chemical.Compound prodChem;
 
-//	public Chemical.Reaction activeReact;
+	public Chemical.Reaction activeReact;
 
 
 
@@ -46,6 +46,7 @@ public class GunScript : MonoBehaviour {
     public GameObject shoot1;		//for compound 1
     public GameObject absorb2;		//for compound 2
     public GameObject shoot2;		//for compound 2
+	//COULDN'T WE JUST MAKE THIS USE WHAT'S STORED IN COMPOUND (emitters)?
 
     public int getFullCap()
     {
@@ -59,10 +60,10 @@ public class GunScript : MonoBehaviour {
 		eqBalanced = false;
 		combineCap = 0;
 		cursorName = " ";
-		tank1Name = "O2";	//not brookes. MUST REMOVE HARD CODE
-		tank2Name = "H2";	//not brookes. HARD CODE
-		tank1Rate = 1;		//not brookes. HARD CODED
-		tank2Rate = 2;		//not brookes. HARD CODED
+		tank1Name = "";	//not brookes. MUST REMOVE HARD CODE
+		tank2Name = "";	//not brookes. HARD CODE
+		tank1Rate = 0;		//not brookes. HARD CODED
+		tank2Rate = 0;		//not brookes. HARD CODED
 		//perhaps include tankElem3 at some point?
 
 		sprayDamage = 0;
@@ -104,10 +105,18 @@ public class GunScript : MonoBehaviour {
 
 //			activeReact = new WaterReac();
 
+			activeReact = new WaterReac();
+			tank1Name = activeReact.Reactant1.formula;
+			//FINISH THIS!!!
 
 
-			prodChem = this.gameObject.AddComponent<Water>();
 
+
+			prodChem = this.gameObject.AddComponent<Water>();	//HARDCODED
+			tank1Name = "";	//HARD CODED
+			tank2Name = "H2";	//HARD CODED
+			tank1Rate = 1;		//HARD CODED
+			tank2Rate = 2;		//HARD CODED
 
 			//prodChem = this.gameObject.AddComponent<Methane>();	//RETRIEVE FROM ACTIVE REACTION
 				//HARDCODE
