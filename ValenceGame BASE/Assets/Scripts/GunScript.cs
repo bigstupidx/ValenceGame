@@ -12,8 +12,8 @@ public class GunScript : MonoBehaviour {
     public bool isEmitting;
 	public bool isEmpty;
 	public bool reactSelected;    //was 'isEquation' //is there a specific equation that is being used to get elements
-		//what does this do?
-	public bool eqBalanced;		//was 'balanced'
+
+    public bool eqBalanced;		//was 'balanced'
 
     public GameObject effect;
 
@@ -35,11 +35,9 @@ public class GunScript : MonoBehaviour {
 
 	public int sprayDamage;		//to use with different elements and objects
 
+    public string prodChemName;
 	public Chemical.Compound prodChem;
-
 //	public Chemical.Reaction activeReact;
-
-
 
 	//used for different particle emitters
     public GameObject absorb1;		//for compound 1
@@ -47,7 +45,7 @@ public class GunScript : MonoBehaviour {
     public GameObject absorb2;		//for compound 2
     public GameObject shoot2;		//for compound 2
 
-    public int getFullCap()
+    public int getFullCap()  //So GUI can know the maximum capacity in order to scale the gui to screen
     {
         return fullCap;
     }
@@ -59,10 +57,10 @@ public class GunScript : MonoBehaviour {
 		eqBalanced = false;
 		combineCap = 0;
 		cursorName = " ";
-		tank1Name = "O2";	//not brookes. MUST REMOVE HARD CODE
-		tank2Name = "H2";	//not brookes. HARD CODE
-		tank1Rate = 1;		//not brookes. HARD CODED
-		tank2Rate = 2;		//not brookes. HARD CODED
+		//tank1Name = "O2";	//not brookes. MUST REMOVE HARD CODE
+		//tank2Name = "H2";	//not brookes. HARD CODE
+		//tank1Rate = 1;		//not brookes. HARD CODED
+		//tank2Rate = 2;		//not brookes. HARD CODED
 		//perhaps include tankElem3 at some point?
 
 		sprayDamage = 0;
@@ -87,8 +85,6 @@ public class GunScript : MonoBehaviour {
             if (hit.distance < 8)
             {
 				cursorName = hit.transform.name;
-				//cursorName = hit.transform.GetComponent<ElementScript>().name;
-					//i suppose she sets elementScripts name for each object it's attached to
             }
         }
         else
@@ -96,27 +92,9 @@ public class GunScript : MonoBehaviour {
 			cursorName = " ";
         }
 
-		if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null) {
-			//prodChem = new Water();		//obviously change this to not be hardcoded water, but current compound
-				//THIS DOESN'T WORK WITH MONOBEHAVIOURS! must "AddComponent()", but don't know how that works.
-				//I'm going to try and make Compounds just a regular class.
-			//works with Compounds being a regular class! :)
-
-//			activeReact = new WaterReac();
-
-
-
-			prodChem = this.gameObject.AddComponent<Water>();
-
-
-			//prodChem = this.gameObject.AddComponent<Methane>();	//RETRIEVE FROM ACTIVE REACTION
-				//HARDCODE
-	
-			//tank1Name = "CH4";	//not brookes. MUST REMOVE HARD CODE
-			//tank2Name = "CH4";	//not brookes. HARD CODE
-			//tank1Rate = 4;		//not brookes. HARD CODED
-			//tank2Rate = 4;		//not brookes. HARD CODED
-
+		if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null) {			
+			//prodChemName will be set by the reaction, else it will just be the element name
+            prodChem = this.gameObject.AddComponent("prodChemName") as Chemical.Compound;
 
 		}
 
