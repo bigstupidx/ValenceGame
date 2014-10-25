@@ -7,7 +7,7 @@ public class GunScript : MonoBehaviour {
 	public int numclicks;
 		//what is this for?
 	
-    public GameObject emitter;
+    public GameObject emitter;  //HARDCODE
 	
     public bool isEmitting;
 	public bool isEmpty;
@@ -15,7 +15,7 @@ public class GunScript : MonoBehaviour {
 
     public bool eqBalanced;		//was 'balanced'
 
-    public GameObject effect;
+    public GameObject effect;   //HARDCODE
 
 	//compound capacities in tank
 	public int combineCap;		//was 'capacity'
@@ -24,6 +24,7 @@ public class GunScript : MonoBehaviour {
 	public int tank3Cap;
 	private int fullCap = 400; //needs to be private to be accessed  by gui
 
+    //compond names and compound rates will need to be set by the reaction
 	//compound names
     public string cursorName;	//was "elemName"
 	public string tank1Name;	//was 'elem1Name'
@@ -55,12 +56,11 @@ public class GunScript : MonoBehaviour {
 		isEmpty = true;
 		isEmitting = false;
 		eqBalanced = false;
+        reactSelected = false;
 		combineCap = 0;
 		cursorName = " ";
-		//tank1Name = "O2";	//not brookes. MUST REMOVE HARD CODE
-		//tank2Name = "H2";	//not brookes. HARD CODE
-		//tank1Rate = 1;		//not brookes. HARD CODED
-		//tank2Rate = 2;		//not brookes. HARD CODED
+		tank1Rate = 1;		//unless reaction needed, no need to adjust rates
+		tank2Rate = 0;		//can only absorb one element when reaction not selected
 		//perhaps include tankElem3 at some point?
 
 		sprayDamage = 0;
@@ -93,7 +93,8 @@ public class GunScript : MonoBehaviour {
         }
 
 		if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null) {			
-			//prodChemName will be set by the reaction, else it will just be the element name
+			
+            //prodChemName will be set by the reaction, else it will just be the element name
             prodChem = this.gameObject.AddComponent("prodChemName") as Chemical.Compound;
 
 		}
@@ -117,7 +118,7 @@ public class GunScript : MonoBehaviour {
 		}
 
 		//absorbing
-		if (Input.GetMouseButton(1) && eqBalanced)
+		if (Input.GetMouseButton(1) && (eqBalanced || !reactSelected))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 			
@@ -130,44 +131,60 @@ public class GunScript : MonoBehaviour {
 				{
 					Quaternion q = Quaternion.identity;
 					q.eulerAngles = new Vector3(hit2.normal.x - ray.direction.x, hit2.normal.y - ray.direction.y, hit2.normal.z - ray.direction.z);
-					Instantiate(effect, hit2.point, q);
-					isEmpty = false;
 
-					//if (reactSelected)	//specific absorb if specific reaction selected
-
-					//if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank1Name)
-					if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank1Name)
-					//if (hit2.transform.name == tank1Name)
-                    {
-						if (tank1Cap < fullCap)
+                    if (reactSelected)
+                    {	//specific absorb if specific reaction selected
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank1Name)
                         {
-							tank1Cap += 1;
+                            if (tank1Cap < fullCap)
+                            {
+                                tank1Cap += 1;
+
+                                Instantiate(effect, hit2.point, q);
+                                isEmpty = false;
+
+                            }
+                        }
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank2Name)
+                        {
+                            if (tank2Cap < fullCap)
+                            {
+                                tank2Cap += 1;
+
+                                Instantiate(effect, hit2.point, q);
+                                isEmpty = false;
+                            }
                         }
                     }
-					//if (hit2.transform.GetComponent<ElementScript>().compound.getFormula() == tank2Name)
-					if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank2Name)
-					//if (hit2.transform.name == tank2Name)
-                    {
-						if (tank2Cap < fullCap)
+                    else if (!reactSelected)
+                    {	//to absorb anything without specific reaction selected
+                        if (tank1Cap == 0)  //can absorb anything into tank1
                         {
-							tank2Cap += 1;
+                            tank1Name = hit2.transform.GetComponent<Chemical.Compound>().getFormula();
+                            tank1Cap += 1;
+
+                            Instantiate(effect, hit2.point, q);
+                            isEmpty = false;
+                        }
+                        else if(hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank1Name)
+                        {
+                            if (tank1Cap < fullCap)
+                            {
+                                tank1Cap += 1;
+
+                                Instantiate(effect, hit2.point, q);
+                                isEmpty = false;
+                            }
                         }
                     }
-					
-
-					//else (!reactSelected)	//to absorb anything without specific reaction selected
-					
-
-					
-
 				}
 			}
 		}
 
 
 		//shooting
-        if (eqBalanced)
-			//if (eqBalanced || !reactSelected)	//to allow to shoot if no reaction selected
+        //if (eqBalanced)
+		if (eqBalanced || !reactSelected)	//to allow to shoot if no reaction selected
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -182,23 +199,42 @@ public class GunScript : MonoBehaviour {
             {
                 if (isEmitting && !isEmpty)
                 {
-					if (tank1Cap > 0 && tank2Cap > 0)
+                    if (reactSelected) //is using more than one element
                     {
-                        isEmpty = false;
-                        isEmitting = true;
-                        emitter.particleSystem.Play();
-						tank1Cap -= 1 * tank1Rate;
-						tank2Cap -= 1 * tank2Rate;
+                        if (tank1Cap > 0 && tank2Cap > 0)
+                        {
+                            isEmpty = false;
+                            isEmitting = true;
+                            emitter.particleSystem.Play();
+                            tank1Cap -= 1 * tank1Rate;
+                            tank2Cap -= 1 * tank2Rate;
+                        }
+                        else
+                        {
+                            isEmpty = true;
+                            isEmitting = false;
+                            emitter.particleSystem.Stop();
+                        }
                     }
-                    else
+                    else //not a reaction, just single compound
                     {
-                        isEmpty = true;
-                        isEmitting = false;
-                        emitter.particleSystem.Stop();
+                        if (tank1Cap > 0)
+                        {
+                            isEmpty = false;
+                            isEmitting = true;
+                            emitter.particleSystem.Play();
+                            tank1Cap -= 1 * tank1Rate;
+                        }
+                        else
+                        {
+                            isEmpty = true;
+                            isEmitting = false;
+                            emitter.particleSystem.Stop();
+                        }
                     }
                 }
             }
-            if (Input.GetButtonUp("Fire1"))
+            if (Input.GetButtonUp("Fire1")) //stop emitting
             {
                 if (isEmitting)
                 {
