@@ -105,8 +105,8 @@ public class GunScript : MonoBehaviour {
 
 //			activeReact = new WaterReac();
 
-			activeReact = new WaterReac();
-			tank1Name = activeReact.Reactant1.formula;
+			//activeReact = new WaterReac();
+			tank1Name = "O2";	//activeReact.Reactant1.formula;
 			//FINISH THIS!!!
 
 

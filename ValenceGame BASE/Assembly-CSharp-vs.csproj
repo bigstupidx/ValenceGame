@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Chemicals\Elements\Element.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Elements\Hydrogen.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Elements\Oxygen.cs" />
+     <Compile Include="Assets\Scripts\Chemicals\Reactions\MethaneCombust.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Reactions\Reaction.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Reactions\WaterReac.cs" />
      <Compile Include="Assets\Scripts\Cursor.cs" />

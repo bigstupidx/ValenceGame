@@ -4,11 +4,23 @@ using System.Collections.Generic;
 
 namespace Chemical {
 
-	public abstract class Reaction {
+	public class Reaction : MonoBehaviour {
 	    // A reaction consumes one or more Reactants and creates one or more Products
 
+		//SO I THINK I'M GONG TO MAKE THIS A MONOBEHAVIOUR.
+			//so that i can attach it to the note object,
+			//NoteBalance can stay separate from the reaction,
+			//and all that.
+		//NEED SOME WAY TO DESIGNATE THE "LOW" COMPOUND, for proportions of compound in balance.
+
 		protected string reactName;
-		protected GameObject holder;	//for holding Components
+		public string ReactName {
+			get {
+				return reactName;
+			}
+		}
+
+//		public GameObject holder;	//for holding Components
 		//public string ReactName {
 		//	get {
 		//		return reactName;
@@ -140,20 +152,29 @@ namespace Chemical {
 
 
 		protected energy energyType;
+		public energy EnergyType {
+			get {
+				return energyType;		
+			}
+		}
 
-
-		protected enum energy {
+		public enum energy {
 			Exotherm, Endotherm, Refreshing, None
 		};
 
 
-		protected Reaction(string rN) {
-			reactName = rN;
-		}
+//		protected Reaction(string rN) {
+//			reactName = rN;
+//		}
 
-		public string getReactName() {
-			return reactName;
-		}
+
+
+
+		public virtual void Start () {}
+		
+		// Update is called once per frame
+		public virtual void Update () {}
+
 	
 	}
 }
