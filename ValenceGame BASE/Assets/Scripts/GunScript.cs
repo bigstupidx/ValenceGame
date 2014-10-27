@@ -1,83 +1,81 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GunScript : MonoBehaviour {
-	public int power;
-		//never used in GunScript
-	public int numclicks;
-		//what is this for?
-	
+public class GunScript : MonoBehaviour
+{
+    public int power;
+    //never used in GunScript
+    public int numclicks;
+    //what is this for?
+
     public GameObject emitter;  //HARDCODE
-	
+
     public bool isEmitting;
-	public bool isEmpty;
-	public bool reactSelected;    //was 'isEquation' //is there a specific equation that is being used to get elements
+    public bool isEmpty;
+    public bool reactSelected;    //was 'isEquation' //is there a specific equation that is being used to get elements
 
     public bool eqBalanced;		//was 'balanced'
 
     public GameObject effect;   //HARDCODE
 
-	//compound capacities in tank
-	public int combineCap;		//was 'capacity'
-	public int tank1Cap;		//was 'elem1capacity'
-	public int tank2Cap;		//was 'elem2capacity'
-	public int tank3Cap;
-	private int fullCap = 400; //needs to be private to be accessed  by gui
+    //compound capacities in tank
+    public int combineCap;		//was 'capacity'
+    public int tank1Cap;		//was 'elem1capacity'
+    public int tank2Cap;		//was 'elem2capacity'
+    public int tank3Cap;
+    private int fullCap = 400; //needs to be private to be accessed  by gui
 
     //compond names and compound rates will need to be set by the reaction
-	//compound names
+    //compound names
     public string cursorName;	//was "elemName"
-	public string tank1Name;	//was 'elem1Name'
-	public string tank2Name;	//was 'elem2Name'
+    public string tank1Name;	//was 'elem1Name'
+    public string tank2Name;	//was 'elem2Name'
 
-	//compound use rates
-	public int tank1Rate;		//was 'rateElem1'
-	public int tank2Rate;		//was 'rateElem2'
+    //compound use rates
+    public int tank1Rate;		//was 'rateElem1'
+    public int tank2Rate;		//was 'rateElem2'
 
-	public int sprayDamage;		//to use with different elements and objects
+    public int sprayDamage;		//to use with different elements and objects
 
     public string prodChemName;
-	public Chemical.Compound prodChem;
-	public Chemical.Reaction activeReact;
+    public Chemical.Compound prodChem;
+    //	public Chemical.Reaction activeReact;
 
-
-	//used for different particle emitters
+    //used for different particle emitters
     public GameObject absorb1;		//for compound 1
     public GameObject shoot1;		//for compound 1
     public GameObject absorb2;		//for compound 2
     public GameObject shoot2;		//for compound 2
-	//COULDN'T WE JUST MAKE THIS USE WHAT'S STORED IN COMPOUND (emitters)?
 
     public int getFullCap()  //So GUI can know the maximum capacity in order to scale the gui to screen
     {
         return fullCap;
     }
 
-	// Use this for initialization
-	void Start () {
-		isEmpty = true;
-		isEmitting = false;
-		eqBalanced = false;
+    // Use this for initialization
+    void Start()
+    {
+        isEmpty = true;
+        isEmitting = false;
+        eqBalanced = false;
         reactSelected = false;
-		combineCap = 0;
-		cursorName = " ";
+        combineCap = 0;
+        cursorName = " ";
+        tank1Rate = 1;		//unless reaction needed, no need to adjust rates
+        tank2Rate = 0;		//can only absorb one element when reaction not selected
+        //perhaps include tankElem3 at some point?
 
-		tank1Name = "";	//not brookes. MUST REMOVE HARD CODE
-		tank2Name = "";	//not brookes. HARD CODE
-		tank1Rate = 0;		//not brookes. HARD CODED
-		tank2Rate = 0;		//not brookes. HARD CODED
-		//perhaps include tankElem3 at some point?
+        sprayDamage = 0;
+    }
 
-		sprayDamage = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         //venting
         if (Input.GetKeyDown(KeyCode.Q))
         {
-			tank1Cap = 0;
-			tank2Cap = 0;
+            tank1Cap = 0;
+            tank2Cap = 0;
         }
         //identifying elements
         Ray ray1 = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -89,79 +87,55 @@ public class GunScript : MonoBehaviour {
         {
             if (hit.distance < 8)
             {
-				cursorName = hit.transform.name;
+                cursorName = hit.transform.name;
             }
         }
         else
         {
-			cursorName = " ";
+            cursorName = " ";
         }
-		
-		if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null) {
-			//prodChem = new Water();		//obviously change this to not be hardcoded water, but current compound
-				//THIS DOESN'T WORK WITH MONOBEHAVIOURS! must "AddComponent()", but don't know how that works.
-				//I'm going to try and make Compounds just a regular class.
-			//works with Compounds being a regular class! :)
 
-//			activeReact = new WaterReac();
+        if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null)
+        {
 
-			//activeReact = new WaterReac();
-			tank1Name = "O2";	//activeReact.Reactant1.formula;
-			//FINISH THIS!!!
+            //prodChemName will be set by the reaction, else it will just be the element name
+            prodChem = this.gameObject.AddComponent("prodChemName") as Chemical.Compound;
 
+        }
 
+        //identifying objects (for damaging)
+        //if(prodChem != null && !isEmpty) {
+        if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
+        {
 
+            //foreach(Chemical.Compound comp in activeReact.Products) {
+            //	sprayDamage = comp.damage(hit.transform.name);
+            //so maybe just give property to emitter, and detect hit on object?
 
-			prodChem = this.gameObject.AddComponent("prodChemName") as Chemical.Compound;	//HARDCODED
-			tank1Name = "";	//HARD CODED
-			tank2Name = "H2";	//HARD CODED
-			tank1Rate = 1;		//HARD CODED
-			tank2Rate = 2;		//HARD CODED
-
-			//prodChem = this.gameObject.AddComponent<Methane>();	//RETRIEVE FROM ACTIVE REACTION
-				//HARDCODE
-	
-			//tank1Name = "CH4";	//not brookes. MUST REMOVE HARD CODE
-			//tank2Name = "CH4";	//not brookes. HARD CODE
-			//tank1Rate = 4;		//not brookes. HARD CODED
-			//tank2Rate = 4;		//not brookes. HARD CODED
+            //	emitter.GetComponent<Extinguished>().particleDamage = sprayDamage;
+            //}
 
 
+            sprayDamage = prodChem.damage(hit.transform.name);
+            //this will be used in script Extinguished
 
-		}
+            emitter.GetComponent<Extinguished>().particleDamage = sprayDamage;
+        }
 
-		//identifying objects (for damaging)
-		//if(prodChem != null && !isEmpty) {
-		if(this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty) {
+        //absorbing
+        if (Input.GetMouseButton(1) && (eqBalanced || !reactSelected))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-			//foreach(Chemical.Compound comp in activeReact.Products) {
-			//	sprayDamage = comp.damage(hit.transform.name);
-					//so maybe just give property to emitter, and detect hit on object?
+            RaycastHit hit2;
+            Physics.Raycast(ray, out hit2, 1000f);
 
-			//	emitter.GetComponent<Extinguished>().particleDamage = sprayDamage;
-			//}
-
-
-			sprayDamage = prodChem.damage(hit.transform.name);
-				//this will be used in script Extinguished
-
-			emitter.GetComponent<Extinguished>().particleDamage = sprayDamage;
-		}
-
-		//absorbing
-		if (Input.GetMouseButton(1) && (eqBalanced || !reactSelected))
-		{
-			Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-			
-			RaycastHit hit2;
-			Physics.Raycast(ray, out hit2, 1000f);
-			
-			if (hit2.transform.tag == "Absorbable")
-			{
-				if (hit2.distance < 8)
-				{
-					Quaternion q = Quaternion.identity;
-					q.eulerAngles = new Vector3(hit2.normal.x - ray.direction.x, hit2.normal.y - ray.direction.y, hit2.normal.z - ray.direction.z);
+            if (hit2.transform.tag == "Absorbable")
+            {
+                if (hit2.distance < 8)
+                {
+                    Quaternion q = Quaternion.identity;
+                    q.eulerAngles = new Vector3(hit2.normal.x - ray.direction.x, hit2.normal.y - ray.direction.y, hit2.normal.z - ray.direction.z);
 
                     if (reactSelected)
                     {	//specific absorb if specific reaction selected
@@ -197,7 +171,7 @@ public class GunScript : MonoBehaviour {
                             Instantiate(effect, hit2.point, q);
                             isEmpty = false;
                         }
-                        else if(hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank1Name)
+                        else if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank1Name)
                         {
                             if (tank1Cap < fullCap)
                             {
@@ -208,14 +182,14 @@ public class GunScript : MonoBehaviour {
                             }
                         }
                     }
-				}
-			}
-		}
+                }
+            }
+        }
 
 
-		//shooting
+        //shooting
         //if (eqBalanced)
-		if (eqBalanced || !reactSelected)	//to allow to shoot if no reaction selected
+        if (eqBalanced || !reactSelected)	//to allow to shoot if no reaction selected
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -272,12 +246,12 @@ public class GunScript : MonoBehaviour {
                     isEmitting = false;
                     emitter.particleSystem.Stop();
 
-					if (tank1Cap <= 0 && tank1Cap <= 0)
+                    if (tank1Cap <= 0 && tank1Cap <= 0)
                     {
                         isEmpty = true;
                     }
                 }
             }
         }
-	}
+    }
 }
