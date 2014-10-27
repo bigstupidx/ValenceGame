@@ -38,13 +38,15 @@ public class GunScript : MonoBehaviour {
 
     public string prodChemName;
 	public Chemical.Compound prodChem;
-//	public Chemical.Reaction activeReact;
+	public Chemical.Reaction activeReact;
+
 
 	//used for different particle emitters
     public GameObject absorb1;		//for compound 1
     public GameObject shoot1;		//for compound 1
     public GameObject absorb2;		//for compound 2
     public GameObject shoot2;		//for compound 2
+	//COULDN'T WE JUST MAKE THIS USE WHAT'S STORED IN COMPOUND (emitters)?
 
     public int getFullCap()  //So GUI can know the maximum capacity in order to scale the gui to screen
     {
@@ -59,8 +61,11 @@ public class GunScript : MonoBehaviour {
         reactSelected = false;
 		combineCap = 0;
 		cursorName = " ";
-		tank1Rate = 1;		//unless reaction needed, no need to adjust rates
-		tank2Rate = 0;		//can only absorb one element when reaction not selected
+
+		tank1Name = "";	//not brookes. MUST REMOVE HARD CODE
+		tank2Name = "";	//not brookes. HARD CODE
+		tank1Rate = 0;		//not brookes. HARD CODED
+		tank2Rate = 0;		//not brookes. HARD CODED
 		//perhaps include tankElem3 at some point?
 
 		sprayDamage = 0;
@@ -91,11 +96,37 @@ public class GunScript : MonoBehaviour {
         {
 			cursorName = " ";
         }
+		
+		if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null) {
+			//prodChem = new Water();		//obviously change this to not be hardcoded water, but current compound
+				//THIS DOESN'T WORK WITH MONOBEHAVIOURS! must "AddComponent()", but don't know how that works.
+				//I'm going to try and make Compounds just a regular class.
+			//works with Compounds being a regular class! :)
 
-		if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null) {			
-			
-            //prodChemName will be set by the reaction, else it will just be the element name
-            prodChem = this.gameObject.AddComponent("prodChemName") as Chemical.Compound;
+//			activeReact = new WaterReac();
+
+			//activeReact = new WaterReac();
+			tank1Name = "O2";	//activeReact.Reactant1.formula;
+			//FINISH THIS!!!
+
+
+
+
+			prodChem = this.gameObject.AddComponent("prodChemName") as Chemical.Compound;	//HARDCODED
+			tank1Name = "";	//HARD CODED
+			tank2Name = "H2";	//HARD CODED
+			tank1Rate = 1;		//HARD CODED
+			tank2Rate = 2;		//HARD CODED
+
+			//prodChem = this.gameObject.AddComponent<Methane>();	//RETRIEVE FROM ACTIVE REACTION
+				//HARDCODE
+	
+			//tank1Name = "CH4";	//not brookes. MUST REMOVE HARD CODE
+			//tank2Name = "CH4";	//not brookes. HARD CODE
+			//tank1Rate = 4;		//not brookes. HARD CODED
+			//tank2Rate = 4;		//not brookes. HARD CODED
+
+
 
 		}
 
