@@ -27,6 +27,8 @@ public class myGUI : MonoBehaviour
 	
 	private GUIStyle guiStyle;
 	
+    public string productName;
+
 	void Start()
 	{
 		cursorPic = (Texture2D)Resources.Load("cursor");
@@ -36,7 +38,8 @@ public class myGUI : MonoBehaviour
 		guiStyle.normal.textColor = Color.white;
 		
 		fullCap = player.GetComponent<GunScript>().getFullCap();
-		
+	
+	    productName = "";
 	}
 	
 	void OnGUI()
@@ -80,10 +83,11 @@ public class myGUI : MonoBehaviour
 		GUI.skin = mySkin;
 		
 		GUI.Label(new Rect(Screen.width / 2 - (50 * ratW), Screen.height / 2 - (50 * ratH), 100 * ratW, 100 * ratH), cursorPic);
-		player.GetComponent<GunScript> ().eqBalanced = true;
-		if (player.GetComponent<GunScript>().eqBalanced)
+	
+        //Do need to show GUI all the time
+		//if (player.GetComponent<GunScript>().eqBalanced)
 			//if (player.GetComponent<GunScript>().balanced || !player.GetComponent<GunScript>().isEquation)
-		{
+		//{
 			
 			//First bar
 			Rect bar1 = new Rect(10 * ratW, (Screen.height) - 130*ratH, 20 * ratW, 100*ratH);
@@ -111,7 +115,7 @@ public class myGUI : MonoBehaviour
 
 			//Selected Reaction
 			mySkin.font = font;
-			GUI.Box(new Rect(10 * ratW, (Screen.height) - 160*ratH, 80 * ratW, 30*ratH), "H20");
+			GUI.Box(new Rect(10 * ratW, (Screen.height) - 160*ratH, 80 * ratW, 30*ratH), productName);
 			
 			
 			//GUI.Box(new Rect(50 * ratW, (Screen.height - (30 * ratH * player.GetComponent<GunScript>().tank1Rate)), 30 * ratW, (30 * ratH * player.GetComponent<GunScript>().tank1Rate) - (10 * ratH)), "");
@@ -129,7 +133,7 @@ public class myGUI : MonoBehaviour
 			
 			//GUI.Box(new Rect(10 * ratW, 10 * ratH, 50 * ratW, 50 * ratH), "   H2O", "whitebar");
 			//GUI.Button(new Rect(10 * ratW, (Screen.height - (10 * ratH)) - 180, 50 * ratW, 50 * ratH), "   H2O");
-		}
+		//}
 		
 		GUI.Label(new Rect(Screen.width / 2 - (20 * ratW), Screen.height / 2 - (60 * ratH), 50 * ratW, 50 * ratH), player.GetComponent<GunScript>().cursorName, guiStyle);		
 		

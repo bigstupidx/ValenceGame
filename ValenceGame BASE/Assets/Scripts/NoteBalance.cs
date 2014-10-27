@@ -460,6 +460,7 @@ public class NoteBalance : MonoBehaviour {
             {
                 balanceSuccessful = true;
                 GameObject.Find("Player").GetComponent<GunScript>().eqBalanced = true;
+                GameObject.Find("Player").GetComponent<GunScript>().reactSelected = true;
             }
             else
                 balanceSuccessful = false;
