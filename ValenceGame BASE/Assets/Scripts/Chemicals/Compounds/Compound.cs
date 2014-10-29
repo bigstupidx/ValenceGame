@@ -8,7 +8,21 @@ namespace Chemical {
 	//[System.Serializable]
 	public class Compound : MonoBehaviour {
 
-		public string formula;
+        protected string compoundName;  //corresponds to the name of the SCRIPT
+        public string CompoundName {
+            get {
+                return compoundName;
+            }
+        }
+		protected string formula;   //corresponds to the CHEMICAL FORMULA
+        public string Formula
+        {
+            get
+            {
+                return formula;
+            }
+        }
+
 		public Dictionary<Element, int> atoms;
 		//protected GameObject accessor;
 

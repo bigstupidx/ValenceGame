@@ -58,7 +58,8 @@ public class Water : Chemical.Compound {
 
 	// Use this for initialization
 	public override void Start () {
-		formula = "H2O";
+        compoundName = "Water";
+        formula = "H2O";
 
 		atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Hydrogen(), 2);

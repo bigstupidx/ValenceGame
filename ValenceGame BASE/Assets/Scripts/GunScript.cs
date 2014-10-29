@@ -37,9 +37,9 @@ public class GunScript : MonoBehaviour
 
     public int sprayDamage;		//to use with different elements and objects
 
-    public string prodChemName;
-    public Chemical.Compound prodChem;
-    //	public Chemical.Reaction activeReact;
+    public string chemToShootName;
+    public Chemical.Compound chemToShoot;
+   	public Chemical.Reaction activeReact;
 
     //used for different particle emitters
     public GameObject absorb1;		//for compound 1
@@ -61,7 +61,7 @@ public class GunScript : MonoBehaviour
         reactSelected = false;
         combineCap = 0;
         cursorName = " ";
-        tank1Rate = 1;		//unless reaction needed, no need to adjust rates
+        tank1Rate = 2;		//unless reaction needed, no need to adjust rates
         tank2Rate = 0;		//can only absorb one element when reaction not selected
         //perhaps include tankElem3 at some point?
 
@@ -97,14 +97,14 @@ public class GunScript : MonoBehaviour
 
         if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null)
         {
+            //SEMI-HARDCODE NEEDS TO BE CHANGED WHEN PRODUCT SELECTION IMPLEMENTED
+            chemToShootName = activeReact.Product1.CompoundName;
 
-            //prodChemName will be set by the reaction, else it will just be the element name
-            prodChem = this.gameObject.AddComponent("prodChemName") as Chemical.Compound;
+            chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
 
         }
 
         //identifying objects (for damaging)
-        //if(prodChem != null && !isEmpty) {
         if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
         {
 
@@ -116,7 +116,7 @@ public class GunScript : MonoBehaviour
             //}
 
 
-            sprayDamage = prodChem.damage(hit.transform.name);
+            sprayDamage = chemToShoot.damage(hit.transform.name);
             //this will be used in script Extinguished
 
             emitter.GetComponent<Extinguished>().particleDamage = sprayDamage;
@@ -137,24 +137,29 @@ public class GunScript : MonoBehaviour
                     Quaternion q = Quaternion.identity;
                     q.eulerAngles = new Vector3(hit2.normal.x - ray.direction.x, hit2.normal.y - ray.direction.y, hit2.normal.z - ray.direction.z);
 
-                    if (reactSelected)
+                    if (reactSelected && activeReact != null)
                     {	//specific absorb if specific reaction selected
-                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank1Name)
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeReact.Reactant1.getFormula())
                         {
+                            tank1Name = activeReact.Reactant1.getFormula();
+                            tank1Rate = activeReact.ReactCoeff1;
                             if (tank1Cap < fullCap)
                             {
-                                tank1Cap += 1;
+                                tank1Cap += 2;
 
                                 Instantiate(effect, hit2.point, q);
                                 isEmpty = false;
 
                             }
                         }
-                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == tank2Name)
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeReact.Reactant2.getFormula())
                         {
+                            tank2Name = activeReact.Reactant2.getFormula();
+                            tank2Rate = activeReact.ReactCoeff2;
+
                             if (tank2Cap < fullCap)
                             {
-                                tank2Cap += 1;
+                                tank2Cap += 2;
 
                                 Instantiate(effect, hit2.point, q);
                                 isEmpty = false;
@@ -166,7 +171,7 @@ public class GunScript : MonoBehaviour
                         if (tank1Cap == 0)  //can absorb anything into tank1
                         {
                             tank1Name = hit2.transform.GetComponent<Chemical.Compound>().getFormula();
-                            tank1Cap += 1;
+                            tank1Cap += 2;
 
                             Instantiate(effect, hit2.point, q);
                             isEmpty = false;
@@ -175,7 +180,7 @@ public class GunScript : MonoBehaviour
                         {
                             if (tank1Cap < fullCap)
                             {
-                                tank1Cap += 1;
+                                tank1Cap += 2;
 
                                 Instantiate(effect, hit2.point, q);
                                 isEmpty = false;
@@ -204,7 +209,7 @@ public class GunScript : MonoBehaviour
             {
                 if (isEmitting && !isEmpty)
                 {
-                    if (reactSelected) //is using more than one element
+                    if (reactSelected && activeReact != null) //is using more than one element
                     {
                         if (tank1Cap > 0 && tank2Cap > 0)
                         {

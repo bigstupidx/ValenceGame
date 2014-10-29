@@ -43,7 +43,8 @@ public class O2 : Chemical.Compound {
 	
 	// Use this for initialization
 	public override void Start () {
-		formula = "O2";
+        compoundName = "O2";
+        formula = "O2";
 			
 		atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Oxygen(), 2);

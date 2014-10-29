@@ -48,7 +48,8 @@ public class Methane : Chemical.Compound {
 */
 
 	public override void Start() {
-		formula = "CH4";
+        compoundName = "Methane";
+        formula = "CH4";
 			
 			atoms = new Dictionary<Chemical.Element, int>();
 			atoms.Add (new Carbon(), 1);

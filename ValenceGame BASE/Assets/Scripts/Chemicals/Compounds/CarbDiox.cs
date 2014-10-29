@@ -47,7 +47,8 @@ public class CarbDiox : Chemical.Compound {
 	*/
 
 	public override void Start() {
-		formula = "CO2";
+        compoundName = "CarbDiox";
+        formula = "CO2";
 
 		atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Oxygen(), 2);

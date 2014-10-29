@@ -22,7 +22,7 @@ public class NoteBalance : MonoBehaviour {
 //    public int h2oCount;
 	public bool isNear = false;
 
-
+    private Chemical.Reaction chemReaction;
 
 	public int react1Count;
 	public int react2Count;
@@ -52,11 +52,6 @@ public class NoteBalance : MonoBehaviour {
 	void Start () {
 
 
-
-
-
-
-
 //        h2Count = 1;
 //        o2Count = 1;
 //        h2oCount = 1;
@@ -65,57 +60,56 @@ public class NoteBalance : MonoBehaviour {
 	}
 
 	void init() {
-		if (this.gameObject.GetComponent<Chemical.Reaction> () == null) {
+        chemReaction = this.gameObject.GetComponent<Chemical.Reaction>();
+
+        if (chemReaction == null) {
 			error = true;
 		}
 		
-		
-		
-		
 		react1Count = 1;
-		react1Truth = this.gameObject.GetComponent<Chemical.Reaction> ().ReactCoeff1;
+		react1Truth = chemReaction.ReactCoeff1;
 		
-		if (this.gameObject.GetComponent<Chemical.Reaction> ().Reactant2 == null) {
+		if (chemReaction.Reactant2 == null) {
 			react2Exist = false;
 			react2Count = 0;
 			react2Truth = 0;
 		}
 		else {
 			react2Exist = true;
-			react2Truth = this.gameObject.GetComponent<Chemical.Reaction> ().ReactCoeff2;
+			react2Truth = chemReaction.ReactCoeff2;
 			react2Count = 1;
 		}
-		if (this.gameObject.GetComponent<Chemical.Reaction> ().Reactant3 == null) {
+		if (chemReaction.Reactant3 == null) {
 			react3Exist = false;
 			react3Count = 0;
 			react3Truth = 0;
 		}
 		else {
 			react3Exist = true;
-			react3Truth = this.gameObject.GetComponent<Chemical.Reaction> ().ReactCoeff3;
+			react3Truth = chemReaction.ReactCoeff3;
 			react3Count = 1;
 		}
 		
-		prod1Truth = this.gameObject.GetComponent<Chemical.Reaction> ().ProdCoeff1;
+		prod1Truth = chemReaction.ProdCoeff1;
 		prod1Count = 1;
-		if (this.gameObject.GetComponent<Chemical.Reaction> ().Product2 == null) {
+		if (chemReaction.Product2 == null) {
 			prod2Exist = false;
 			prod2Count = 0;
 			prod2Truth = 0;
 		}
 		else {
 			prod2Exist = true;
-			prod2Truth = this.gameObject.GetComponent<Chemical.Reaction> ().ProdCoeff2;
+			prod2Truth = chemReaction.ProdCoeff2;
 			prod2Count = 1;
 		}
-		if (this.gameObject.GetComponent<Chemical.Reaction> ().Product3 == null) {
+		if (chemReaction.Product3 == null) {
 			prod3Exist = false;
 			prod3Count = 0;
 			prod3Truth = 0;
 		}
 		else {
 			prod3Exist = true;
-			prod3Truth = this.gameObject.GetComponent<Chemical.Reaction> ().ProdCoeff3;
+			prod3Truth = chemReaction.ProdCoeff3;
 			prod3Count = 1;
 		}
 
@@ -352,7 +346,7 @@ public class NoteBalance : MonoBehaviour {
 //		Vector2 h2Pos = new Vector2(160, 160);
 		Vector2 react1Pos = new Vector2(arrowPos.x - 130, arrowPos.y - 65);
 		
-		string dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Reactant1.formula);
+		string dispFormula = parseFormula (chemReaction.Reactant1.Formula);
 		GUI.Label(new Rect(react1Pos.x, react1Pos.y, 100, 100), dispFormula, guiStyle);
 		GUI.Box(new Rect(react1Pos.x - 50, react1Pos.y, 40, 60), react1Coeff, guiStyle);
 //        addButtons(h2Pos.x, h2Pos.y, ref h2Count);
@@ -365,7 +359,7 @@ public class NoteBalance : MonoBehaviour {
 //			Vector2 o2Pos = new Vector2(340, 160);			
 		Vector2 react2Pos = new Vector2(arrowPos.x - 310, arrowPos.y - 65);			
 					
-			dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Reactant2.formula);
+			dispFormula = parseFormula (chemReaction.Reactant2.Formula);
 		GUI.Label(new Rect(react2Pos.x, react2Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", guiStyle);
 		GUI.Box(new Rect(react2Pos.x - 50, react2Pos.y, 40, 60), react2Coeff, guiStyle);
 	//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
@@ -376,7 +370,7 @@ public class NoteBalance : MonoBehaviour {
 			//			Vector2 o2Pos = new Vector2(340, 160);			
 			Vector2 react3Pos = new Vector2(arrowPos.x - 310, arrowPos.y - 65);			
 			
-			dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Reactant3.formula);
+			dispFormula = parseFormula (chemReaction.Reactant3.Formula);
 			GUI.Label(new Rect(react3Pos.x, react3Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", guiStyle);
 			GUI.Box(new Rect(react3Pos.x - 50, react3Pos.y, 40, 60), react3Coeff, guiStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
@@ -387,7 +381,7 @@ public class NoteBalance : MonoBehaviour {
 			//			Vector2 o2Pos = new Vector2(340, 160);			
 			Vector2 react3Pos = new Vector2(arrowPos.x - 490, arrowPos.y - 65);			
 			
-			dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Reactant3.formula);
+			dispFormula = parseFormula (chemReaction.Reactant3.Formula);
 			GUI.Label(new Rect(react3Pos.x, react3Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", guiStyle);
 			GUI.Box(new Rect(react3Pos.x - 50, react3Pos.y, 40, 60), react3Coeff, guiStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
@@ -399,7 +393,7 @@ public class NoteBalance : MonoBehaviour {
  //       Vector2 h2oPos = new Vector2(640, 160);      
 		Vector2 h2oPos = new Vector2(arrowPos.x + 130, arrowPos.y - 65);      
 
-		dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Product1.formula);
+		dispFormula = parseFormula (chemReaction.Product1.Formula);
         GUI.Label(new Rect(h2oPos.x, h2oPos.y, 100, 100), dispFormula, guiStyle);
 		GUI.Box(new Rect(h2oPos.x - 50, h2oPos.y, 40, 60), prod1Coeff, guiStyle);
 //        addButtons(h2oPos.x, h2oPos.y, ref h2oCount);
@@ -411,7 +405,7 @@ public class NoteBalance : MonoBehaviour {
 			//			Vector2 o2Pos = new Vector2(340, 160);			
 			Vector2 prod2Pos = new Vector2(arrowPos.x + 260, arrowPos.y - 65);			
 			
-			dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Product2.formula);
+			dispFormula = parseFormula (chemReaction.Product2.Formula);
 			GUI.Label(new Rect(prod2Pos.x, prod2Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, guiStyle);
 			GUI.Box(new Rect(prod2Pos.x + 56, prod2Pos.y, 40, 60), prod2Coeff, guiStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
@@ -422,7 +416,7 @@ public class NoteBalance : MonoBehaviour {
 			//			Vector2 o2Pos = new Vector2(340, 160);			
 			Vector2 prod3Pos = new Vector2(arrowPos.x + 310, arrowPos.y - 65);			
 			
-			dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Product3.formula);
+			dispFormula = parseFormula (chemReaction.Product3.Formula);
 			GUI.Label(new Rect(prod3Pos.x, prod3Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, guiStyle);
 			GUI.Box(new Rect(prod3Pos.x + 56, prod3Pos.y, 40, 60), react3Coeff, guiStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
@@ -433,7 +427,7 @@ public class NoteBalance : MonoBehaviour {
 			//			Vector2 o2Pos = new Vector2(340, 160);			
 			Vector2 prod3Pos = new Vector2(arrowPos.x + 490, arrowPos.y - 65);			
 			
-			dispFormula = parseFormula (this.gameObject.GetComponent<Chemical.Reaction> ().Product3.formula);
+			dispFormula = parseFormula (chemReaction.Product3.Formula);
 			GUI.Label(new Rect(prod3Pos.x, prod3Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, guiStyle);
 			GUI.Box(new Rect(prod3Pos.x + 56, prod3Pos.y, 40, 60), prod3Coeff, guiStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
@@ -461,6 +455,7 @@ public class NoteBalance : MonoBehaviour {
                 balanceSuccessful = true;
                 GameObject.Find("Player").GetComponent<GunScript>().eqBalanced = true;
                 GameObject.Find("Player").GetComponent<GunScript>().reactSelected = true;
+                GameObject.Find("Player").GetComponent<GunScript>().activeReact = chemReaction;
             }
             else
                 balanceSuccessful = false;
