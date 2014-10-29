@@ -50,7 +50,8 @@ public class Methane : Chemical.Compound {
 	public override void Start() {
         compoundName = "Methane";
         formula = "CH4";
-			
+        shooter = Resources.Load("GasParticles", typeof(GameObject)) as GameObject;
+
 			atoms = new Dictionary<Chemical.Element, int>();
 			atoms.Add (new Carbon(), 1);
 			atoms.Add (new Hydrogen (), 4);
