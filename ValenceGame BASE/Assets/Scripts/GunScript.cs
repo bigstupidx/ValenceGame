@@ -8,16 +8,19 @@ public struct Tank {
 	public int rate;
 	// Current amount of compound stored in tank
 	public int capacity;
+	// true if tank should be actively selected
+	public bool isActive;
 
-	public Tank(string n, int rt, int cp)
+	public Tank(string n, int rt, int cp, bool act)
 	{
 		name = n;
 		rate = rt;
 		capacity = cp;
+		isActive = act;
 	}
 
 	public Tank(string n, int rt)
-	: this(n, rt, 0)
+	: this(n, rt, 0, false)
 	{}
 }
 
@@ -60,7 +63,7 @@ public class GunScript : MonoBehaviour
 
 	public string chemToShootName;
 	public Chemical.Compound chemToShoot;
-   	public Chemical.Reaction activeReact;
+	public Chemical.Reaction activeReact;
 	public GameObject shootEffect;
 
 	//used for different particle emitters
@@ -83,8 +86,7 @@ public class GunScript : MonoBehaviour
 		cursorName = " ";
 		reactTank1 = new Tank ("O2", 1);  // HARD CODED
 		reactTank2 = new Tank ("H2", 2);  // HARD CODED
-
-		//perhaps include tankElem3 at some point?
+		reactTank3 = new Tank ();
 
 		sprayDamage = 0;
 	}
@@ -135,6 +137,20 @@ public class GunScript : MonoBehaviour
 			//this will be used in script Extinguished
 
 			//shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
+		}
+
+		//Tank selection
+		if (Input.GetKeyDown("1"))
+		{
+			reactTank1.isActive = !reactTank1.isActive;
+		}
+		if (Input.GetKeyDown("2"))
+		{
+			reactTank2.isActive = !reactTank2.isActive;
+		}
+		if (Input.GetKeyDown("3"))
+		{
+			reactTank3.isActive = !reactTank3.isActive;
 		}
 
 		//absorbing

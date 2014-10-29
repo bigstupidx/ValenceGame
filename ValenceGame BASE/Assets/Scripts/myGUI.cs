@@ -22,6 +22,7 @@ public class myGUI : MonoBehaviour
 	public Font font;
 	public Texture texture;
 	public Texture fillTexture;
+	public Texture highlightTexture;
 	public Material mat; 
 	public GameObject player;
 	
@@ -79,8 +80,10 @@ public class myGUI : MonoBehaviour
 		
 		length1 = (float)player.GetComponent<GunScript>().reactTank1.capacity * (((float)Screen.height - (100 * (float)ratH)) / (float)fullCap); //is relative to screen size
 		length2 = (float)player.GetComponent<GunScript>().reactTank2.capacity * (((float)Screen.height - (100 * (float)ratH)) / (float)fullCap);
-		string tank1Name = player.GetComponent<GunScript>().reactTank1.name;
-		string tank2Name = player.GetComponent<GunScript>().reactTank2.name;
+		Tank reactTank1 = player.GetComponent<GunScript> ().reactTank1;
+		Tank reactTank2 = player.GetComponent<GunScript> ().reactTank2;
+		Tank reactTank3 = player.GetComponent<GunScript> ().reactTank3;
+
 		GUI.skin = mySkin;
 		
 		GUI.Label(new Rect(Screen.width / 2 - (50 * ratW), Screen.height / 2 - (50 * ratH), 100 * ratW, 100 * ratH), cursorPic);
@@ -97,6 +100,12 @@ public class myGUI : MonoBehaviour
 			GUI.DrawTexture(box, fillTexture);
 			GUI.color = Color.white;
 			GUI.DrawTexture(bar1, texture);
+			if (reactTank1.isActive)
+			{	
+				GUI.color = Color.yellow;
+				GUI.DrawTexture(bar1, highlightTexture);
+			}
+			
 			
 			//Second bar
 			Rect bar2 = new Rect(40 * ratW, (Screen.height) - 130*ratH, 20 * ratW, 100*ratH);
@@ -105,7 +114,12 @@ public class myGUI : MonoBehaviour
 			GUI.DrawTexture(box, fillTexture);
 			GUI.color = Color.white;
 			GUI.DrawTexture(bar2, texture);
-			
+			if (reactTank2.isActive)
+			{	
+				GUI.color = Color.yellow;
+				GUI.DrawTexture(bar2, highlightTexture);
+			}
+		
 			//Third bar
 			Rect bar3 = new Rect(70 * ratW, (Screen.height) - 130*ratH, 20 * ratW, 100*ratH);
 			//box = new Rect(70 * ratW, (Screen.height) - 30*ratH, 20 * ratW, 100*ratH-(100*ratH+length2/3));
@@ -113,8 +127,14 @@ public class myGUI : MonoBehaviour
 			//GUI.DrawTexture(box, fillTexture);
 			GUI.color = Color.white;
 			GUI.DrawTexture(bar3, texture);
+			if (reactTank3.isActive)
+			{	
+				GUI.color = Color.yellow;
+				GUI.DrawTexture(bar3, highlightTexture);
+			}
 
-			//Selected Reaction
+
+		//Selected Reaction
 			mySkin.font = font;
 			GUI.Box(new Rect(10 * ratW, (Screen.height) - 160*ratH, 80 * ratW, 30*ratH), productName);
 			
@@ -128,9 +148,9 @@ public class myGUI : MonoBehaviour
 			
 			GUI.color = Color.black;
 			//Element/Compound names
-			GUI.Button(new Rect(10 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), tank1Name);
+			GUI.Button(new Rect(10 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), reactTank1.name);
 			//GUI.Button(new Rect(50 * ratW, (Screen.height - 30*ratH), 30 * ratW, 20*ratH), player.GetComponent<GunScript> ().tank1Name);
-			GUI.Button(new Rect(40 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), tank2Name);
+			GUI.Button(new Rect(40 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), reactTank2.name);
 			
 			//GUI.Box(new Rect(10 * ratW, 10 * ratH, 50 * ratW, 50 * ratH), "   H2O", "whitebar");
 			//GUI.Button(new Rect(10 * ratW, (Screen.height - (10 * ratH)) - 180, 50 * ratW, 50 * ratH), "   H2O");
