@@ -27,8 +27,8 @@ public class iceCollision : MonoBehaviour {
 		Vector3 newPos2 = partner.transform.position;
 
 		if (col.gameObject == box) {
-			newPos1.y-=0.5f;
-			newPos2.y+=0.5f;
+			newPos1.y-=0.1f;
+			newPos2.y+=0.1f;
 			if(newPos1.y<=1){newPos1.y=1;}
 			if(newPos2.y<=1){newPos2.y=1;}
 			this.gameObject.transform.position=newPos1;
