@@ -8,7 +8,7 @@ public class GunScript : MonoBehaviour
     public int numclicks;
     //what is this for?
 
-    public GameObject emitter;  //HARDCODE
+    //public GameObject emitter;  //HARDCODE
 
     public bool isEmitting;
     public bool isEmpty;
@@ -40,12 +40,11 @@ public class GunScript : MonoBehaviour
     public string chemToShootName;
     public Chemical.Compound chemToShoot;
    	public Chemical.Reaction activeReact;
+    public GameObject shootEffect;
 
     //used for different particle emitters
     public GameObject absorb1;		//for compound 1
-    public GameObject shoot1;		//for compound 1
     public GameObject absorb2;		//for compound 2
-    public GameObject shoot2;		//for compound 2
 
     public int getFullCap()  //So GUI can know the maximum capacity in order to scale the gui to screen
     {
@@ -102,24 +101,18 @@ public class GunScript : MonoBehaviour
 
             chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
 
+            //shootEffect = Instantiate(this.gameObject.GetComponent<Chemical.Compound>().shooter, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.shooter);
+
         }
 
         //identifying objects (for damaging)
         if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
         {
-
-            //foreach(Chemical.Compound comp in activeReact.Products) {
-            //	sprayDamage = comp.damage(hit.transform.name);
-            //so maybe just give property to emitter, and detect hit on object?
-
-            //	emitter.GetComponent<Extinguished>().particleDamage = sprayDamage;
-            //}
-
-
             sprayDamage = chemToShoot.damage(hit.transform.name);
             //this will be used in script Extinguished
 
-            emitter.GetComponent<Extinguished>().particleDamage = sprayDamage;
+            shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
         }
 
         //absorbing
@@ -202,7 +195,7 @@ public class GunScript : MonoBehaviour
                 if (!isEmitting && !isEmpty)	//will need to code the absorb mechanic
                 {
                     isEmitting = true;
-                    emitter.particleSystem.Play();
+                    shootEffect.particleSystem.Play();
                 }
             }
             if (Input.GetButton("Fire1"))
@@ -215,7 +208,7 @@ public class GunScript : MonoBehaviour
                         {
                             isEmpty = false;
                             isEmitting = true;
-                            emitter.particleSystem.Play();
+                            shootEffect.particleSystem.Play();
                             tank1Cap -= 1 * tank1Rate;
                             tank2Cap -= 1 * tank2Rate;
                         }
@@ -223,7 +216,7 @@ public class GunScript : MonoBehaviour
                         {
                             isEmpty = true;
                             isEmitting = false;
-                            emitter.particleSystem.Stop();
+                            shootEffect.particleSystem.Stop();
                         }
                     }
                     else //not a reaction, just single compound
@@ -232,14 +225,14 @@ public class GunScript : MonoBehaviour
                         {
                             isEmpty = false;
                             isEmitting = true;
-                            emitter.particleSystem.Play();
+                            shootEffect.particleSystem.Play();
                             tank1Cap -= 1 * tank1Rate;
                         }
                         else
                         {
                             isEmpty = true;
                             isEmitting = false;
-                            emitter.particleSystem.Stop();
+                            shootEffect.particleSystem.Stop();
                         }
                     }
                 }
@@ -249,7 +242,7 @@ public class GunScript : MonoBehaviour
                 if (isEmitting)
                 {
                     isEmitting = false;
-                    emitter.particleSystem.Stop();
+                    shootEffect.particleSystem.Stop();
 
                     if (tank1Cap <= 0 && tank1Cap <= 0)
                     {

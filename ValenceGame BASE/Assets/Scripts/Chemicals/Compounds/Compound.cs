@@ -27,8 +27,8 @@ namespace Chemical {
 		//protected GameObject accessor;
 
 
-		public ParticleSystem absorber;
-		public ParticleSystem shooter;
+		public GameObject absorber;
+		public GameObject shooter;
 
 		//need frozen + hot properties
 

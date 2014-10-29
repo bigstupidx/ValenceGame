@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
@@ -36,7 +35,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-													GlobalSection(MonoDevelopProperties) = preSolution
+																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -53,46 +52,6 @@ Global
 		$3.inheritsSet = Mono
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
-	EndGlobalSection
-
-EndGlobal
-=======
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{06AFF7BC-9375-85D3-3BD9-7C58D1B55D22}") = "ValenceGame BASE", "Assembly-CSharp-firstpass.csproj", "{80226DF3-2BE1-B2C3-9992-310742C978C7}"
-EndProject
-Project("{06AFF7BC-9375-85D3-3BD9-7C58D1B55D22}") = "ValenceGame BASE", "Assembly-CSharp.csproj", "{E8A7CA07-784C-9252-A8F9-B06E9CAFE76D}"
-EndProject
-Project("{06AFF7BC-9375-85D3-3BD9-7C58D1B55D22}") = "ValenceGame BASE", "Assembly-UnityScript-firstpass.unityproj", "{844BA6A1-EB78-D74C-B055-F643E18F4909}"
-EndProject
-Project("{06AFF7BC-9375-85D3-3BD9-7C58D1B55D22}") = "ValenceGame BASE", "Assembly-UnityScript.unityproj", "{1E81FFDB-09BB-D35C-72C2-98D24BC5EB0C}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{80226DF3-2BE1-B2C3-9992-310742C978C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80226DF3-2BE1-B2C3-9992-310742C978C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80226DF3-2BE1-B2C3-9992-310742C978C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80226DF3-2BE1-B2C3-9992-310742C978C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8A7CA07-784C-9252-A8F9-B06E9CAFE76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8A7CA07-784C-9252-A8F9-B06E9CAFE76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8A7CA07-784C-9252-A8F9-B06E9CAFE76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8A7CA07-784C-9252-A8F9-B06E9CAFE76D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{844BA6A1-EB78-D74C-B055-F643E18F4909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{844BA6A1-EB78-D74C-B055-F643E18F4909}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{844BA6A1-EB78-D74C-B055-F643E18F4909}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{844BA6A1-EB78-D74C-B055-F643E18F4909}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E81FFDB-09BB-D35C-72C2-98D24BC5EB0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E81FFDB-09BB-D35C-72C2-98D24BC5EB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E81FFDB-09BB-D35C-72C2-98D24BC5EB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E81FFDB-09BB-D35C-72C2-98D24BC5EB0C}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 								GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
@@ -114,4 +73,3 @@ Global
 	EndGlobalSection
 
 EndGlobal
->>>>>>> Stashed changes

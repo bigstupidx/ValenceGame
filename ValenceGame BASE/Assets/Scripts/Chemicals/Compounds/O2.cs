@@ -45,7 +45,8 @@ public class O2 : Chemical.Compound {
 	public override void Start () {
         compoundName = "O2";
         formula = "O2";
-			
+        shooter = Resources.Load("GasParticles", typeof(GameObject)) as GameObject;
+
 		atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Oxygen(), 2);
 	}

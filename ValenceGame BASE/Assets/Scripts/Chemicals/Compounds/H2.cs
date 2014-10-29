@@ -44,6 +44,7 @@ public class H2 : Chemical.Compound {
 	public override void Start() {
         compoundName = "H2";
         formula = "H2";
+        shooter = Resources.Load("GasParticles", typeof(GameObject)) as GameObject;
 
 		atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Hydrogen(), 2);
