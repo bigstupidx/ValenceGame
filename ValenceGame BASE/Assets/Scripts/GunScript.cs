@@ -164,6 +164,11 @@ public class GunScript : MonoBehaviour
                         if (tank1Cap == 0)  //can absorb anything into tank1
                         {
                             tank1Name = hit2.transform.GetComponent<Chemical.Compound>().getFormula();
+                            chemToShoot = this.gameObject.AddComponent(tank1Name) as Chemical.Compound;
+                            chemToShoot.init();
+
+                            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+                            
                             tank1Cap += 2;
 
                             Instantiate(effect, hit2.point, q);
