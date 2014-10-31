@@ -60,15 +60,21 @@ public class Water : Chemical.Compound {
 	public override void Start () {
         compoundName = "Water";
         formula = "H2O";
-        shooter = Resources.Load("LiquidParticles", typeof(GameObject)) as GameObject;
+        state = stateOfMatter.liquid;
 
-		atoms = new Dictionary<Chemical.Element, int>();
+        atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Hydrogen(), 2);
 		atoms.Add (new Oxygen (), 1);
 	}
-	
+    
 	// Update is called once per frame
 	public override void Update () {
 //	
 	}
+
+    public override void init()
+    {
+        state = stateOfMatter.liquid;
+
+    }
 }

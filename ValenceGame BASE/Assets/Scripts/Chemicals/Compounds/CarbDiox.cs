@@ -49,7 +49,7 @@ public class CarbDiox : Chemical.Compound {
 	public override void Start() {
         compoundName = "CarbDiox";
         formula = "CO2";
-        shooter = Resources.Load("GasParticles", typeof(GameObject)) as GameObject;
+        state = stateOfMatter.gas;
 
 		atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Oxygen(), 2);
@@ -58,4 +58,10 @@ public class CarbDiox : Chemical.Compound {
 	}
 	
 	public override void Update() {}
+
+    public override void init()
+    {
+        state = stateOfMatter.gas;
+
+    }
 }
