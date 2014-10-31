@@ -26,10 +26,11 @@ namespace Chemical {
 		public Dictionary<Element, int> atoms;
 		//protected GameObject accessor;
 
+        public enum stateOfMatter { solid, liquid, gas };
+        public stateOfMatter state;
 
-		public GameObject absorber;
-		public GameObject shooter;
-
+        //public GameObject shooter;
+        //public GameObject absorber;
 		//need frozen + hot properties
 
 
@@ -37,7 +38,6 @@ namespace Chemical {
 //			formula = f;
 //
 //		}
-
 
 		public string getFormula() {
 			return formula;
@@ -112,5 +112,7 @@ namespace Chemical {
 		
 		// Update is called once per frame
 		public virtual void Update () {}
+
+        public virtual void init() { }
 	}
 }

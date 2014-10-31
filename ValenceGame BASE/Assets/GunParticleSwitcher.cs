@@ -2,14 +2,46 @@
 using System.Collections;
 
 public class GunParticleSwitcher : MonoBehaviour {
-    private GameObject particleSystem;
+    public GameObject particleSystem;
 
-    public GameObject setParticleSystem(GameObject parSys)
+    public void Start()
     {
-        particleSystem = parSys;
+        particleSystem = GameObject.Find("End");
+    }
 
-        Instantiate(particleSystem, new Vector3(0, 0, 0), Quaternion.identity);
+    public GameObject setParticleSystem(Chemical.Compound.stateOfMatter state)
+    {
+        if (state == Chemical.Compound.stateOfMatter.liquid)
+        {
+            return GameObject.Find("LiquidParticles");
 
-        return particleSystem;
+        }
+        else if (state == Chemical.Compound.stateOfMatter.gas)
+        {
+            return GameObject.Find("GasParticles");
+
+        }
+        else if (state == Chemical.Compound.stateOfMatter.solid)
+        {
+            return particleSystem;
+
+        }
+        else
+        {
+            return particleSystem;
+
+        }
+        /*switch (state)
+        {
+            case Chemical.Compound.stateOfMatter.gas:
+                return GameObject.Find("GasParticles");
+            case Chemical.Compound.stateOfMatter.liquid:
+                return GameObject.Find("LiquidParticles");
+            case Chemical.Compound.stateOfMatter.solid:
+                return particleSystem;
+            default:
+                return particleSystem;
+        }*/
+        //return GameObject.Find("LiquidParticles");
     }
 }

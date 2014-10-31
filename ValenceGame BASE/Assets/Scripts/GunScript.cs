@@ -100,9 +100,9 @@ public class GunScript : MonoBehaviour
             chemToShootName = activeReact.Product1.CompoundName;
 
             chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+            chemToShoot.init();
 
-            //shootEffect = Instantiate(this.gameObject.GetComponent<Chemical.Compound>().shooter, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.shooter);
+            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
 
         }
 
@@ -112,7 +112,7 @@ public class GunScript : MonoBehaviour
             sprayDamage = chemToShoot.damage(hit.transform.name);
             //this will be used in script Extinguished
 
-            shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
+            //shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
         }
 
         //absorbing
