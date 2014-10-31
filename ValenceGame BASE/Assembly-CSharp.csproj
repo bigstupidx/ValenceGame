@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Chemicals\Compounds\CarbDiox.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Compounds\Compound.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Compounds\H2.cs" />
+     <Compile Include="Assets\Scripts\Chemicals\Compounds\IceWater.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Compounds\Methane.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Compounds\O2.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Compounds\Water.cs" />
