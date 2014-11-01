@@ -78,6 +78,7 @@
      <Compile Include="Assets\Scripts\ToggleMouseLook.cs" />
      <Compile Include="Assets\Scripts\deleteEffect.cs" />
      <Compile Include="Assets\Scripts\myGUI.cs" />
+     <Compile Include="Assets\reactionMasterList.cs" />
      <None Include="Assets\Standard Assets\Sounds\test.txt" />
      <None Include="Assets\Prefabs\test.txt" />
      <None Include="Assets\Materials\test.txt" />

@@ -1,16 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Chemicals/Compounds/Compound.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Chemicals\Reactions\WaterReac.cs">
     <Files>
-      <File FileName="Assets/Scripts/Chemicals/Reactions/Reaction.cs" Line="134" Column="5" />
-      <File FileName="Assets/Scripts/GunScript.cs" Line="35" Column="25" />
-      <File FileName="Assets/Scripts/Chemicals/Compounds/Compound.cs" Line="10" Column="3" />
-      <File FileName="Assets/Scripts/Chemicals/Reactions/WaterReac.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Chemicals/Reactions/Reaction.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Chemicals/Compounds/Water.cs" Line="17" Column="28" />
-      <File FileName="Assets/Scripts/NoteBalance.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Chemicals/Elements/Element.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Chemicals/Reactions/MethaneCombust.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GunScript.cs" Line="129" Column="12" />
+      <File FileName="Assets\Scripts\NoteBalance.cs" Line="79" Column="17" />
+      <File FileName="Assets\Scripts\Chemicals\Reactions\WaterReac.cs" Line="37" Column="19" />
+      <File FileName="Assets\Scripts\Chemicals\Reactions\MethaneCombust.cs" Line="8" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
