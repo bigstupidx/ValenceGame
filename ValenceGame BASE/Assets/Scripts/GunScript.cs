@@ -1,3 +1,4 @@
+﻿<<<<<<< Updated upstream
 ﻿using UnityEngine;
 using System;
 using System.Collections;
@@ -132,6 +133,39 @@ public class GunScript : MonoBehaviour
         {
             cursorName = " ";
         }
+
+		//-----------------switch reactions------------------//
+
+			//can only switch between unlocked reactions
+
+			//activeReact = switched reaction
+			//when switched, do below
+
+			//assign reaction values to tanks
+			//select tank to shoot
+			/*
+			chemToShootName = activeReact.*whatever is selected*.CompoundName;
+		
+			chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+			chemToShoot.init();
+			
+			shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);*/
+
+		//----------------------------//
+
+		//if mouse button 1
+			//raycast
+			//if absorbable
+				//if activereact != null (aka if there is an active reaction
+					//match tank names w compounds
+					//etc
+					//when absorbed, add component
+				//else if no active reaction
+					//if first tank has element, move to next, until all tanks full, then no absorb
+		//---------------------------------------//
+		//venting
+		// must remove all compounds from player in addition to emptying and renaming all of the tanks
+		//set shoot effect to null?
 
         if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null)
         {
