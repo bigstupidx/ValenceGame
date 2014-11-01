@@ -8,7 +8,13 @@ public class reactionMasterList : MonoBehaviour {
 	void Start () {
 		reactionList = GameObject.Find ("Reactions").GetComponents<Chemical.Reaction> ();
 	}
-	
+
+    public Chemical.Reaction[] initReactionList()
+    {
+		reactionList = GameObject.Find ("Reactions").GetComponents<Chemical.Reaction> ();
+
+        return reactionList;
+    }
 	// Update is called once per frame
 	void Update () {
 	

@@ -72,7 +72,11 @@ public class GunScript : MonoBehaviour
 
     public string chemToShootName;
     public Chemical.Compound chemToShoot;
+
     public Chemical.Reaction activeReact;
+    public Chemical.Reaction[] reactions;
+    private int reactIndex;
+
     public GameObject shootEffect;
 
     //used for different particle emitters
@@ -102,7 +106,10 @@ public class GunScript : MonoBehaviour
         reactTanks = new Tank[] {reactTank1, reactTank2, reactTank3};
         prodTanks = new Tank[] {prodTank1, prodTank2, prodTank3};
         allTanks = new Tank[] {reactTank1, reactTank2, reactTank3, prodTank1, prodTank2, prodTank3};
-        
+
+
+        reactions = this.gameObject.GetComponent<reactionMasterList>().initReactionList();
+        reactIndex = 0;
         sprayDamage = 0;
     }
 
@@ -133,6 +140,81 @@ public class GunScript : MonoBehaviour
             cursorName = " ";
         }
 
+        //Tank selection
+        if (Input.GetKeyDown("1"))
+        {
+            reactTank1.isActive = !reactTank1.isActive;
+            reactTank2.isActive = false;
+            reactTank3.isActive = false;
+            prodTank1.isActive = false;
+            prodTank2.isActive = false;
+            prodTank3.isActive = false;
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            reactTank1.isActive = false;
+            reactTank2.isActive = !reactTank2.isActive;
+            reactTank3.isActive = false;
+            prodTank1.isActive = false;
+            prodTank2.isActive = false;
+            prodTank3.isActive = false;
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            reactTank1.isActive = false;
+            reactTank2.isActive = false;
+            reactTank3.isActive = !reactTank3.isActive;
+            prodTank1.isActive = false;
+            prodTank2.isActive = false;
+            prodTank3.isActive = false;
+
+        }
+        if (Input.GetKeyDown("4"))
+        {
+            reactTank1.isActive = false;
+            reactTank2.isActive = false;
+            reactTank3.isActive = false;
+            prodTank1.isActive = !prodTank1.isActive;
+            prodTank2.isActive = false;
+            prodTank3.isActive = false;
+
+        }
+        if (Input.GetKeyDown("5"))
+        {
+            reactTank1.isActive = false;
+            reactTank2.isActive = false;
+            reactTank3.isActive = false;
+            prodTank1.isActive = false;
+            prodTank2.isActive = !prodTank2.isActive;
+            prodTank3.isActive = false;
+
+        }
+        if (Input.GetKeyDown("6"))
+        {
+            reactTank1.isActive = false;
+            reactTank2.isActive = false;
+            reactTank3.isActive = false;
+            prodTank1.isActive = false;
+            prodTank2.isActive = false;
+            prodTank3.isActive = !prodTank3.isActive;
+
+        }
+
+        //reaction selection
+        if(Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            ++reactIndex;
+            if(reactIndex > reactions.Length - 1){
+                reactIndex = 0;
+            }
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            --reactIndex;
+            if(reactIndex < 0){
+                reactIndex = reactions.Length - 1;
+            }
+        }
 		//-----------------switch reactions------------------//
 
 			//can only switch between unlocked reactions
@@ -187,19 +269,7 @@ public class GunScript : MonoBehaviour
             //shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
         }
 
-        //Tank selection
-        if (Input.GetKeyDown("1"))
-        {
-            reactTank1.isActive = !reactTank1.isActive;
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            reactTank2.isActive = !reactTank2.isActive;
-        }
-        if (Input.GetKeyDown("3"))
-        {
-            reactTank3.isActive = !reactTank3.isActive;
-        }
+        
 
         //absorbing
         /*if (Input.GetMouseButton(1) && (eqBalanced || !reactSelected))
