@@ -60,7 +60,6 @@ public class NoteBalance : MonoBehaviour {
 	}
 
 	void init() {
-        //chemReaction = this.gameObject.GetComponent<Chemical.Reaction>();
 
         if (chemReaction == null) {
 			error = true;
@@ -273,46 +272,6 @@ public class NoteBalance : MonoBehaviour {
 		string prod3Coeff = String.Format("<color=white><size=60>{0}</size></color>", prod3Count).ToString();
 
 
-
-		//Change color of coefficients 
-			//first determine proportion factor
-//		coeffsTrue = coeffsCorrect ();
-		/*
-		int factor = 0;
-		if (react1Count % react1Truth != 0) {
-			eqCorrect = false;	
-		}
-		else {
-			factor = react1Count / react1Truth;
-			if(react2Count != factor * react2Truth && react2Count != factor * react2Truth && react2Count != factor * react2Truth && react2Count != factor * react2Truth && react2Count != factor * react2Truth) {
-
-			}
-			else {
-				eqCorrect = true;
-			}
-		}
-		*/
-
-
-//		if (balanceAttempted && h2Count != o2Count * 2 && changeColor) {
-//			h2CountString = String.Format ("<color=red><size=60>{0}</size></color>", h2Count).ToString ();
-//			o2CountString = String.Format ("<color=red><size=60>{0}</size></color>", o2Count).ToString ();
-
-//		} 
-//		if (balanceAttempted && h2Count == o2Count * 2 && changeColor) {
-//			h2CountString = String.Format ("<color=green><size=60>{0}</size></color>", h2Count).ToString ();
-//			o2CountString = String.Format ("<color=green><size=60>{0}</size></color>", o2Count).ToString ();
-//		}
-
-//		if (balanceAttempted && (h2oCount != o2Count * 2) && changeColor) {
-//			h2oCountString = String.Format ("<color=red><size=60>{0}</size></color>", h2oCount).ToString ();
-//		} 
-//		if (balanceAttempted && h2oCount == o2Count * 2 && changeColor) {
-//			h2oCountString = String.Format ("<color=green><size=60>{0}</size></color>", h2oCount).ToString ();
-//			o2CountString = String.Format ("<color=green><size=60>{0}</size></color>", o2Count).ToString ();
-//		}
-
-
 		//Generic change color of coeffs
 		if (balanceAttempted && !coeffsTrue && changeColor) {
 			react1Coeff = String.Format ("<color=red><size=60>{0}</size></color>", react1Count).ToString ();
@@ -453,9 +412,10 @@ public class NoteBalance : MonoBehaviour {
             if (coeffsTrue)
             {
                 balanceSuccessful = true;
-                GameObject.Find("Player").GetComponent<GunScript>().eqBalanced = true;
-                GameObject.Find("Player").GetComponent<GunScript>().reactSelected = true;
-                GameObject.Find("Player").GetComponent<GunScript>().activeReact = chemReaction;
+				chemReaction.unlocked = true;
+				//GameObject.Find("Player").GetComponent<GunScript>().eqBalanced = true;
+                //GameObject.Find("Player").GetComponent<GunScript>().reactSelected = true;
+                //GameObject.Find("Player").GetComponent<GunScript>().activeReact = chemReaction;
             }
             else
                 balanceSuccessful = false;
