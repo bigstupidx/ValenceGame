@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
-public struct Tank {
+[System.Serializable]
+public class Tank {
 	// Name of compound stored in tank
 	public string name;
 	// Rate at which a compound will be consumed
@@ -26,6 +29,8 @@ public struct Tank {
 
 public class GunScript : MonoBehaviour
 {
+    public const int SHOOT_RATE = 1;
+
 	public int power;
 	//never used in GunScript
 	public int numclicks;
@@ -42,14 +47,18 @@ public class GunScript : MonoBehaviour
 	public GameObject effect;   //HARDCODE
 
 	// Tanks for reactants
-	public Tank reactTank1;
-	public Tank reactTank2;
-	public Tank reactTank3;
+    public Tank reactTank1;
+    public Tank reactTank2;
+    public Tank reactTank3;
 
 	// Tanks for products
-	public Tank prodTank1;
-	public Tank prodTank2;
-	public Tank prodTank3;
+    public Tank prodTank1;
+    public Tank prodTank2;
+    public Tank prodTank3;
+
+    public Tank[] reactTanks;
+    public Tank[] prodTanks;
+    public Tank[] allTanks;
 
 	//compound capacities in tank
 	public int combineCap;	
@@ -75,6 +84,11 @@ public class GunScript : MonoBehaviour
 		return fullCap;
 	}
 
+    public Tank[] getActiveTanks()
+    {
+        return Array.FindAll(allTanks, x => x.isActive);
+    }
+
 	// Use this for initialization
 	void Start()
 	{
@@ -84,10 +98,11 @@ public class GunScript : MonoBehaviour
 		reactSelected = false;
 		combineCap = 0;
 		cursorName = " ";
-		reactTank1 = new Tank ("O2", 1);  // HARD CODED
-		reactTank2 = new Tank ("H2", 2);  // HARD CODED
-		reactTank3 = new Tank ();
 
+        reactTanks = new Tank[] {reactTank1, reactTank2, reactTank3};
+        prodTanks = new Tank[] {prodTank1, prodTank2, prodTank3};
+        allTanks = new Tank[] {reactTank1, reactTank2, reactTank3, prodTank1, prodTank2, prodTank3};
+		
 		sprayDamage = 0;
 	}
 
@@ -97,8 +112,8 @@ public class GunScript : MonoBehaviour
 		//venting
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
-			reactTank1.capacity = 0;
-			reactTank2.capacity = 0;
+            for (int i = 0; i < allTanks.Length; i++)
+                allTanks[i].capacity = 0;
 		}
 		//identifying elements
 		Ray ray1 = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -228,68 +243,55 @@ public class GunScript : MonoBehaviour
 
 
 		//shooting
-		//if (eqBalanced)
-		if (eqBalanced || !reactSelected)	//to allow to shoot if no reaction selected
+		if (Input.GetButtonDown("Fire1"))
 		{
-			if (Input.GetButtonDown("Fire1"))
+			numclicks++;
+			if (!isEmitting && !isEmpty)	//will need to code the absorb mechanic
 			{
-				numclicks++;
-				if (!isEmitting && !isEmpty)	//will need to code the absorb mechanic
+				isEmitting = true;
+				shootEffect.particleSystem.Play();
+            }
+        }
+		if (Input.GetButton("Fire1"))
+		{
+            // Look for active tanks that are not empty and fire those
+            Tank[] activeNonemptyTanks = Array.FindAll(allTanks, x => x.isActive && x.capacity > 0);
+            Debug.Log(string.Format("Active Tanks: {0}", getActiveTanks().Length));
+            Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
+            if (isEmitting && !isEmpty)
+			{
+                if (activeNonemptyTanks.Length > 0)
+               // if(reactTank1.capacity > 0)
 				{
+					isEmpty = false;
 					isEmitting = true;
 					shootEffect.particleSystem.Play();
+                    //reactTank1.capacity -= SHOOT_RATE;
+                    for (int i = 0; i < activeNonemptyTanks.Length; i++)
+                    {
+                        Tank tank = activeNonemptyTanks[i];
+                        tank.capacity -= SHOOT_RATE;
+                    }
 				}
-			}
-			if (Input.GetButton("Fire1"))
-			{
-				if (isEmitting && !isEmpty)
+				else
 				{
-					if (reactSelected && activeReact != null) //is using more than one element
-					{
-						if (reactTank1.capacity > 0 && reactTank2.capacity > 0)
-						{
-							isEmpty = false;
-							isEmitting = true;
-							shootEffect.particleSystem.Play();
-							reactTank1.capacity -= 1 * reactTank1.rate;
-							reactTank2.capacity -= 1 * reactTank2.rate;
-						}
-						else
-						{
-							isEmpty = true;
-							isEmitting = false;
-							shootEffect.particleSystem.Stop();
-						}
-					}
-					else //not a reaction, just single compound
-					{
-						if (reactTank1.capacity > 0)
-						{
-							isEmpty = false;
-							isEmitting = true;
-							shootEffect.particleSystem.Play();
-							reactTank1.capacity -= 1 * reactTank1.rate;
-						}
-						else
-						{
-							isEmpty = true;
-							isEmitting = false;
-							shootEffect.particleSystem.Stop();
-						}
-					}
-				}
-			}
-			if (Input.GetButtonUp("Fire1")) //stop emitting
-			{
-				if (isEmitting)
-				{
+					isEmpty = true;
 					isEmitting = false;
 					shootEffect.particleSystem.Stop();
-
-					if (reactTank1.capacity <= 0 && reactTank1.capacity <= 0)
-					{
-						isEmpty = true;
-					}
+				}
+			}
+        }
+		if (Input.GetButtonUp("Fire1")) //stop emitting
+		{
+            if (isEmitting)
+		    {
+			    isEmitting = false;
+			    shootEffect.particleSystem.Stop();
+                   
+                Tank[] nonemptyTanks = Array.FindAll(allTanks, x => x.capacity > 0);
+                if (nonemptyTanks.Length == 0)
+				{
+					isEmpty = true;
 				}
 			}
 		}
