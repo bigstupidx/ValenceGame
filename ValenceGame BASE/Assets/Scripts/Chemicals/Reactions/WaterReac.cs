@@ -34,6 +34,7 @@ public class WaterReac : Chemical.Reaction {
 
 
 	public override void Start () {
+		unlocked = true;
 
 		reactName = "Water Fusion";
 
