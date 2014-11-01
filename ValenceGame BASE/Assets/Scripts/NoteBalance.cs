@@ -22,7 +22,7 @@ public class NoteBalance : MonoBehaviour {
 //    public int h2oCount;
 	public bool isNear = false;
 
-    private Chemical.Reaction chemReaction;
+    public Chemical.Reaction chemReaction;
 
 	public int react1Count;
 	public int react2Count;
@@ -60,7 +60,7 @@ public class NoteBalance : MonoBehaviour {
 	}
 
 	void init() {
-        chemReaction = this.gameObject.GetComponent<Chemical.Reaction>();
+        //chemReaction = this.gameObject.GetComponent<Chemical.Reaction>();
 
         if (chemReaction == null) {
 			error = true;
