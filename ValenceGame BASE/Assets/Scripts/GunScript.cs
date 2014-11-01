@@ -166,7 +166,7 @@ public class GunScript : MonoBehaviour
 		// must remove all compounds from player in addition to emptying and renaming all of the tanks
 		//set shoot effect to null?
 
-        if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null)
+        /*if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null)
         {
             //SEMI-HARDCODE NEEDS TO BE CHANGED WHEN PRODUCT SELECTION IMPLEMENTED
             chemToShootName = activeReact.Product1.CompoundName;
@@ -176,7 +176,7 @@ public class GunScript : MonoBehaviour
 
             shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
 
-        }
+        }*/
 
         //identifying objects (for damaging)
         if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
@@ -202,7 +202,7 @@ public class GunScript : MonoBehaviour
         }
 
         //absorbing
-        if (Input.GetMouseButton(1) && (eqBalanced || !reactSelected))
+        /*if (Input.GetMouseButton(1) && (eqBalanced || !reactSelected))
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
@@ -272,7 +272,7 @@ public class GunScript : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
 
 
         //shooting
