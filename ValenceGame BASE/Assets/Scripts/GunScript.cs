@@ -141,6 +141,8 @@ public class GunScript : MonoBehaviour
         }
 
         //Tank selection
+        //Sets what is shot out based on what tank is selected
+        //if tank is empty with no assigned value, will set what is shot to null
         if (Input.GetKeyDown("1"))
         {
             reactTank1.isActive = !reactTank1.isActive;
@@ -149,6 +151,22 @@ public class GunScript : MonoBehaviour
             prodTank1.isActive = false;
             prodTank2.isActive = false;
             prodTank3.isActive = false;
+
+            if (reactTank1.name != "")
+            {
+                chemToShootName = activeReact.Reactant1.CompoundName;
+
+                chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+                chemToShoot.init();
+
+                shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+            }
+            else
+            {
+                chemToShootName = "";
+                chemToShoot = null;
+                shootEffect = null;
+            }
         }
         if (Input.GetKeyDown("2"))
         {
@@ -158,6 +176,22 @@ public class GunScript : MonoBehaviour
             prodTank1.isActive = false;
             prodTank2.isActive = false;
             prodTank3.isActive = false;
+
+            if (reactTank2.name != "")
+            {
+                chemToShootName = activeReact.Reactant2.CompoundName;
+
+                chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+                chemToShoot.init();
+
+                shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+            }
+            else
+            {
+                chemToShootName = "";
+                chemToShoot = null;
+                shootEffect = null;
+            }
         }
         if (Input.GetKeyDown("3"))
         {
@@ -168,6 +202,21 @@ public class GunScript : MonoBehaviour
             prodTank2.isActive = false;
             prodTank3.isActive = false;
 
+            if (reactTank3.name != "")
+            {
+                chemToShootName = activeReact.Reactant3.CompoundName;
+
+                chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+                chemToShoot.init();
+
+                shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+            }
+            else
+            {
+                chemToShootName = "";
+                chemToShoot = null;
+                shootEffect = null;
+            }
         }
         if (Input.GetKeyDown("4"))
         {
@@ -178,6 +227,21 @@ public class GunScript : MonoBehaviour
             prodTank2.isActive = false;
             prodTank3.isActive = false;
 
+            if (prodTank1.name != "")
+            {
+                chemToShootName = activeReact.Product1.CompoundName;
+
+                chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+                chemToShoot.init();
+
+                shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+            }
+            else
+            {
+                chemToShootName = "";
+                chemToShoot = null;
+                shootEffect = null;
+            }
         }
         if (Input.GetKeyDown("5"))
         {
@@ -188,6 +252,21 @@ public class GunScript : MonoBehaviour
             prodTank2.isActive = !prodTank2.isActive;
             prodTank3.isActive = false;
 
+            if (prodTank2.name != "")
+            {
+                chemToShootName = activeReact.Product2.CompoundName;
+
+                chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+                chemToShoot.init();
+
+                shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+            }
+            else
+            {
+                chemToShootName = "";
+                chemToShoot = null;
+                shootEffect = null;
+            }
         }
         if (Input.GetKeyDown("6"))
         {
@@ -198,28 +277,81 @@ public class GunScript : MonoBehaviour
             prodTank2.isActive = false;
             prodTank3.isActive = !prodTank3.isActive;
 
+            if (prodTank3.name != "")
+            {
+                chemToShootName = activeReact.Product3.CompoundName;
+
+                chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
+                chemToShoot.init();
+
+                shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+            }
+            else
+            {
+                chemToShootName = "";
+                chemToShoot = null;
+                shootEffect = null;
+            }
         }
 
         //reaction selection
-        if(Input.GetAxis("Mouse ScrollWheel") > 0)
+        if(Input.GetAxis("Mouse ScrollWheel") > 0) //scrollup
         {
             ++reactIndex;
             if(reactIndex > reactions.Length - 1){
                 reactIndex = 0;
             }
+            if (reactions[reactIndex].unlocked == true)
+            {
+                activeReact = reactions[reactIndex];
+            }
+            
         }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)//scrolldown
         {
             --reactIndex;
             if(reactIndex < 0){
                 reactIndex = reactions.Length - 1;
             }
+            if (reactions[reactIndex].unlocked == true)
+            {
+                activeReact = reactions[reactIndex];
+            }
+           
         }
-		//-----------------switch reactions------------------//
+        //need way to "lock" reaction when selected
 
-			//can only switch between unlocked reactions
+        if (activeReact != null)
+        {   //active reaction isnt current reaction
+            if (reactTank1.name != activeReact.Reactant1.getFormula())
+            {
+                if (activeReact.Reactant1 != null) 
+                    reactTank1.name = activeReact.Reactant1.getFormula();
+                else reactTank1.name = "";
+                
+                if (activeReact.Reactant2 != null) 
+                    reactTank2.name = activeReact.Reactant2.getFormula();
+                else reactTank2.name = "";
+                
+                if (activeReact.Reactant3 != null) 
+                    reactTank3.name = activeReact.Reactant3.getFormula();
+                else reactTank3.name = "";
+                
+                if (activeReact.Product1 != null) 
+                    prodTank1.name = activeReact.Product1.getFormula();
+                else prodTank1.name = "";
+                
+                if (activeReact.Product2 != null)
+                    prodTank2.name = activeReact.Product2.getFormula();
+                else prodTank2.name = "";
+                
+                if (activeReact.Product3 != null) 
+                    prodTank3.name = activeReact.Product3.getFormula();
+                else prodTank3.name = "";
+            }
+        }
+        //-----------------switch reactions------------------//
 
-			//activeReact = switched reaction
 			//when switched, do below
 
 			//assign reaction values to tanks
@@ -244,9 +376,9 @@ public class GunScript : MonoBehaviour
 				//else if no active reaction
 					//if first tank has element, move to next, until all tanks full, then no absorb
 		//---------------------------------------//
-		//venting
+		// venting
 		// must remove all compounds from player in addition to emptying and renaming all of the tanks
-		//set shoot effect to null?
+		// set shoot effect to null?
 
         /*if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null)
         {
