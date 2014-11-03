@@ -19,6 +19,7 @@ namespace Chemical {
 				return reactName;
 			}
 		}
+		public bool unlocked;
 
 //		public GameObject holder;	//for holding Components
 		//public string ReactName {

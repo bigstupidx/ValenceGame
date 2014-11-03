@@ -44,6 +44,7 @@ public class H2 : Chemical.Compound {
 	public override void Start() {
         compoundName = "H2";
         formula = "H2";
+        state = stateOfMatter.gas;
 
 		atoms = new Dictionary<Chemical.Element, int>();
 		atoms.Add (new Hydrogen(), 2);
@@ -51,4 +52,9 @@ public class H2 : Chemical.Compound {
 
 	public override void Update() {}
 
+    public override void init()
+    {
+        state = stateOfMatter.gas;
+
+    }
 }

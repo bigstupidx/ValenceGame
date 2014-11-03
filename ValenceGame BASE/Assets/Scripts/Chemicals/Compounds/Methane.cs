@@ -50,7 +50,8 @@ public class Methane : Chemical.Compound {
 	public override void Start() {
         compoundName = "Methane";
         formula = "CH4";
-			
+        state = stateOfMatter.gas;
+
 			atoms = new Dictionary<Chemical.Element, int>();
 			atoms.Add (new Carbon(), 1);
 			atoms.Add (new Hydrogen (), 4);
@@ -58,5 +59,11 @@ public class Methane : Chemical.Compound {
 	}
 
 	public override void Update() {}
+
+    public override void init()
+    {
+        state = stateOfMatter.gas;
+
+    }
 
 }
