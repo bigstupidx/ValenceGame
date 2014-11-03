@@ -45,12 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
+    <Compile Include="Assets\GunParticleSwitcher.cs" />
     <Compile Include="Assets\Scripts\CatchFire.cs" />
     <Compile Include="Assets\Scripts\CharContScript.cs" />
     <Compile Include="Assets\Scripts\Chemicals\Compounds\CarbDiox.cs" />
     <Compile Include="Assets\Scripts\Chemicals\Compounds\Compound.cs" />
     <Compile Include="Assets\Scripts\Chemicals\Compounds\H2.cs" />
+    <Compile Include="Assets\Scripts\Chemicals\Compounds\IceWater.cs" />
     <Compile Include="Assets\Scripts\Chemicals\Compounds\Methane.cs" />
     <Compile Include="Assets\Scripts\Chemicals\Compounds\O2.cs" />
     <Compile Include="Assets\Scripts\Chemicals\Compounds\Water.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\iceCollision.cs" />
     <Compile Include="Assets\Scripts\myGUI.cs" />
     <Compile Include="Assets\Scripts\pickUpObject.cs" />
+    <Compile Include="Assets\reactionMasterList.cs" />
     <None Include="Assets\Standard Assets\Sounds\test.txt" />
     <None Include="Assets\Prefabs\test.txt" />
     <None Include="Assets\Materials\test.txt" />
@@ -87,50 +89,6 @@
     <None Include="Assets\Scenes\test.txt" />
     <None Include="Assets\Prefabs\Materials\test.txt" />
     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend %28Queue +100%29.shader" />
-=======
-     <Compile Include="Assets\GunParticleSwitcher.cs" />
-     <Compile Include="Assets\Scripts\CatchFire.cs" />
-     <Compile Include="Assets\Scripts\CharContScript.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Compounds\CarbDiox.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Compounds\Compound.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Compounds\H2.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Compounds\IceWater.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Compounds\Methane.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Compounds\O2.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Compounds\Water.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Elements\Carbon.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Elements\Element.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Elements\Hydrogen.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Elements\Oxygen.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Reactions\MethaneCombust.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Reactions\Reaction.cs" />
-     <Compile Include="Assets\Scripts\Chemicals\Reactions\WaterReac.cs" />
-     <Compile Include="Assets\Scripts\Cursor.cs" />
-     <Compile Include="Assets\Scripts\ElementScript.cs" />
-     <Compile Include="Assets\Scripts\EndCondition.cs" />
-     <Compile Include="Assets\Scripts\Extinguished.cs" />
-     <Compile Include="Assets\Scripts\FireOut.cs" />
-     <Compile Include="Assets\Scripts\GunScript.cs" />
-     <Compile Include="Assets\Scripts\Movement.cs" />
-     <Compile Include="Assets\Scripts\NoteBalance.cs" />
-     <Compile Include="Assets\Scripts\ReactsToCompound.cs" />
-     <Compile Include="Assets\Scripts\SuckDetection.cs" />
-     <Compile Include="Assets\Scripts\SuckScript.cs" />
-     <Compile Include="Assets\Scripts\Swimming.cs" />
-     <Compile Include="Assets\Scripts\ToggleMouseLook.cs" />
-     <Compile Include="Assets\Scripts\deleteEffect.cs" />
-     <Compile Include="Assets\Scripts\myGUI.cs" />
-     <Compile Include="Assets\reactionMasterList.cs" />
-     <None Include="Assets\Standard Assets\Sounds\test.txt" />
-     <None Include="Assets\Prefabs\test.txt" />
-     <None Include="Assets\Materials\test.txt" />
-     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-     <None Include="Assets\Textures\test.txt" />
-     <None Include="Assets\Scripts\test.txt" />
-     <None Include="Assets\Scripts.txt" />
-     <None Include="Assets\Scenes\test.txt" />
-     <None Include="Assets\Prefabs\Materials\test.txt" />
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

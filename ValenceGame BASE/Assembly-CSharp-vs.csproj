@@ -79,11 +79,8 @@
      <Compile Include="Assets\Scripts\deleteEffect.cs" />
      <Compile Include="Assets\Scripts\iceCollision.cs" />
      <Compile Include="Assets\Scripts\myGUI.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\Scripts\pickUpObject.cs" />
-=======
      <Compile Include="Assets\reactionMasterList.cs" />
->>>>>>> origin/master
      <None Include="Assets\Standard Assets\Sounds\test.txt" />
      <None Include="Assets\Prefabs\test.txt" />
      <None Include="Assets\Materials\test.txt" />
