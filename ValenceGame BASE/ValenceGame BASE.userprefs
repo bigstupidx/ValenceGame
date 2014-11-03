@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\iceCollision.cs">
     <Files>
-      <File FileName="Assets\Scripts\NoteBalance.cs" Line="155" Column="10" />
-      <File FileName="Assets\Scripts\CameraTest.cs" Line="60" Column="44" />
-      <File FileName="Assets\Scripts\iceCollision.cs" Line="31" Column="18" />
+      <File FileName="Assets\Scripts\iceCollision.cs" Line="15" Column="2" />
+      <File FileName="Assets\Scripts\pickUpObject.cs" Line="27" Column="81" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
