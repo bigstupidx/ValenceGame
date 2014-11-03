@@ -33,10 +33,6 @@ public class GunScript : MonoBehaviour
 
     public int power;
     //never used in GunScript
-    public int numclicks;
-    //what is this for?
-
-    //public GameObject emitter;  //HARDCODE
 
     public bool isEmitting;
     public bool isEmpty;
@@ -107,22 +103,32 @@ public class GunScript : MonoBehaviour
         prodTanks = new Tank[] {prodTank1, prodTank2, prodTank3};
         allTanks = new Tank[] {reactTank1, reactTank2, reactTank3, prodTank1, prodTank2, prodTank3};
 
-
         reactions = this.gameObject.GetComponent<reactionMasterList>().initReactionList();
         reactIndex = 0;
         sprayDamage = 0;
+    }
+    public void Vent()
+    {
+        for (int i = 0; i < allTanks.Length; i++)
+        {
+            allTanks[i].capacity = 0;
+            allTanks[i].name = "";
+        }
+        chemToShootName = "";
+        chemToShoot = null;
+        shootEffect = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //venting
+        //venting------------------------------------
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            for (int i = 0; i < allTanks.Length; i++)
-                allTanks[i].capacity = 0;
+            Vent();
         }
-        //identifying elements
+
+        //identifying elements------------------------------------------------------
         Ray ray1 = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
         RaycastHit hit;
@@ -140,7 +146,7 @@ public class GunScript : MonoBehaviour
             cursorName = " ";
         }
 
-        //Tank selection
+        //Tank selection---------------------------------------------------------------------
         //Sets what is shot out based on what tank is selected
         //if tank is empty with no assigned value, will set what is shot to null
         if (Input.GetKeyDown("1"))
@@ -294,7 +300,7 @@ public class GunScript : MonoBehaviour
             }
         }
 
-        //reaction selection
+        //reaction selection-----------------------------------------------------------------
         if(Input.GetAxis("Mouse ScrollWheel") > 0) //scrollup
         {
             ++reactIndex;
@@ -321,10 +327,13 @@ public class GunScript : MonoBehaviour
         }
         //need way to "lock" reaction when selected
 
+        //initializing for new reaction -----------------------------------------------
         if (activeReact != null)
         {   //active reaction isnt current reaction
             if (reactTank1.name != activeReact.Reactant1.getFormula())
             {
+                Vent();
+
                 if (activeReact.Reactant1 != null) 
                     reactTank1.name = activeReact.Reactant1.getFormula();
                 else reactTank1.name = "";
@@ -350,61 +359,9 @@ public class GunScript : MonoBehaviour
                 else prodTank3.name = "";
             }
         }
-        //-----------------switch reactions------------------//
 
-			//when switched, do below
-
-			//assign reaction values to tanks
-			//select tank to shoot
-			/*
-			chemToShootName = activeReact.*whatever is selected*.CompoundName;
-		
-			chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
-			chemToShoot.init();
-			
-			shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);*/
-
-		//----------------------------//
-
-		//if mouse button 1
-			//raycast
-			//if absorbable
-				//if activereact != null (aka if there is an active reaction
-					//match tank names w compounds
-					//etc
-					//when absorbed, add component
-				//else if no active reaction
-					//if first tank has element, move to next, until all tanks full, then no absorb
-		//---------------------------------------//
-		// venting
-		// must remove all compounds from player in addition to emptying and renaming all of the tanks
-		// set shoot effect to null?
-
-        /*if (eqBalanced && this.gameObject.GetComponent<Chemical.Compound>() == null)
-        {
-            //SEMI-HARDCODE NEEDS TO BE CHANGED WHEN PRODUCT SELECTION IMPLEMENTED
-            chemToShootName = activeReact.Product1.CompoundName;
-
-            chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
-            chemToShoot.init();
-
-            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
-
-        }*/
-
-        //identifying objects (for damaging)
-        if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
-        {
-            sprayDamage = chemToShoot.damage(hit.transform.name);
-            //this will be used in script Extinguished
-
-            //shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
-        }
-
-        
-
-        //absorbing
-        /*if (Input.GetMouseButton(1) && (eqBalanced || !reactSelected))
+        //absorbing----------------------------------------------------------------------------
+        if (Input.GetMouseButton(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
@@ -418,69 +375,77 @@ public class GunScript : MonoBehaviour
                     Quaternion q = Quaternion.identity;
                     q.eulerAngles = new Vector3(hit2.normal.x - ray.direction.x, hit2.normal.y - ray.direction.y, hit2.normal.z - ray.direction.z);
 
-                    if (reactSelected && activeReact != null)
-                    {    //specific absorb if specific reaction selected
-                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeReact.Reactant1.getFormula())
+                    if (activeReact != null)
+                    {
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank1.name)
                         {
-                            reactTank1.name = activeReact.Reactant1.getFormula();
-                            reactTank1.rate = activeReact.ReactCoeff1;
                             if (reactTank1.capacity < fullCap)
                             {
                                 reactTank1.capacity += 2;
 
                                 Instantiate(effect, hit2.point, q);
                                 isEmpty = false;
-
                             }
                         }
-                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeReact.Reactant2.getFormula())
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank2.name)
                         {
-                            reactTank2.name = activeReact.Reactant2.getFormula();
-                            reactTank2.rate = activeReact.ReactCoeff2;
-
                             if (reactTank2.capacity < fullCap)
                             {
                                 reactTank2.capacity += 2;
+
+                                Instantiate(effect, hit2.point, q);
+                                isEmpty = false;
+                            }
+                        }
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank3.name)
+                        {
+                            if (reactTank3.capacity < fullCap)
+                            {
+                                reactTank3.capacity += 2;
+
                                 Instantiate(effect, hit2.point, q);
                                 isEmpty = false;
                             }
                         }
                     }
-                    else if (!reactSelected)
-                    {    //to absorb anything without specific reaction selected
-                        if (reactTank1.capacity == 0)  //can absorb anything into tank1
-                        {
-                            reactTank1.name = hit2.transform.GetComponent<Chemical.Compound>().getFormula();
-                            chemToShoot = this.gameObject.AddComponent(reactTank1.name) as Chemical.Compound;
-                            chemToShoot.init();
-
-                            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
-                            
-                            reactTank1.capacity += 2;
-
-                            Instantiate(effect, hit2.point, q);
-                            isEmpty = false;
-                        }
-                        else if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank1.name)
-                        {
-                            if (reactTank1.capacity < fullCap)
+                    else     //if there is no active reaction 
+                    {
+                        Tank[] activeTanks = Array.FindAll(allTanks, x => x.isActive && x.capacity > 0);
+                        for(int i = 0; i < activeTanks.Length; ++i){
+                            if (activeTanks[i].name == "")  //can absorb anything into tank1
                             {
-                                reactTank1.capacity += 2;
+                                activeTanks[i].name = hit2.transform.GetComponent<Chemical.Compound>().getFormula();
+                            
+                                activeTanks[i].capacity += 2;
 
                                 Instantiate(effect, hit2.point, q);
                                 isEmpty = false;
+
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < activeTanks.Length; ++i)
+                        {
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeTanks[i].name)
+                            {
+                                if (activeTanks[i].capacity < fullCap)
+                                {
+                                    activeTanks[i].capacity += 2;
+
+                                    Instantiate(effect, hit2.point, q);
+                                    isEmpty = false;
+                                }
+                                break;
                             }
                         }
                     }
                 }
             }
-        }*/
+        }
 
-
-        //shooting
+        //shooting-------------------------------------------------------
         if (Input.GetButtonDown("Fire1"))
         {
-            numclicks++;
             if (!isEmitting && !isEmpty)    //will need to code the absorb mechanic
             {
                 isEmitting = true;
@@ -530,5 +495,17 @@ public class GunScript : MonoBehaviour
                 }
             }
         }
+
+        //identifying objects (for damaging)
+        if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
+        {
+            sprayDamage = chemToShoot.damage(hit.transform.name);
+            //this will be used in script Extinguished
+
+            //shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
+        }
+
+        
+
     }
 }
