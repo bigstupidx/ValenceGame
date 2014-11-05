@@ -15,7 +15,7 @@ public class MethaneCombust : Chemical.Reaction {
 		rCoeff2 = 2;
 		reactant3 = null;
 		rCoeff3 = 0;
-		product1 = this.gameObject.AddComponent<Water> ();
+		product1 = this.gameObject.AddComponent<H2O> ();
 		pCoeff1 = 2;
 		product2 = this.gameObject.AddComponent<CarbDiox>();
 		pCoeff2 = 1;

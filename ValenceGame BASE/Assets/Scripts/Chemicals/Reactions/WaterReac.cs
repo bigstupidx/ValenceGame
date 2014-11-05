@@ -50,7 +50,7 @@ public class WaterReac : Chemical.Reaction {
 //		rCoeff2 = 0;
 //		reactant3 = this.gameObject.AddComponent<O2> ();
 //		rCoeff3 = 1;
-		product1 = this.gameObject.AddComponent<Water> ();
+		product1 = this.gameObject.AddComponent<H2O> ();
 		pCoeff1 = 2;
 		product2 = null;
 		pCoeff2 = 0;

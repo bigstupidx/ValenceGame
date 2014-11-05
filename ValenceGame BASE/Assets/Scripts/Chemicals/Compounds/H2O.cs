@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Water : Chemical.Compound
+public class H2O : Chemical.Compound
 {
 
 

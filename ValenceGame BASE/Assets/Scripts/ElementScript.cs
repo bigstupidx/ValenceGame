@@ -31,7 +31,7 @@ public class ElementScript : MonoBehaviour {
 			compound = new O2();
 		}
 		if (name == "Water" || name == "H2O") {
-			compound = new Water();
+			compound = new H2O();
 		}
 		if (name == "Methane" || name == "CH4") {
 			compound = new Methane();
