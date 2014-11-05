@@ -2,59 +2,64 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class H2 : Chemical.Compound {
+public class H2 : Chemical.Compound
+{
 
 
 
-//	public H2() : base("H2") {
-		
-//		atoms = new Dictionary<Chemical.Element, int>();
-//		atoms.Add (new Hydrogen(), 2);
-//		
-//	}
+    //	public H2() : base("H2") {
+
+    //		atoms = new Dictionary<Chemical.Element, int>();
+    //		atoms.Add (new Hydrogen(), 2);
+    //		
+    //	}
 
 
-	public override int damage (string obstacleName) {
-		
-		return 0;
-	}
+    public override int damage(string obstacleName)
+    {
+
+        return 0;
+    }
+
+    public override int heal(string obstacleName)
+    {
+
+        return 0;
+    }
+
+    /*
+    public override void interact() {
+
+    }
 	
-	public override int heal (string obstacleName) {
-		
-		return 0;
-	}
+    public override bool augment() {
 
-	/*
-	public override void interact() {
-
-	}
+        return false;
+    }
 	
-	public override bool augment() {
+    public override bool remove() {
 
-		return false;
-	}
-	
-	public override bool remove() {
+        return false;
+    }
 
-		return false;
-	}
+    */
 
-	*/
-
-	public override void Start() {
+    public override void Start()
+    {
         compoundName = "H2";
         formula = "H2";
         state = stateOfMatter.gas;
 
-		atoms = new Dictionary<Chemical.Element, int>();
-		atoms.Add (new Hydrogen(), 2);
-	}
+        atoms = new Dictionary<Chemical.Element, int>();
+        atoms.Add(new Hydrogen(), 2);
+    }
 
-	public override void Update() {}
+    public override void Update() { }
 
     public override void init()
     {
         state = stateOfMatter.gas;
+        color = Color.blue;
 
     }
 }

@@ -3,22 +3,28 @@ using System.Collections;
 
 public class GunParticleSwitcher : MonoBehaviour {
     public GameObject particleSystem;
+    public Color c;
 
     public void Start()
     {
         particleSystem = GameObject.Find("End");
     }
 
-    public GameObject setParticleSystem(Chemical.Compound.stateOfMatter state)
+    public GameObject setParticleSystem(Chemical.Compound.stateOfMatter state, Color color)
     {
         if (state == Chemical.Compound.stateOfMatter.liquid)
         {
+            GameObject.Find("LiquidParticles").GetComponent<ParticleSystem>().startColor = color;
+
             return GameObject.Find("LiquidParticles");
 
         }
         else if (state == Chemical.Compound.stateOfMatter.gas)
         {
+            GameObject.Find("GasParticles").GetComponent<ParticleSystem>().startColor = color;
+
             return GameObject.Find("GasParticles");
+
 
         }
         else if (state == Chemical.Compound.stateOfMatter.solid)

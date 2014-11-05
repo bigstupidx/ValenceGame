@@ -158,7 +158,8 @@ public class GunScript : MonoBehaviour
             chemToShoot = this.gameObject.AddComponent(chemToShootName) as Chemical.Compound;
             chemToShoot.init();
             
-            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state);
+            shootEffect = GameObject.Find("ShootGun").GetComponent<GunParticleSwitcher>().setParticleSystem(chemToShoot.state, chemToShoot.color);
+            
         }
         else
         {
@@ -331,9 +332,9 @@ public class GunScript : MonoBehaviour
                             }
                         }
                     }
-                    else     //if there is no active reaction 
+                    else     //if there is no active reaction, must select tank to fill
                     {
-                        Tank[] activeTanks = Array.FindAll(allTanks, x => x.isActive && x.capacity > 0);
+                        Tank[] activeTanks = getActiveTanks();
                         for(int i = 0; i < activeTanks.Length; ++i){
                             if (activeTanks[i].name == "")  //can absorb anything into tank1
                             {
@@ -386,7 +387,7 @@ public class GunScript : MonoBehaviour
             {
                 isEmpty = false;
                 isEmitting = true;
-                shootEffect.particleSystem.Play();
+                //shootEffect.particleSystem.Play();
                 //reactTank1.capacity -= SHOOT_RATE;
                 for (int i = 0; i < activeNonemptyTanks.Length; i++)
                 {
@@ -420,13 +421,13 @@ public class GunScript : MonoBehaviour
         }
 
         //identifying objects (for damaging)
-        if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
+        /*if (this.gameObject.GetComponent<Chemical.Compound>() != null && !isEmpty)
         {
             sprayDamage = chemToShoot.damage(hit.transform.name);
             //this will be used in script Extinguished
 
             //shootEffect.GetComponent<Extinguished>().particleDamage = sprayDamage;
-        }
+        }*/
 
         
 

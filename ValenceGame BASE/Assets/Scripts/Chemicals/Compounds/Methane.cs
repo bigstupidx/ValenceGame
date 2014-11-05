@@ -2,67 +2,73 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Methane : Chemical.Compound {
+public class Methane : Chemical.Compound
+{
 
 
 
-//	public Methane() : base("CH4") {
-//		
-//		atoms = new Dictionary<Chemical.Element, int>();
-//		atoms.Add (new Carbon(), 1);
-//		atoms.Add (new Hydrogen (), 4);
-//	}
+    //	public Methane() : base("CH4") {
+    //		
+    //		atoms = new Dictionary<Chemical.Element, int>();
+    //		atoms.Add (new Carbon(), 1);
+    //		atoms.Add (new Hydrogen (), 4);
+    //	}
 
 
 
-	public override int damage (string obstacleName) {
+    public override int damage(string obstacleName)
+    {
 
-		if(obstacleName == "Firewall") {
-			return -2;
-		}
+        if (obstacleName == "Firewall")
+        {
+            return -2;
+        }
 
-		return 0;
-	}
+        return 0;
+    }
+
+    public override int heal(string obstacleName)
+    {
+
+        return 0;
+    }
+
+    /*
+
+        public override void interact() {
+
+        }
 	
-	public override int heal (string obstacleName) {
-		
-		return 0;
-	}
+        public override bool augment() {
 
-/*
-
-	public override void interact() {
-
-	}
+            return false;
+        }
 	
-	public override bool augment() {
+        public override bool remove() {
 
-		return false;
-	}
+            return false;
+        }
 	
-	public override bool remove() {
+    */
 
-		return false;
-	}
-	
-*/
-
-	public override void Start() {
+    public override void Start()
+    {
         compoundName = "Methane";
         formula = "CH4";
         state = stateOfMatter.gas;
 
-			atoms = new Dictionary<Chemical.Element, int>();
-			atoms.Add (new Carbon(), 1);
-			atoms.Add (new Hydrogen (), 4);
+        atoms = new Dictionary<Chemical.Element, int>();
+        atoms.Add(new Carbon(), 1);
+        atoms.Add(new Hydrogen(), 4);
 
-	}
+    }
 
-	public override void Update() {}
+    public override void Update() { }
 
     public override void init()
     {
         state = stateOfMatter.gas;
+        color = Color.blue;
 
     }
 
