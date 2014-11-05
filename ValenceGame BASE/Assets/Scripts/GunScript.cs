@@ -237,6 +237,15 @@ public class GunScript : MonoBehaviour
             if (activeReact.Reactant3 != null && reactTank3.capacity < activeReact.ReactCoeff3)
                 canReact = false;
 
+            // Check that product tanks can hold more product
+            Debug.Log(prodTank1.capacity + activeReact.ProdCoeff1);
+            if (activeReact.Product1 != null && prodTank1.capacity + activeReact.ProdCoeff1 > fullCap)
+                canReact = false;
+            if (activeReact.Product2 != null && prodTank2.capacity + activeReact.ProdCoeff2 > fullCap)
+                canReact = false;
+            if (activeReact.Product3 != null && prodTank3.capacity + activeReact.ProdCoeff3 > fullCap)
+                canReact = false;
+
             if (canReact)
             {
                 // Consume reactants
