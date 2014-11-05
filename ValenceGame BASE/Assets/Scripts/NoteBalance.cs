@@ -227,7 +227,6 @@ public class NoteBalance : MonoBehaviour {
 
 		scribe.Write ("<color=white><size=60>");
 
-		int index = 0;
 		foreach (char c in formula) {
 			if(Char.IsLetter(c)) {
 				scribe.Write(c);

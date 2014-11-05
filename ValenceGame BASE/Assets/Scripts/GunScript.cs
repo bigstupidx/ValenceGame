@@ -35,10 +35,6 @@ public class GunScript : MonoBehaviour
     //never used in GunScript
 
     public bool isEmitting;
-    public bool isEmpty;
-    public bool reactSelected;    //was 'isEquation' //is there a specific equation that is being used to get elements
-        //what does this do?
-    public bool eqBalanced;        //was 'balanced'
 
     public GameObject effect;   //HARDCODE
 
@@ -97,10 +93,7 @@ public class GunScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        isEmpty = true;
         isEmitting = false;
-        eqBalanced = false;
-        reactSelected = false;
         combineCap = 0;
         cursorName = " ";
 
@@ -362,7 +355,6 @@ public class GunScript : MonoBehaviour
                                 reactTank1.capacity += 2;
 
                                 Instantiate(effect, hit2.point, q);
-                                isEmpty = false;
                             }
                         }
                         if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank2.name)
@@ -372,7 +364,6 @@ public class GunScript : MonoBehaviour
                                 reactTank2.capacity += 2;
 
                                 Instantiate(effect, hit2.point, q);
-                                isEmpty = false;
                             }
                         }
                         if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank3.name)
@@ -382,7 +373,6 @@ public class GunScript : MonoBehaviour
                                 reactTank3.capacity += 2;
 
                                 Instantiate(effect, hit2.point, q);
-                                isEmpty = false;
                             }
                         }
                     }
@@ -397,7 +387,7 @@ public class GunScript : MonoBehaviour
                                 activeTanks[i].capacity += 2;
 
                                 Instantiate(effect, hit2.point, q);
-                                isEmpty = false;
+                                
 
                                 break;
                             }
@@ -411,7 +401,7 @@ public class GunScript : MonoBehaviour
                                     activeTanks[i].capacity += 2;
 
                                     Instantiate(effect, hit2.point, q);
-                                    isEmpty = false;
+                                    
                                 }
                                 break;
                             }
@@ -439,7 +429,6 @@ public class GunScript : MonoBehaviour
             Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
             if (isEmitting && activeNonemptyTanks.Length > 0)
             {
-                isEmpty = false;
                 isEmitting = true;
                 //shootEffect.particleSystem.Play();
                 //reactTank1.capacity -= SHOOT_RATE;
@@ -451,7 +440,6 @@ public class GunScript : MonoBehaviour
             }
             else
             {
-                isEmpty = true;
                 isEmitting = false;
                 if(shootEffect != null)
                 {
@@ -469,7 +457,6 @@ public class GunScript : MonoBehaviour
                 Tank[] nonemptyTanks = Array.FindAll(allTanks, x => x.capacity > 0);
                 if (nonemptyTanks.Length == 0)
                 {
-                    isEmpty = true;
                 }
             }
         }
