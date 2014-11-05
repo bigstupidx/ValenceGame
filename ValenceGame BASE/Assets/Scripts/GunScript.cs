@@ -224,6 +224,51 @@ public class GunScript : MonoBehaviour
             selectTank(prodTank3);
         }
 
+        // React Button
+        if (Input.GetKey("r") && activeReact != null)
+        {
+            bool canReact = true;
+
+            // Check that all needed reactant tanks have the necessary amounts of reactant
+            if (activeReact.Reactant1 != null && reactTank1.capacity < activeReact.ReactCoeff1)
+                canReact = false;
+            if (activeReact.Reactant2 != null && reactTank2.capacity < activeReact.ReactCoeff2)
+                canReact = false;
+            if (activeReact.Reactant3 != null && reactTank3.capacity < activeReact.ReactCoeff3)
+                canReact = false;
+
+            if (canReact)
+            {
+                // Consume reactants
+                if (activeReact.Reactant1 != null)
+                {
+                    reactTank1.capacity -= activeReact.ReactCoeff1;
+                }
+                if (activeReact.Reactant2 != null)
+                {
+                    reactTank2.capacity -= activeReact.ReactCoeff2;
+                }
+                if (activeReact.Reactant3 != null)
+                {
+                    reactTank3.capacity -= activeReact.ReactCoeff3;
+                }
+
+                // Generate products
+                if (activeReact.Product1 != null)
+                {
+                    prodTank1.capacity += activeReact.ProdCoeff1;
+                }
+                if (activeReact.Product2 != null)
+                {
+                    prodTank2.capacity += activeReact.ProdCoeff2;
+                }
+                if (activeReact.Product3 != null)
+                {
+                    prodTank3.capacity += activeReact.ProdCoeff3;
+                }
+            }
+        }
+
         //reaction selection-----------------------------------------------------------------
         if(Input.GetAxis("Mouse ScrollWheel") > 0) //scrollup
         {
