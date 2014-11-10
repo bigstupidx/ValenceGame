@@ -70,6 +70,7 @@ public class GunScript : MonoBehaviour
     private int reactIndex;
 
     public GameObject shootEffect;
+	public ParticleSystem pyro;
 
     //used for different particle emitters
     public GameObject absorb1;        //for compound 1
@@ -104,6 +105,8 @@ public class GunScript : MonoBehaviour
         reactions = this.gameObject.GetComponent<reactionMasterList>().initReactionList();
         reactIndex = 0;
         sprayDamage = 0;
+
+//		pyro.particleSystem.Play ();
     }
     public void Vent()
     {
@@ -161,6 +164,59 @@ public class GunScript : MonoBehaviour
             shootEffect = null;
         }
     }
+
+	//Flamethrowing method
+	void ejectFire() {
+		if (Input.GetButtonDown("Fire1"))
+		{
+			Tank[] activeNonemptyTanks = getActiveNonemptyTanks();
+			if (activeNonemptyTanks.Length > 0 && !isEmitting)    //will need to code the absorb mechanic
+			{
+				isEmitting = true;
+				shootEffect.particleSystem.Play();
+			}
+		}
+		if (Input.GetButton("Fire1"))
+		{
+			// Look for active tanks that are not empty and fire those
+			Tank[] activeNonemptyTanks = getActiveNonemptyTanks();
+			Debug.Log(string.Format("Active Tanks: {0}", getActiveTanks().Length));
+			Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
+			if (isEmitting && activeNonemptyTanks.Length > 0)
+			{
+				isEmitting = true;
+				//shootEffect.particleSystem.Play();
+				//reactTank1.capacity -= SHOOT_RATE;
+				for (int i = 0; i < activeNonemptyTanks.Length; i++)
+				{
+					Tank tank = activeNonemptyTanks[i];
+					tank.capacity -= SHOOT_RATE;
+				}
+			}
+			else
+			{
+				isEmitting = false;
+				if(shootEffect != null)
+				{
+					shootEffect.particleSystem.Stop();
+				}
+			}
+		}
+		if (Input.GetButtonUp("Fire1")) //stop emitting
+		{
+			if (isEmitting)
+			{
+				isEmitting = false;
+				shootEffect.particleSystem.Stop();
+				
+				Tank[] nonemptyTanks = Array.FindAll(allTanks, x => x.capacity > 0);
+				if (nonemptyTanks.Length == 0)
+				{
+				}
+			}
+		}
+	}
+
 
     // Update is called once per frame
     void Update()
@@ -231,7 +287,7 @@ public class GunScript : MonoBehaviour
                 canReact = false;
 
             // Check that product tanks can hold more product
-            Debug.Log(prodTank1.capacity + activeReact.ProdCoeff1);
+//            Debug.Log(prodTank1.capacity + activeReact.ProdCoeff1);
             if (activeReact.Product1 != null && prodTank1.capacity + activeReact.ProdCoeff1 > fullCap)
                 canReact = false;
             if (activeReact.Product2 != null && prodTank2.capacity + activeReact.ProdCoeff2 > fullCap)
@@ -255,6 +311,11 @@ public class GunScript : MonoBehaviour
                     reactTank3.capacity -= activeReact.ReactCoeff3;
                 }
 
+				if (activeReact.EnergyType == Chemical.Reaction.energy.Combust) {
+					//ejectFire();
+					pyro.particleSystem.Play();
+				}
+
                 // Generate products
                 if (activeReact.Product1 != null)
                 {
@@ -269,7 +330,13 @@ public class GunScript : MonoBehaviour
                     prodTank3.capacity += activeReact.ProdCoeff3;
                 }
             }
+			else {
+				pyro.particleSystem.Stop();
+			}
         }
+		else {
+			pyro.particleSystem.Stop();
+		}
 
         //reaction selection-----------------------------------------------------------------
         if(Input.GetAxis("Mouse ScrollWheel") > 0) //scrollup

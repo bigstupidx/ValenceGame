@@ -160,7 +160,7 @@ namespace Chemical {
 		}
 
 		public enum energy {
-			Exotherm, Endotherm, Refreshing, None
+			Exotherm, Endotherm, Combust, Refreshing, None
 		};
 
 

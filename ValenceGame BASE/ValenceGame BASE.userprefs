@@ -1,12 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GunScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Chemicals/Compounds/IceWater.cs">
     <Files>
-      <File FileName="Assets\Scripts\GunScript.cs" Line="135" Column="1" />
-      <File FileName="Assets\Scripts\NoteBalance.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Reactions\WaterReac.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Reactions\MethaneCombust.cs" Line="1" Column="1" />
-      <File FileName="Assets\reactionMasterList.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Chemicals/Reactions/MethaneCombust.cs" Line="27" Column="30" />
+      <File FileName="Assets/Scripts/Chemicals/Reactions/Reaction.cs" Line="163" Column="33" />
+      <File FileName="Assets/Scripts/GunScript.cs" Line="290" Column="3" />
+      <File FileName="Assets/Scripts/Chemicals/Compounds/IceWater.cs" Line="12" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
