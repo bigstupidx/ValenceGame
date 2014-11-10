@@ -180,8 +180,8 @@ public class GunScript : MonoBehaviour
 		{
 			// Look for active tanks that are not empty and fire those
 			Tank[] activeNonemptyTanks = getActiveNonemptyTanks();
-			Debug.Log(string.Format("Active Tanks: {0}", getActiveTanks().Length));
-			Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
+//			Debug.Log(string.Format("Active Tanks: {0}", getActiveTanks().Length));
+//			Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
 			if (isEmitting && activeNonemptyTanks.Length > 0)
 			{
 				isEmitting = true;
@@ -486,14 +486,15 @@ public class GunScript : MonoBehaviour
             {
                 isEmitting = true;
                 shootEffect.particleSystem.Play();
+				Debug.Log("shooting effect: " + shootEffect.name);
             }
         }
         if (Input.GetButton("Fire1"))
         {
             // Look for active tanks that are not empty and fire those
             Tank[] activeNonemptyTanks = getActiveNonemptyTanks();
-            Debug.Log(string.Format("Active Tanks: {0}", getActiveTanks().Length));
-            Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
+//            Debug.Log(string.Format("Active Tanks: {0}", getActiveTanks().Length));
+//            Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
             if (isEmitting && activeNonemptyTanks.Length > 0)
             {
                 isEmitting = true;

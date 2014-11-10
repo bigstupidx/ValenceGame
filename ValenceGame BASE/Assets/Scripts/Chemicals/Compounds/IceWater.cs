@@ -69,11 +69,11 @@ public class IceWater : Chemical.Compound {
 	}
 
 	void OnParticleCollision(GameObject other){
-		Debug.Log ("OHNO");
+//		Debug.Log ("OHNO");
 
-		if(other.tag == "WaterGunEmitter") {
+//		if(other.tag == "WaterGunEmitter") {
 //		Debug.Log (other.gameObject.name);
-//		if(other.name == "FireParticles") {
+		if(other.name == "FireParticles") {
 			//			Vector3 shrink = new Vector3(0.9, 0.9, 0.9);
 			//			Vector3 aPosition = new Vector3(1, 1, 1);
 			this.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.localScale, new Vector3(0.95F, 0.95F, 0.95F));
