@@ -57,7 +57,7 @@
      <None Include="Assets\Scenes\test.txt" />
      <None Include="Assets\Prefabs\Materials\test.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>C:/Users/bjg5436/Documents/GitHub/ValenceGame/ValenceGame BASE/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>C:/Users/qmh8529/Desktop/ValenceGame/ValenceGame BASE/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
