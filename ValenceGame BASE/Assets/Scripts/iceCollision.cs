@@ -45,7 +45,7 @@ public class iceCollision : MonoBehaviour
             // The original box is ruled by gravity so that effects the rate also
             // Rates below 0.1 can cause problems where the platform only moves once
             newPos1.y -= 0.3f * Time.deltaTime;
-			newPos2.y += 0.3f * Time.deltaTime;;
+			newPos2.y += 0.3f * Time.deltaTime;
 
             this.gameObject.transform.position = newPos1;
             partner.transform.position = newPos2;
@@ -63,7 +63,7 @@ public class iceCollision : MonoBehaviour
 			Vector3 newPos2 = partner.transform.position;
 			
 			newPos1.y += 0.3f * Time.deltaTime;
-			newPos2.y -= 0.3f * Time.deltaTime;;
+			newPos2.y -= 0.3f * Time.deltaTime;
 
 			this.gameObject.transform.position = newPos1;
 			partner.transform.position = newPos2;
