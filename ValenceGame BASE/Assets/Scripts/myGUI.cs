@@ -98,12 +98,18 @@ public class myGUI : MonoBehaviour
         GUI.skin = mySkin;
         
         GUI.Label(new Rect(Screen.width / 2 - (50 * ratW), Screen.height / 2 - (50 * ratH), 100 * ratW, 100 * ratH), cursorPic);
+
+        // Reactant cirle bars
+        //gameObject.renderer.material.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, Input.mousePosition.x));
+
+
+
     
         //Do need to show GUI all the time
         //if (player.GetComponent<GunScript>().eqBalanced)
             //if (player.GetComponent<GunScript>().balanced || !player.GetComponent<GunScript>().isEquation)
         //{
-
+/*
         // REACTANT BARS
             
             //First reactant bar
@@ -188,6 +194,7 @@ public class myGUI : MonoBehaviour
                 GUI.color = Color.yellow;
                 GUI.DrawTexture(prodBar3, highlightTexture);
             }
+
         //Selected Reaction
             mySkin.font = font;
             GUI.Box(new Rect(10 * ratW, (Screen.height) - 160*ratH, 80 * ratW, 30*ratH), productName);
@@ -219,7 +226,8 @@ public class myGUI : MonoBehaviour
         //}
         
         GUI.Label(new Rect(Screen.width / 2 - (20 * ratW), Screen.height / 2 - (60 * ratH), 50 * ratW, 50 * ratH), player.GetComponent<GunScript>().cursorName, guiStyle);        
+*/
         
     }
-    
+
 }
