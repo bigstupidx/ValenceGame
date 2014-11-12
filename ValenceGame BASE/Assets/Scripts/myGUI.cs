@@ -232,21 +232,21 @@ public class myGUI : MonoBehaviour
 			prod3name = prodTank3.substance.Formula;
 		}
 
-		GUI.Button(new Rect(10 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), react1name);
-		GUI.Button(new Rect(40 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), react2name);
-		GUI.Button(new Rect(70 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), react3name);
+        GUI.Button(new Rect(10 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), react1name);
+        GUI.Button(new Rect(40 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), react2name);
+        GUI.Button(new Rect(70 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), react3name);
 
             // Product names
-		GUI.Button(new Rect(110 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), prod1name);
-		GUI.Button(new Rect(140 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), prod2name);
-		GUI.Button(new Rect(170 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), prod3name);
+        GUI.Button(new Rect(110 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), prod1name);
+        GUI.Button(new Rect(140 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), prod2name);
+        GUI.Button(new Rect(170 * ratW, (Screen.height - 30*ratH), 20 * ratW, 20*ratH), prod3name);
 			
 			//GUI.Box(new Rect(10 * ratW, 10 * ratH, 50 * ratW, 50 * ratH), "   H2O", "whitebar");
 			//GUI.Button(new Rect(10 * ratW, (Screen.height - (10 * ratH)) - 180, 50 * ratW, 50 * ratH), "   H2O");
 		//}
 		
-		GUI.Label(new Rect(Screen.width / 2 - (20 * ratW), Screen.height / 2 - (60 * ratH), 50 * ratW, 50 * ratH), player.GetComponent<GunScript>().cursorName, guiStyle);		
-		
+        GUI.Label(new Rect(Screen.width / 2 - (20 * ratW), Screen.height / 2 - (60 * ratH), 50 * ratW, 50 * ratH), player.GetComponent<GunScript>().cursorName, guiStyle);		
+        
 	}
 	
 }
