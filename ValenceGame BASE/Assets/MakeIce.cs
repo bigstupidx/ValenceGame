@@ -7,6 +7,7 @@ public class MakeIce : MonoBehaviour {
 	public GameObject target;
 
 	public int capacity;
+	public int maxCapacity;
 
 	// Use this for initialization
 	void Start () {
