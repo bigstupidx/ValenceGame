@@ -20,7 +20,7 @@ public class MakeIce : MonoBehaviour {
 	}
 
 	void OnParticleCollision(GameObject other){
-		if (player.GetComponent<GunScript> ().chemToShootName == "H2O") {
+		if (player.GetComponent<GunScript> ().chemToShoot.Formula == "H2O") {
 			if(capacity < maxCapacity){	
 				capacity += 1;
 				//Instantiate(ice, new Vector3(target.transform.position.x, target.transform.position.y + 2, target.transform.position.z), Quaternion.identity);

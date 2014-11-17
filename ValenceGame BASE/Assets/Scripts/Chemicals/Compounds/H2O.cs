@@ -82,6 +82,6 @@ public class H2O : Chemical.Compound
     public override void init()
     {
         state = stateOfMatter.liquid;
-        color = Color.blue;
+        color = Color.cyan;
     }
 }

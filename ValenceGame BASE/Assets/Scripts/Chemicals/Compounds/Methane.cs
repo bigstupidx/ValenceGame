@@ -68,7 +68,7 @@ public class Methane : Chemical.Compound
     public override void init()
     {
         state = stateOfMatter.gas;
-        color = Color.blue;
+        color = Color.green;
 
     }
 
