@@ -64,7 +64,7 @@ public class H2O : Chemical.Compound
     // Use this for initialization
     public override void Start()
     {
-        compoundName = "Water";
+        compoundName = "H2O";
         formula = "H2O";
         state = stateOfMatter.liquid;
 
