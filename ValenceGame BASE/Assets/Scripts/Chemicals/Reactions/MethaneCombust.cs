@@ -24,7 +24,7 @@ public class MethaneCombust : Chemical.Reaction {
 		product3 = null;
 		pCoeff3 = 0;
 		
-		energyType = energy.Exotherm;
+		energyType = energy.Combust;
 	}
 	
 	// Update is called once per frame
