@@ -83,8 +83,7 @@ public class GunScript : MonoBehaviour
 	public ParticleSystem pyro;
 
     //used for different particle emitters
-    public GameObject absorb1;        //for compound 1
-    public GameObject absorb2;        //for compound 2
+    public GameObject absorbEffect;        //for compound 1
 
     public int getFullCap()  //So GUI can know the maximum capacity in order to scale the gui to screen
     {
@@ -115,7 +114,8 @@ public class GunScript : MonoBehaviour
         reactions = this.gameObject.GetComponent<reactionMasterList>().initReactionList();
         reactIndex = 0;
         sprayDamage = 0;
-
+        //absorbEffect = GameObject.Find("AbsorbLiquid");
+        //absorbEffect.particleSystem.Play();
 //		pyro.particleSystem.Play ();
     }
     public void Vent()
@@ -416,6 +416,93 @@ public class GunScript : MonoBehaviour
         }
 
         //absorbing----------------------------------------------------------------------------
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+            RaycastHit hit2;
+            Physics.Raycast(ray, out hit2, 1000f);
+
+            if (hit2.transform.tag == "Absorbable")
+            {
+                if (hit2.distance < 8)
+                {
+                    Quaternion q = Quaternion.identity;
+                    q.eulerAngles = new Vector3(hit2.normal.x - ray.direction.x, hit2.normal.y - ray.direction.y, hit2.normal.z - ray.direction.z);
+
+                    if (activeReact != null)
+                    {
+                        if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank1.substance.Formula)
+                        {
+                            if (reactTank1.capacity < fullCap)
+                            {
+                                absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank1.substance);
+                                absorbEffect.particleSystem.Play();
+                                reactTank1.capacity += 2;
+                            }
+                        }
+                        if (reactTank2.substance != null)
+                        {
+
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank2.substance.Formula)
+                            {
+                                if (reactTank2.capacity < fullCap)
+                                {
+                                    reactTank2.capacity += 2;
+                                    absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank2.substance);
+                                    absorbEffect.particleSystem.Play();
+                                }
+                            }
+                        }
+                        if (reactTank3.substance != null)
+                        {
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank3.substance.Formula)
+                            {
+                                if (reactTank3.capacity < fullCap)
+                                {
+                                    reactTank3.capacity += 2;
+
+                                    absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank1.substance);
+                                    absorbEffect.particleSystem.Play();
+                                }
+                            }
+                        }
+                    }
+                    else     //if there is no active reaction, must select tank to fill
+                    {
+                        Tank[] activeTanks = getActiveTanks();
+                        for (int i = 0; i < activeTanks.Length; ++i)
+                        {
+                            if (activeTanks[i].substance == null)  //can absorb anything into tank1
+                            {
+                                activeTanks[i].substance = hit2.transform.GetComponent<Chemical.Compound>();
+
+                                activeTanks[i].capacity += 2;
+
+                                absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(activeTanks[i].substance);
+                                absorbEffect.particleSystem.Play();
+
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < activeTanks.Length; ++i)
+                        {
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeTanks[i].substance.Formula)
+                            {
+                                if (activeTanks[i].capacity < fullCap)
+                                {
+                                    activeTanks[i].capacity += 2;
+
+                                    absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(activeTanks[i].substance);
+                                    absorbEffect.particleSystem.Play();
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         if (Input.GetMouseButton(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -437,30 +524,40 @@ public class GunScript : MonoBehaviour
                             if (reactTank1.capacity < fullCap)
                             {
                                 reactTank1.capacity += 2;
-
-                                Instantiate(effect, hit2.point, q);
+                            }
+                            else
+                            {
+                                absorbEffect.particleSystem.Stop();
                             }
                         }
-						if(reactTank2.substance != null) {
-                         
-						    if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank2.substance.Formula)
+                        if (reactTank2.substance != null)
+                        {
+
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank2.substance.Formula)
                             {
                                 if (reactTank2.capacity < fullCap)
                                 {
                                     reactTank2.capacity += 2;
-
-                                    Instantiate(effect, hit2.point, q);
+                                    
+                                }
+                                else
+                                {
+                                    absorbEffect.particleSystem.Stop();
                                 }
                             }
-						}
-                        if(reactTank3.substance != null) {
-    						if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank3.substance.Formula)
+                        }
+                        if (reactTank3.substance != null)
+                        {
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank3.substance.Formula)
                             {
                                 if (reactTank3.capacity < fullCap)
                                 {
                                     reactTank3.capacity += 2;
 
-                                    Instantiate(effect, hit2.point, q);
+                                }
+                                else
+                                {
+                                    absorbEffect.particleSystem.Stop();
                                 }
                             }
                         }
@@ -468,29 +565,28 @@ public class GunScript : MonoBehaviour
                     else     //if there is no active reaction, must select tank to fill
                     {
                         Tank[] activeTanks = getActiveTanks();
-                        for(int i = 0; i < activeTanks.Length; ++i){
+                        for (int i = 0; i < activeTanks.Length; ++i)
+                        {
                             if (activeTanks[i].substance == null)  //can absorb anything into tank1
                             {
                                 activeTanks[i].substance = hit2.transform.GetComponent<Chemical.Compound>();
-                            
-                                activeTanks[i].capacity += 2;
 
-                                Instantiate(effect, hit2.point, q);
-                                
+                                activeTanks[i].capacity += 2;
 
                                 break;
                             }
                         }
                         for (int i = 0; i < activeTanks.Length; ++i)
                         {
-							if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeTanks[i].substance.Formula)
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeTanks[i].substance.Formula)
                             {
                                 if (activeTanks[i].capacity < fullCap)
                                 {
                                     activeTanks[i].capacity += 2;
-
-                                    Instantiate(effect, hit2.point, q);
-                                    
+                                }
+                                else
+                                {
+                                    absorbEffect.particleSystem.Stop();
                                 }
                                 break;
                             }
@@ -498,6 +594,10 @@ public class GunScript : MonoBehaviour
                     }
                 }
             }
+        }
+        if(Input.GetMouseButtonUp(1))
+        {
+            absorbEffect.particleSystem.Stop();
         }
 
         //shooting-------------------------------------------------------

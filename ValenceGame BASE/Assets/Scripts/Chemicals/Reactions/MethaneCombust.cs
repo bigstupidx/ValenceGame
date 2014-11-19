@@ -4,7 +4,8 @@ using System.Collections;
 public class MethaneCombust : Chemical.Reaction {
 
 	// Use this for initialization
-	void Start () {
+   public override void Start()
+    {
 		unlocked = true;
 
 		reactName = "Methane Combustion";

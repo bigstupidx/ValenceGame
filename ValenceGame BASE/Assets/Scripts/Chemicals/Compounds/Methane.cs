@@ -53,6 +53,7 @@ public class Methane : Chemical.Compound
 
     public override void Start()
     {
+        color = Color.green;
         compoundName = "Methane";
         formula = "CH4";
         state = stateOfMatter.gas;

@@ -46,6 +46,8 @@ public class H2 : Chemical.Compound
 
     public override void Start()
     {
+        color = Color.blue;
+
         compoundName = "H2";
         formula = "H2";
         state = stateOfMatter.gas;

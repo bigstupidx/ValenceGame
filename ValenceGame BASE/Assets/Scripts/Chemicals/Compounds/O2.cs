@@ -47,6 +47,7 @@ public class O2 : Chemical.Compound
     // Use this for initialization
     public override void Start()
     {
+        color = Color.cyan;
         compoundName = "O2";
         formula = "O2";
         state = stateOfMatter.gas;
