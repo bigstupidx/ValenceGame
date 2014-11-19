@@ -5,12 +5,13 @@ public class iceCollision : MonoBehaviour
 {
 	public GameObject partner;
 	public bool weighedDown;
-	private Vector3 originalPosition;
+	//private Vector3 resetPosition;
+	public float resetY;
 
     // Use this for initialization
     void Start ()
     {
-		originalPosition = this.transform.position;
+		//resetPosition = this.transform.position;
     }
     
     // Update is called once per frame
@@ -44,8 +45,8 @@ public class iceCollision : MonoBehaviour
 			// Rate at which the platforms move
             // The original box is ruled by gravity so that effects the rate also
             // Rates below 0.1 can cause problems where the platform only moves once
-            newPos1.y -= 0.3f * Time.deltaTime;
-			newPos2.y += 0.3f * Time.deltaTime;
+            newPos1.y -= 0.5f * Time.deltaTime;
+			newPos2.y += 0.5f * Time.deltaTime;
 
             this.gameObject.transform.position = newPos1;
             partner.transform.position = newPos2;
@@ -54,11 +55,11 @@ public class iceCollision : MonoBehaviour
 
 	void reset()
 	{
-		if (this.transform.position.y == originalPosition.y) {
+		if (this.transform.position.y == resetY) {
 						// do nothing
 		} 
 
-		else if (this.transform.position.y < originalPosition.y) {
+		else if (this.transform.position.y < resetY) {
 			Vector3 newPos1 = this.gameObject.transform.position;
 			Vector3 newPos2 = partner.transform.position;
 			
