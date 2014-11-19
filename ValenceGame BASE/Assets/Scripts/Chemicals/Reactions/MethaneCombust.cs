@@ -4,7 +4,8 @@ using System.Collections;
 public class MethaneCombust : Chemical.Reaction {
 
 	// Use this for initialization
-	void Start () {
+   public override void Start()
+    {
 		unlocked = true;
 
 		reactName = "Methane Combustion";
@@ -24,11 +25,12 @@ public class MethaneCombust : Chemical.Reaction {
 		product3 = null;
 		pCoeff3 = 0;
 		
-		energyType = energy.Exotherm;
+		energyType = energy.Combust;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+   public override void Update()
+   {
 	
 	}
 }

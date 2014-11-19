@@ -51,6 +51,8 @@ public class CarbDiox : Chemical.Compound
 
     public override void Start()
     {
+        color = Color.yellow;
+
         compoundName = "CarbDiox";
         formula = "CO2";
         state = stateOfMatter.gas;
@@ -66,7 +68,7 @@ public class CarbDiox : Chemical.Compound
     public override void init()
     {
         state = stateOfMatter.gas;
-        color = Color.blue;
+        color = Color.yellow;
 
     }
 }

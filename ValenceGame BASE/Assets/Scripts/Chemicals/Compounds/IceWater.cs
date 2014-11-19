@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class IceWater : Chemical.Compound {
-	
+	private bool isMoved;
+
 	
 	//	public Water() : base("H2O") {
 	//
@@ -65,18 +66,26 @@ public class IceWater : Chemical.Compound {
 		atoms.Add (new Hydrogen(), 2);
 		atoms.Add (new Oxygen (), 1);
 		
-		
+		isMoved = false;
 	}
 
 	void OnParticleCollision(GameObject other){
-		if(other.tag == "WaterGunEmitter") {
-			//			Vector3 shrink = new Vector3(0.9, 0.9, 0.9);
-			//			Vector3 aPosition = new Vector3(1, 1, 1);
-			this.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.localScale, new Vector3(0.95F, 0.95F, 0.95F));
+//		Debug.Log ("OHNO");
+
+//		if(other.tag == "WaterGunEmitter") {
+//		Debug.Log (other.gameObject.name);
+		if(other.name == "FireParticles") {
+//			Vector3 shrink = new Vector3(0.9, 0.9, 0.9);
+//			Vector3 aPosition = new Vector3(1, 1, 1);
+//			this.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.localScale, new Vector3(0.99F, 0.99F, 0.99F));
+            Debug.Log (Time.deltaTime);
+            this.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.localScale, new Vector3((1F - Time.deltaTime), (1F - Time.deltaTime), (1F - Time.deltaTime)));
 			
-			if(this.gameObject.transform.localScale.x < 0.25F) {
-				this.gameObject.gameObject.SetActive(false);
-			}
+			/*if(this.gameObject.transform.localScale.x < 0.25F) {
+				//this.gameObject.gameObject.SetActive(false);
+				this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 100, this.gameObject.transform.position.z);
+				Destroy (this.gameObject.gameObject);
+			}*/
 			//			Vector3 scale = other.transform.localScale;
 			//			other.transform.localScale.x = scale.x - 0.1F;
 			//			other.transform.localScale.y = scale.y - 0.1F;
@@ -87,6 +96,15 @@ public class IceWater : Chemical.Compound {
 	
 	// Update is called once per frame
 	public override void Update () {
-		//	
+		if(isMoved){
+			isMoved = false;
+			Destroy (this.gameObject.gameObject);
+		}
+
+		if(this.gameObject.transform.localScale.x < 0.25F) {
+		//this.gameObject.gameObject.SetActive(false);
+			this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 100, this.gameObject.transform.position.z);
+			isMoved = true;
+		}
 	}
 }
