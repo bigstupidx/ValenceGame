@@ -24,21 +24,30 @@ public class CompoundBar : MonoBehaviour
             Debug.Log(string.Format("Scale before: {0}", gameObject.transform.localScale));
             if (totalAngle < 0f)
             {
-                gameObject.transform.localScale.Set(
+                gameObject.transform.localScale = new Vector3(
                     gameObject.transform.localScale.x,
                     gameObject.transform.localScale.y * -1.0f,
                     gameObject.transform.localScale.z);
+
                 Debug.Log(string.Format("Scale after: {0}", gameObject.transform.localScale));
             }
 
             // Rotate bar so it fills at the right angle
-
+            if(totalAngle < 0f)
+            {
+                gameObject.transform.Rotate(new Vector3(0.0f, 0.0f, startAngle - 180f));
+            }
+            else
+            {
+                gameObject.transform.Rotate(new Vector3(0.0f, 0.0f, startAngle));
+            }
         }
     
         // Update is called once per frame
         void Update ()
         {
-            float revealOffset = 1f - ((totalAngle / 360f) * (float)(Time.timeSinceLevelLoad % 3) / 3f);
+
+            float revealOffset = 1f - (Mathf.Abs(totalAngle) / 360f) * ((float)(Time.timeSinceLevelLoad % 3) / 3f);
             gameObject.renderer.material.SetFloat("_Cutoff", revealOffset);
         }
 }
