@@ -30,6 +30,7 @@ public class myGUI : MonoBehaviour
     public Texture highlightTexture;
     public Material mat; 
     public GameObject player;
+    public GameObject compoundBarPrefab;
     public Chemical.Reaction activeReaction;
     
     private GUIStyle guiStyle;
@@ -47,6 +48,75 @@ public class myGUI : MonoBehaviour
         fullCap = player.GetComponent<GunScript>().getFullCap();
     
         productName = "";
+    }
+
+    // Changes positioning of compound bars in GUI
+    List<CompoundBar> ResetCompoundBars (int newNumBars)
+    {
+        // Destroy existing bars
+        CompoundBar[] compoundBars = GameObject.FindObjectsOfType<CompoundBar>();
+        GameObject HUDObject = GameObject.Find("HUD");
+        if(HUDObject == null)
+        {
+            throw new System.Exception("Cannot find HUD object to attach new compound bars to.");
+        }
+        else
+        {
+            HUDObject.transform.LookAt(this.transform);
+        }
+
+        for(int i = 0; i < compoundBars.Length; i++)
+        {
+            Destroy(compoundBars[i]);
+        }
+
+        // Instantiate new bars from CompoundBar prefab
+        var newBars = new List<CompoundBar>();
+        for(int i = 0; i < newNumBars; i++)
+        {
+            GameObject barObject = Instantiate(compoundBarPrefab) as GameObject;
+            Transform barTransform = barObject.transform;
+            CompoundBar bar = barObject.GetComponent<CompoundBar>();
+
+            barTransform.parent = HUDObject.transform;
+            barTransform.localPosition = new Vector3(0f, 0f, 0f);
+            newBars.Add(bar);
+        }
+
+        // Set angles depending on number of bars
+        if(newBars.Count == 0)
+        {
+        }
+        else if(newBars.Count == 1)
+        {
+            newBars[0].startAngle = 260;
+            newBars[0].endAngle = -80;
+        }
+        else if(newBars.Count == 2)
+        {
+            newBars[0].startAngle = 260;
+            newBars[0].endAngle = 100;
+
+            newBars[1].startAngle = -80;
+            newBars[1].endAngle = 80;
+        }
+        else if(newBars.Count == 3)
+        {
+            newBars[0].startAngle = 260;
+            newBars[0].endAngle = 160;
+
+            newBars[1].startAngle = 150;
+            newBars[1].endAngle = 30;
+
+            newBars[2].startAngle = -80;
+            newBars[2].endAngle = 20;
+        }
+        else
+        {
+            throw new System.Exception("GUI was given an unexpected number of reactants to make compound bars for.");
+        }
+
+        return newBars;
     }
     
     void OnGUI()
@@ -82,11 +152,16 @@ public class myGUI : MonoBehaviour
         GUI.matrix = m;
         */
 
+        // Manage compound bars for reactants
         activeReaction = player.GetComponent<GunScript>().activeReact;
         if(activeReaction != null)
         {
+            CompoundBar[] reactantBars = GameObject.FindObjectsOfType<CompoundBar>();
             List<Chemical.Compound> activeReactants = activeReaction.Reactants;
-            List<Chemical.Compound> activeProducts = activeReaction.Products;
+            if(activeReactants.Count != reactantBars.Length)
+            {
+                ResetCompoundBars(activeReactants.Count);
+            }
         }
 
         ratH = (float)Screen.height / (float)relScreenH;
