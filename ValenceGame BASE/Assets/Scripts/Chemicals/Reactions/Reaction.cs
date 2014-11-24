@@ -168,8 +168,38 @@ namespace Chemical {
 //			reactName = rN;
 //		}
 
+        public List<Chemical.Compound> Reactants
+        {
+            get
+            {
+                var reactants = new List<Compound>();
+                if (reactant1 != null)
+                    reactants.Add(reactant1);
+                if (reactant2 != null)
+                    reactants.Add(reactant2);
+                if (reactant3 != null)
+                    reactants.Add(reactant3);
+
+                return reactants;
+            }
+        }
 
 
+        public List<Chemical.Compound> Products
+        {
+            get
+            {
+                var products = new List<Compound>();
+                if (product1 != null)
+                    products.Add(product1);
+                if (product2 != null)
+                    products.Add(product2);
+                if (product3 != null)
+                    products.Add(product3);
+
+                return products;
+            }
+        }
 
 		public virtual void Start () {}
 		
