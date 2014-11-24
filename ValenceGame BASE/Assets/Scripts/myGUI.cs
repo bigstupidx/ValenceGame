@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class myGUI : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class myGUI : MonoBehaviour
     public Texture highlightTexture;
     public Material mat; 
     public GameObject player;
+    public Chemical.Reaction activeReaction;
     
     private GUIStyle guiStyle;
     
@@ -85,6 +87,14 @@ public class myGUI : MonoBehaviour
 
         GUI.matrix = m;
         */
+
+        activeReaction = player.GetComponent<GunScript>().activeReact;
+        if(activeReaction != null)
+        {
+            List<Chemical.Compound> activeReactants = activeReaction.Reactants;
+            List<Chemical.Compound> activeProducts = activeReaction.Products;
+        }
+
         ratH = (float)Screen.height / (float)relScreenH;
         ratW = (float)Screen.width / (float)relScreenW;
 
@@ -108,6 +118,8 @@ public class myGUI : MonoBehaviour
         Tank prodTank1 = player.GetComponent<GunScript> ().prodTank1;
         Tank prodTank2 = player.GetComponent<GunScript> ().prodTank2;
         Tank prodTank3 = player.GetComponent<GunScript> ().prodTank3;
+
+
 
         GUI.skin = mySkin;
         
