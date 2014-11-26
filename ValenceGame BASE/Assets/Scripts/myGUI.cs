@@ -3,7 +3,10 @@ using System.Collections;
 
 public class myGUI : MonoBehaviour
 {
-    
+
+    public Material reactFillbar1;
+    public Texture2D texture1;
+
     public Texture2D cursorPic;
     
     public float reactLength1 = 0;
@@ -12,6 +15,8 @@ public class myGUI : MonoBehaviour
     public float prodLength1 = 0;
     public float prodLength2 = 0;
     public float prodLength3 = 0;
+
+    public float length;
     
     private int fullCap;
     
@@ -49,6 +54,7 @@ public class myGUI : MonoBehaviour
     
     void OnGUI()
     {
+
         /*scale.y = (float)Screen.height / (float)relScreenH;
         scale.x = scale.y; 
         scale.z = 1;
@@ -81,6 +87,14 @@ public class myGUI : MonoBehaviour
         */
         ratH = (float)Screen.height / (float)relScreenH;
         ratW = (float)Screen.width / (float)relScreenW;
+
+        if (Event.current.type.Equals(EventType.Repaint))
+        {
+            Rect temp = new Rect(10 * ratW, (Screen.height) - 130 * ratH, 200 * ratW, 30 * ratH);
+            Rect temp2 = new Rect(10 * ratW, (Screen.height) - 130 * ratH, 200 * ratW, 30 * ratH);
+            Rect pos = new Rect(10 * ratW, (Screen.height) - 130 * ratH, 200, 200);
+            Graphics.DrawTexture(temp2, texture1, reactFillbar1);
+        }
         
         reactLength1 = (float)player.GetComponent<GunScript>().reactTank1.capacity * (((float)Screen.height - (100 * (float)ratH)) / (float)fullCap); //is relative to screen size
         reactLength2 = (float)player.GetComponent<GunScript>().reactTank2.capacity * (((float)Screen.height - (100 * (float)ratH)) / (float)fullCap);
@@ -107,7 +121,7 @@ public class myGUI : MonoBehaviour
         // REACTANT BARS
             
             //First reactant bar
-            Rect reactBar1 = new Rect(10 * ratW, (Screen.height) - 130*ratH, 20 * ratW, 100*ratH);
+            Rect reactBar1 = new Rect(10 * ratW, (Screen.height) - 130*ratH, 20 * ratW, 100*ratH - 75);
             Rect box = new Rect(10 * ratW, (Screen.height) - 30*ratH, 20 * ratW, 100*ratH-(100*ratH+reactLength1/3));
             GUI.color = Color.blue;
             GUI.DrawTexture(box, fillTexture);
@@ -245,7 +259,21 @@ public class myGUI : MonoBehaviour
 			//GUI.Button(new Rect(10 * ratW, (Screen.height - (10 * ratH)) - 180, 50 * ratW, 50 * ratH), "   H2O");
 		//}
 		
-        GUI.Label(new Rect(Screen.width / 2 - (20 * ratW), Screen.height / 2 - (60 * ratH), 50 * ratW, 50 * ratH), player.GetComponent<GunScript>().cursorName, guiStyle);		
-        
+        GUI.Label(new Rect(Screen.width / 2 - (20 * ratW), Screen.height / 2 - (60 * ratH), 50 * ratW, 50 * ratH), player.GetComponent<GunScript>().cursorName, guiStyle);
+
+
+
 	}
+
+    void Update()
+    {
+
+
+
+        length = 1.0f-(float)player.GetComponent<GunScript>().reactTank1.capacity/400f;
+        if (length == 0) {
+            length = 0.01f;
+        }
+        reactFillbar1.SetFloat("_Cutoff", length);
+    }
 }
