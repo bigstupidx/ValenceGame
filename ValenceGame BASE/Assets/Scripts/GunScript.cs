@@ -82,6 +82,41 @@ public class GunScript : MonoBehaviour
     public GameObject shootEffect;
 	public ParticleSystem pyro;
 
+
+	//audio components
+	public AudioSource gunAudio;
+//	public AudioSource reactLoop;
+//	public AudioClip ACreactStart;
+//	public AudioClip ACreactLoop;
+//	public AudioClip ACreactEnd;
+//	public AudioClip ACflameStart;
+//	public AudioClip ACflameLoop;
+//	public AudioClip ACflameEnd;
+//	public AudioClip ACvacuumStart;
+//	public AudioClip ACvacuumLoop;
+//	public AudioClip ACvacuumEnd;
+//	public AudioClip ACvent;
+	public bool startReactLoop;
+	public bool startVacuumLoop;
+	public bool startFlameLoop;
+//	public bool endReact;
+
+	public AudioSource[] audios;
+		//0		gunAudio
+		//1		vac start
+		//2		vac loop
+		//3		vac end
+		//4		react start
+		//5		react loop
+		//6		react end
+		//7		flame start
+		//8		flame loop
+		//9		flame end
+		//10	vent
+		//11	
+		//12	
+
+
     //used for different particle emitters
     public GameObject absorbEffect;        //for compound 1
 
@@ -117,6 +152,13 @@ public class GunScript : MonoBehaviour
         //absorbEffect = GameObject.Find("AbsorbLiquid");
         //absorbEffect.particleSystem.Play();
 //		pyro.particleSystem.Play ();
+
+		startReactLoop = false;
+		startFlameLoop = false;
+		startVacuumLoop = false;
+
+		audios = GetComponents<AudioSource>();
+		Debug.Log (audios.Length);
     }
     public void Vent()
     {
@@ -135,6 +177,10 @@ public class GunScript : MonoBehaviour
         {
             Destroy(components[i]);
         }
+
+		//audio
+		//gunAudio.PlayOneShot(ACvent);
+		audios[10].Play();
     }
 
     public void selectTank(Tank selectTank)
@@ -179,56 +225,6 @@ public class GunScript : MonoBehaviour
 
 	//Flamethrowing method
 	void ejectFire() {
-/*
-		if (Input.GetButtonDown("Fire1"))
-		{
-			Tank[] activeNonemptyTanks = getActiveNonemptyTanks();
-			if (activeNonemptyTanks.Length > 0 && !isEmitting)    //will need to code the absorb mechanic
-			{
-				isEmitting = true;
-				shootEffect.particleSystem.Play();
-			}
-		}
-		if (Input.GetButton("Fire1"))
-		{
-			// Look for active tanks that are not empty and fire those
-			Tank[] activeNonemptyTanks = getActiveNonemptyTanks();
-//			Debug.Log(string.Format("Active Tanks: {0}", getActiveTanks().Length));
-//			Debug.Log(string.Format("Active Nonempty Tanks: {0}", activeNonemptyTanks.Length));
-			if (isEmitting && activeNonemptyTanks.Length > 0)
-			{
-				isEmitting = true;
-				//shootEffect.particleSystem.Play();
-				//reactTank1.capacity -= SHOOT_RATE;
-				for (int i = 0; i < activeNonemptyTanks.Length; i++)
-				{
-					Tank tank = activeNonemptyTanks[i];
-					tank.capacity -= SHOOT_RATE;
-				}
-			}
-			else
-			{
-				isEmitting = false;
-				if(shootEffect != null)
-				{
-					shootEffect.particleSystem.Stop();
-				}
-			}
-		}
-		if (Input.GetButtonUp("Fire1")) //stop emitting
-		{
-			if (isEmitting)
-			{
-				isEmitting = false;
-				shootEffect.particleSystem.Stop();
-				
-				Tank[] nonemptyTanks = Array.FindAll(allTanks, x => x.capacity > 0);
-				if (nonemptyTanks.Length == 0)
-				{
-				}
-			}
-		}
-*/
     }
 
 
@@ -311,6 +307,45 @@ public class GunScript : MonoBehaviour
 
             if (canReact)
             {
+				//audio
+				if (activeReact.EnergyType == Chemical.Reaction.energy.Combust) {
+					//ejectFire();
+					pyro.particleSystem.Play();
+
+					if(!startFlameLoop) {
+						//					gunAudio.PlayOneShot(ACreactStart);
+						audios[7].Play ();
+						startFlameLoop = true;
+					}
+
+					//gunAudio.PlayOneShot(ACflameLoop);
+					//startFlameLoop = true;
+					if(!audios[8].isPlaying) {
+						audios[8].Play ();
+					}
+				}
+
+
+
+				if(!startReactLoop && !startFlameLoop) {
+//					gunAudio.PlayOneShot(ACreactStart);
+					audios[4].Play ();
+					startReactLoop = true;
+				}
+				if(startReactLoop && !startFlameLoop) {
+					//					reactLoop.Play ();
+					//gunAudio.PlayOneShot(ACreactLoop);
+					if(!audios[5].isPlaying) {
+						audios[5].Play ();
+					}
+				}
+				if(startReactLoop) {
+//					reactLoop.Play ();
+					//gunAudio.PlayOneShot(ACreactLoop);
+					//audios[5].Play ();
+				}
+
+
                 // Consume reactants
                 if (activeReact.Reactant1 != null)
                 {
@@ -325,10 +360,14 @@ public class GunScript : MonoBehaviour
                     reactTank3.capacity -= activeReact.ReactCoeff3;
                 }
 
-				if (activeReact.EnergyType == Chemical.Reaction.energy.Combust) {
-					//ejectFire();
-					pyro.particleSystem.Play();
-				}
+//				if (activeReact.EnergyType == Chemical.Reaction.energy.Combust) {
+//					//ejectFire();
+//					pyro.particleSystem.Play();
+//					//gunAudio.PlayOneShot(ACflameLoop);
+//					startFlameLoop = true;
+//					audios[8].Play ();
+//				}
+
 
                 // Generate products
                 if (activeReact.Product1 != null)
@@ -345,11 +384,38 @@ public class GunScript : MonoBehaviour
                 }
             }
 			else {
+				audios[5].Stop ();
+				audios[8].Stop ();
 				pyro.particleSystem.Stop();
+//				reactLoop.Stop ();
+				if(startReactLoop) {
+					startReactLoop = false;
+					//gunAudio.PlayOneShot(ACreactEnd);
+					audios[6].Play ();
+				}
+				if(startFlameLoop) {
+					startFlameLoop = false;
+					audios[9].Play ();
+				}
+
 			}
         }
 		else {
+			audios[5].Stop ();
+			audios[8].Stop ();
 			pyro.particleSystem.Stop();
+//			reactLoop.Stop ();
+//			startReactLoop = false;
+//			gunAudio.PlayOneShot(reactEnd);
+			if(startReactLoop) {
+				startReactLoop = false;
+				//gunAudio.PlayOneShot(ACreactEnd);
+				audios[6].Play ();
+			}
+			if(startFlameLoop) {
+				startFlameLoop = false;
+				audios[9].Play ();
+			}
 		}
 
         //reaction selection-----------------------------------------------------------------
@@ -439,6 +505,14 @@ public class GunScript : MonoBehaviour
                                 absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank1.substance);
                                 absorbEffect.particleSystem.Play();
                                 reactTank1.capacity += 2;
+
+								if(!startVacuumLoop) {
+									audios[1].Play ();
+									startVacuumLoop = true;
+								}
+					//			if(startVacuumLoop && !audios[2].isPlaying) {
+					//				audios[2].Play ();
+					//			}
                             }
                         }
                         if (reactTank2.substance != null)
@@ -451,6 +525,14 @@ public class GunScript : MonoBehaviour
                                     reactTank2.capacity += 2;
                                     absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank2.substance);
                                     absorbEffect.particleSystem.Play();
+
+									if(!startVacuumLoop) {
+										audios[1].Play ();
+										startVacuumLoop = true;
+									}
+						//			if(startVacuumLoop && !audios[2].isPlaying) {
+						//				audios[2].Play ();
+						//			}
                                 }
                             }
                         }
@@ -464,6 +546,14 @@ public class GunScript : MonoBehaviour
 
                                     absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank1.substance);
                                     absorbEffect.particleSystem.Play();
+
+									if(!startVacuumLoop) {
+										audios[1].Play ();
+										startVacuumLoop = true;
+									}
+							//		if(startVacuumLoop && !audios[2].isPlaying) {
+							//			audios[2].Play ();
+							//		}
                                 }
                             }
                         }
@@ -482,6 +572,14 @@ public class GunScript : MonoBehaviour
                                 absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(activeTanks[i].substance);
                                 absorbEffect.particleSystem.Play();
 
+								if(!startVacuumLoop) {
+									audios[1].Play ();
+									startVacuumLoop = true;
+								}
+						//		if(startVacuumLoop && !audios[2].isPlaying) {
+						//			audios[2].Play ();
+						//		}
+
                                 break;
                             }
                         }
@@ -495,6 +593,11 @@ public class GunScript : MonoBehaviour
 
                                     absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(activeTanks[i].substance);
                                     absorbEffect.particleSystem.Play();
+
+									if(!startVacuumLoop) {
+										audios[1].Play ();
+										startVacuumLoop = true;
+									}
                                 }
                                 break;
                             }
@@ -524,10 +627,21 @@ public class GunScript : MonoBehaviour
                             if (reactTank1.capacity < fullCap)
                             {
                                 reactTank1.capacity += 2;
+
+								if(startVacuumLoop && !audios[2].isPlaying) {
+									audios[2].Play ();
+								}
                             }
                             else
                             {
                                 absorbEffect.particleSystem.Stop();
+
+								audios[2].Stop ();
+								if(startVacuumLoop) {
+									startVacuumLoop = false;
+									audios[3].Play ();
+								}
+
                             }
                         }
                         if (reactTank2.substance != null)
@@ -538,11 +652,22 @@ public class GunScript : MonoBehaviour
                                 if (reactTank2.capacity < fullCap)
                                 {
                                     reactTank2.capacity += 2;
+
+									if(startVacuumLoop && !audios[2].isPlaying) {
+										audios[2].Play ();
+									}
                                     
                                 }
                                 else
                                 {
                                     absorbEffect.particleSystem.Stop();
+
+									audios[2].Stop ();
+									if(startVacuumLoop) {
+										startVacuumLoop = false;
+										audios[3].Play ();
+									}
+
                                 }
                             }
                         }
@@ -554,10 +679,21 @@ public class GunScript : MonoBehaviour
                                 {
                                     reactTank3.capacity += 2;
 
+									if(startVacuumLoop && !audios[2].isPlaying) {
+										audios[2].Play ();
+									}
+
                                 }
                                 else
                                 {
                                     absorbEffect.particleSystem.Stop();
+
+									audios[2].Stop ();
+									if(startVacuumLoop) {
+										startVacuumLoop = false;
+										audios[3].Play ();
+									}
+
                                 }
                             }
                         }
@@ -573,6 +709,10 @@ public class GunScript : MonoBehaviour
 
                                 activeTanks[i].capacity += 2;
 
+								if(startVacuumLoop && !audios[2].isPlaying) {
+									audios[2].Play ();
+								}
+
                                 break;
                             }
                         }
@@ -583,10 +723,21 @@ public class GunScript : MonoBehaviour
                                 if (activeTanks[i].capacity < fullCap)
                                 {
                                     activeTanks[i].capacity += 2;
+
+									if(startVacuumLoop && !audios[2].isPlaying) {
+										audios[2].Play ();
+									}
                                 }
                                 else
                                 {
                                     absorbEffect.particleSystem.Stop();
+
+									audios[2].Stop ();
+									if(startVacuumLoop) {
+										startVacuumLoop = false;
+										audios[3].Play ();
+									}
+
                                 }
                                 break;
                             }
@@ -598,6 +749,13 @@ public class GunScript : MonoBehaviour
         if(Input.GetMouseButtonUp(1))
         {
             absorbEffect.particleSystem.Stop();
+
+			audios[2].Stop ();
+			if(startVacuumLoop) {
+				startVacuumLoop = false;
+				audios[3].Play ();
+			}
+
         }
 
         //shooting-------------------------------------------------------
