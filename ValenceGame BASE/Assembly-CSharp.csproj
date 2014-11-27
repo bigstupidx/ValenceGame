@@ -64,7 +64,6 @@
      <Compile Include="Assets\Scripts\Chemicals\Reactions\Reaction.cs" />
      <Compile Include="Assets\Scripts\Chemicals\Reactions\WaterReac.cs" />
      <Compile Include="Assets\Scripts\Cursor.cs" />
-     <Compile Include="Assets\Scripts\ElementScript.cs" />
      <Compile Include="Assets\Scripts\EndCondition.cs" />
      <Compile Include="Assets\Scripts\Extinguished.cs" />
      <Compile Include="Assets\Scripts\FireOut.cs" />

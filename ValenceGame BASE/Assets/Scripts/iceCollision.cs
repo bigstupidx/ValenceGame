@@ -7,6 +7,7 @@ public class iceCollision : MonoBehaviour
 	public bool weighedDown;
 	//private Vector3 resetPosition;
 	public float resetY;
+    public float lowerY;
 
     // Use this for initialization
     void Start ()
@@ -22,12 +23,12 @@ public class iceCollision : MonoBehaviour
 		}
 
 		// Stop platforms from going through the floor, sets limits
-		if (this.gameObject.transform.position.y<1) {
+		if (this.gameObject.transform.position.y < lowerY) {
 			Vector3 newPos1 = this.gameObject.transform.position;
 			Vector3 newPos2 = partner.transform.position;
 
-			newPos1.y = 1;
-			newPos2.y = 8;
+			newPos1.y = lowerY;
+			newPos2.y = 10;
 
 			this.gameObject.transform.position = newPos1;
 			partner.transform.position = newPos2;
