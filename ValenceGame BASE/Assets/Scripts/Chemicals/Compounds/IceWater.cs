@@ -96,15 +96,21 @@ public class IceWater : Chemical.Compound {
 	
 	// Update is called once per frame
 	public override void Update () {
-		if(isMoved){
+		/*if(isMoved){
 			isMoved = false;
 			Destroy (this.gameObject.gameObject);
-		}
+		}*/
 
 		if(this.gameObject.transform.localScale.x < 0.25F) {
-		//this.gameObject.gameObject.SetActive(false);
 			this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 100, this.gameObject.transform.position.z);
 			isMoved = true;
 		}
 	}
+    
+    public void OnCollisionExit(Collision col){
+        if (col.gameObject.GetComponent<iceCollision>() != null && isMoved)    //collision has ice collision
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
