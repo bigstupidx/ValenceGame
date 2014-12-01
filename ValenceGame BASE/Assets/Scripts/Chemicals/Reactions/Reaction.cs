@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Chemical {
 
@@ -20,6 +22,24 @@ namespace Chemical {
 			}
 		}
 		public bool unlocked;
+
+        // Compiles string version of equation
+        // Based on names of reactants and products
+        public string EquationString
+        {
+            get
+            {
+                var equationString = new StringWriter();
+                IEnumerable<string> reactantNames = Reactants.Select(react => react.Formula);
+                IEnumerable<string> productNames = Products.Select(prod => prod.Formula);
+
+                equationString.Write(string.Join(" + ", reactantNames.ToArray()));
+                equationString.Write(" → ");
+                equationString.Write(string.Join(" + ", productNames.ToArray()));
+
+                return equationString.ToString();
+            }
+        }
 
 //		public GameObject holder;	//for holding Components
 		//public string ReactName {
