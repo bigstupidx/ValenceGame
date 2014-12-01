@@ -744,7 +744,15 @@ public class GunScript : MonoBehaviour
                         }
                     }
                 }
-            }
+            }else{
+				absorbEffect.particleSystem.Stop();
+				
+				audios[2].Stop ();
+				if(startVacuumLoop) {
+					startVacuumLoop = false;
+					audios[3].Play ();
+				}
+			}
         }
         if(Input.GetMouseButtonUp(1))
         {

@@ -101,7 +101,7 @@ public class IceWater : Chemical.Compound {
 			Destroy (this.gameObject.gameObject);
 		}*/
 
-		if(this.gameObject.transform.localScale.x < 0.25F) {
+		if(this.gameObject.transform.localScale.x < 0.50F) {
 			this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 100, this.gameObject.transform.position.z);
 			isMoved = true;
 		}
