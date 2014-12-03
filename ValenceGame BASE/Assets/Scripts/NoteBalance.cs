@@ -50,11 +50,6 @@ public class NoteBalance : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-
-//        h2Count = 1;
-//        o2Count = 1;
-//        h2oCount = 1;
         guiStyle = new GUIStyle();
         guiStyle.richText = true;
 	}
@@ -217,27 +212,26 @@ public class NoteBalance : MonoBehaviour {
 
 
         // Display note text
-        string noteText1 = @"This is the hydrogen and oxygen lab. You’ll need to utilize all your resources to make it out of here in one piece. 
+        string noteText1 = @"<size=15>This is the hydrogen and oxygen lab. You’ll need to utilize all your resources to make it out of here in one piece. 
 
-I know it’s still a prototype, but maybe the Catalyst can help you. Its database is still incomplete, so you’ll have to program it yourself. I don’t have much time, but I’ll leave you with this unbalanced equation to get you started...";
+I know it’s still a prototype, but maybe the Catalyst can help you. Its database is still incomplete, so you’ll have to program it yourself. I don’t have much time, but I’ll leave you with this unbalanced equation to get you started...</size>";
 
         // Make button for balancing equation. If pressed, open equation panel
-        if (GUI.Button(new Rect(40, 240, 200, 20), "_H2 + _O2 -> _H2O."))
+        if (GUI.Button(new Rect(40, 220, 400, 50), "<size=30>_H2 + _O2 -> _H2O</size>"))
         {
             activateBalancingPanel = true;
         }
 
-        string noteText2 = @"Just in case you forgot, chemistry is not magic. Elements must be combined in certain proportions to react - they cannot violate the laws of conservation of mass. 
+        string noteText2 = @"<size=15>Just in case you forgot, chemistry is not magic. Elements must be combined in certain proportions to react - they cannot violate the laws of conservation of mass. 
 
 In each reaction, there must be the same amount of each element on both sides of the equation. 
 
 Large numbers multiply across the entire compound, while subscripts only apply to the element they are attached to. 
 
-For example: A2 + 2B2 -> 2A2B.";
+For example: A2 + 2B2 -> 2A2B.</size>";
 
-        GUI.Label(new Rect(40, 100, Screen.width - 80f, 100), noteText1);
+        GUI.Label(new Rect(40, 100, Screen.width - 80f, 150), noteText1);
         GUI.Label(new Rect(40, 300, Screen.width - 80f, 150), noteText2);
-
     }
 
 	string parseFormula(string formula) {
