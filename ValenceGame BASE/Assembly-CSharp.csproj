@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\GunScript.cs" />
      <Compile Include="Assets\Scripts\Instuction_Script.cs" />
      <Compile Include="Assets\Scripts\LevelSwitch.cs" />
+     <Compile Include="Assets\Scripts\MainmenuScript.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\NoteBalance.cs" />
      <Compile Include="Assets\Scripts\ReactsToCompound.cs" />
