@@ -509,9 +509,9 @@ public class GunScript : MonoBehaviour
 									audios[1].Play ();
 									startVacuumLoop = true;
 								}
-					//			if(startVacuumLoop && !audios[2].isPlaying) {
-					//				audios[2].Play ();
-					//			}
+								if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
+									audios[2].Play ();
+                                }
                             }
                         }
                         if (reactTank2.substance != null)
