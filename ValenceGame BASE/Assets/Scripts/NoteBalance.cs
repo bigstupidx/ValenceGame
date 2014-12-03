@@ -46,12 +46,20 @@ public class NoteBalance : MonoBehaviour {
 	public bool initializer = false;
 	public bool error = false;
 
-    private GUIStyle guiStyle;
+    private GUIStyle noteStyle;
+    private GUIStyle balanceStyle;
 
 	// Use this for initialization
 	void Start () {
-        guiStyle = new GUIStyle();
-        guiStyle.richText = true;
+
+        Texture2D white = new Texture2D(1, 1);
+        white.SetPixel(0, 0, Color.white);
+        noteStyle = new GUIStyle();
+        noteStyle.normal.background = white;
+
+
+        balanceStyle = new GUIStyle();
+        balanceStyle.richText = true;
 	}
 
 	void init() {
@@ -208,29 +216,30 @@ public class NoteBalance : MonoBehaviour {
         Screen.showCursor = true;
 
         // Make GUI box for the note
-        GUI.Box(new Rect(20, 20, Screen.width - 40, Screen.height - 40), "");
-
+        GUI.Box(new Rect(20, 20, Screen.width - 40, Screen.height - 40), "", noteStyle);
+        GUI.Box(new Rect(20, 20, Screen.width - 40, Screen.height - 40), "", noteStyle);
 
         // Display note text
-        string noteText1 = @"<size=15>This is the hydrogen and oxygen lab. You’ll need to utilize all your resources to make it out of here in one piece. 
+        string noteText1 = @"<size=15><color=black>This is the hydrogen and oxygen lab. You’ll need to utilize all your resources to make it out of here in one piece. 
 
-I know it’s still a prototype, but maybe the Catalyst can help you. Its database is still incomplete, so you’ll have to program it yourself. I don’t have much time, but I’ll leave you with this unbalanced equation to get you started...</size>";
+I know it’s still a prototype, but maybe the Catalyst can help you. Its database is still incomplete, so you’ll have to program it yourself. I don’t have much time, but I’ll leave you with this unbalanced equation to get you started...</color></size>";
 
-        // Make button for balancing equation. If pressed, open equation panel
-        if (GUI.Button(new Rect(40, 220, 400, 50), "<size=30>_H2 + _O2 -> _H2O</size>"))
-        {
-            activateBalancingPanel = true;
-        }
-
-        string noteText2 = @"<size=15>Just in case you forgot, chemistry is not magic. Elements must be combined in certain proportions to react - they cannot violate the laws of conservation of mass. 
+        string noteText2 = @"<size=15><color=black>Just in case you forgot, chemistry is not magic. Elements must be combined in certain proportions to react - they cannot violate the laws of conservation of mass. 
 
 In each reaction, there must be the same amount of each element on both sides of the equation. 
 
 Large numbers multiply across the entire compound, while subscripts only apply to the element they are attached to. 
 
-For example: A2 + 2B2 -> 2A2B.</size>";
+For example: A2 + 2B2 -> 2A2B.</color></size>";
 
-        GUI.Label(new Rect(40, 100, Screen.width - 80f, 150), noteText1);
+        GUI.Label(new Rect(40, 50, Screen.width - 80f, 100), noteText1);
+
+        // Make button for balancing equation. If pressed, open equation panel
+        if (GUI.Button(new Rect(40, 200, 400, 50), "<size=30>_ H2 + _ O2 -> _ H2O</size>"))
+        {
+            activateBalancingPanel = true;
+        }
+
         GUI.Label(new Rect(40, 300, Screen.width - 80f, 150), noteText2);
     }
 
@@ -260,6 +269,11 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 
     void displayBalancingPanel()
     {
+        // Display multiple times to increase opacity
+        // Hacky? Yes. Effective? Heck yes.
+        GUI.Box(new Rect(40, 40, Screen.width - 80, Screen.height - 80), "Balancing Panel");
+        GUI.Box(new Rect(40, 40, Screen.width - 80, Screen.height - 80), "Balancing Panel");
+        GUI.Box(new Rect(40, 40, Screen.width - 80, Screen.height - 80), "Balancing Panel");
         GUI.Box(new Rect(40, 40, Screen.width - 80, Screen.height - 80), "Balancing Panel");
 
         
@@ -307,7 +321,7 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 		// GUI element for arrow
 		Vector2 arrowPos = new Vector2(Screen.width/2, Screen.height/2);
 		//Vector2 o2Pos = new Vector2(340, 160);
-		GUI.Label(new Rect(arrowPos.x - 50, arrowPos.y - 100, 200, 200), "<color=white><size=100>→</size></color>", guiStyle);
+		GUI.Label(new Rect(arrowPos.x - 50, arrowPos.y - 100, 200, 200), "<color=white><size=100>→</size></color>", balanceStyle);
 		//340+110, 160-30, 200, 200
 		//450
 		
@@ -317,8 +331,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 		Vector2 react1Pos = new Vector2(arrowPos.x - 130, arrowPos.y - 65);
 		
 		string dispFormula = parseFormula (chemReaction.Reactant1.Formula);
-		GUI.Label(new Rect(react1Pos.x, react1Pos.y, 100, 100), dispFormula, guiStyle);
-		GUI.Box(new Rect(react1Pos.x - 50, react1Pos.y, 40, 60), react1Coeff, guiStyle);
+		GUI.Label(new Rect(react1Pos.x, react1Pos.y, 100, 100), dispFormula, balanceStyle);
+		GUI.Box(new Rect(react1Pos.x - 50, react1Pos.y, 40, 60), react1Coeff, balanceStyle);
 //        addButtons(h2Pos.x, h2Pos.y, ref h2Count);
 		addButtons(react1Pos.x, react1Pos.y, ref react1Count);
 
@@ -330,8 +344,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 		Vector2 react2Pos = new Vector2(arrowPos.x - 310, arrowPos.y - 65);			
 					
 			dispFormula = parseFormula (chemReaction.Reactant2.Formula);
-		GUI.Label(new Rect(react2Pos.x, react2Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", guiStyle);
-		GUI.Box(new Rect(react2Pos.x - 50, react2Pos.y, 40, 60), react2Coeff, guiStyle);
+		GUI.Label(new Rect(react2Pos.x, react2Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", balanceStyle);
+		GUI.Box(new Rect(react2Pos.x - 50, react2Pos.y, 40, 60), react2Coeff, balanceStyle);
 	//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
 		addButtons(react2Pos.x, react2Pos.y, ref react2Count);
 		}
@@ -341,8 +355,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 			Vector2 react3Pos = new Vector2(arrowPos.x - 310, arrowPos.y - 65);			
 			
 			dispFormula = parseFormula (chemReaction.Reactant3.Formula);
-			GUI.Label(new Rect(react3Pos.x, react3Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", guiStyle);
-			GUI.Box(new Rect(react3Pos.x - 50, react3Pos.y, 40, 60), react3Coeff, guiStyle);
+			GUI.Label(new Rect(react3Pos.x, react3Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", balanceStyle);
+			GUI.Box(new Rect(react3Pos.x - 50, react3Pos.y, 40, 60), react3Coeff, balanceStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
 			addButtons(react3Pos.x, react3Pos.y, ref react3Count);
 		}
@@ -352,8 +366,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 			Vector2 react3Pos = new Vector2(arrowPos.x - 490, arrowPos.y - 65);			
 			
 			dispFormula = parseFormula (chemReaction.Reactant3.Formula);
-			GUI.Label(new Rect(react3Pos.x, react3Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", guiStyle);
-			GUI.Box(new Rect(react3Pos.x - 50, react3Pos.y, 40, 60), react3Coeff, guiStyle);
+			GUI.Label(new Rect(react3Pos.x, react3Pos.y, 100, 100), dispFormula + "<color=white><size=60> +</size></color>", balanceStyle);
+			GUI.Box(new Rect(react3Pos.x - 50, react3Pos.y, 40, 60), react3Coeff, balanceStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
 			addButtons(react3Pos.x, react3Pos.y, ref react3Count);
 		}
@@ -364,8 +378,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 		Vector2 h2oPos = new Vector2(arrowPos.x + 130, arrowPos.y - 65);      
 
 		dispFormula = parseFormula (chemReaction.Product1.Formula);
-        GUI.Label(new Rect(h2oPos.x, h2oPos.y, 100, 100), dispFormula, guiStyle);
-		GUI.Box(new Rect(h2oPos.x - 50, h2oPos.y, 40, 60), prod1Coeff, guiStyle);
+        GUI.Label(new Rect(h2oPos.x, h2oPos.y, 100, 100), dispFormula, balanceStyle);
+		GUI.Box(new Rect(h2oPos.x - 50, h2oPos.y, 40, 60), prod1Coeff, balanceStyle);
 //        addButtons(h2oPos.x, h2oPos.y, ref h2oCount);
         addButtons(h2oPos.x, h2oPos.y, ref prod1Count);
 
@@ -376,8 +390,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 			Vector2 prod2Pos = new Vector2(arrowPos.x + 260, arrowPos.y - 65);			
 			
 			dispFormula = parseFormula (chemReaction.Product2.Formula);
-			GUI.Label(new Rect(prod2Pos.x, prod2Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, guiStyle);
-			GUI.Box(new Rect(prod2Pos.x + 56, prod2Pos.y, 40, 60), prod2Coeff, guiStyle);
+			GUI.Label(new Rect(prod2Pos.x, prod2Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, balanceStyle);
+			GUI.Box(new Rect(prod2Pos.x + 56, prod2Pos.y, 40, 60), prod2Coeff, balanceStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
 			addButtons(prod2Pos.x + 106, prod2Pos.y, ref prod2Count);
 		}
@@ -387,8 +401,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 			Vector2 prod3Pos = new Vector2(arrowPos.x + 310, arrowPos.y - 65);			
 			
 			dispFormula = parseFormula (chemReaction.Product3.Formula);
-			GUI.Label(new Rect(prod3Pos.x, prod3Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, guiStyle);
-			GUI.Box(new Rect(prod3Pos.x + 56, prod3Pos.y, 40, 60), react3Coeff, guiStyle);
+			GUI.Label(new Rect(prod3Pos.x, prod3Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, balanceStyle);
+			GUI.Box(new Rect(prod3Pos.x + 56, prod3Pos.y, 40, 60), react3Coeff, balanceStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
 			addButtons(prod3Pos.x + 106, prod3Pos.y, ref react3Count);
 		}
@@ -398,8 +412,8 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 			Vector2 prod3Pos = new Vector2(arrowPos.x + 490, arrowPos.y - 65);			
 			
 			dispFormula = parseFormula (chemReaction.Product3.Formula);
-			GUI.Label(new Rect(prod3Pos.x, prod3Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, guiStyle);
-			GUI.Box(new Rect(prod3Pos.x + 56, prod3Pos.y, 40, 60), prod3Coeff, guiStyle);
+			GUI.Label(new Rect(prod3Pos.x, prod3Pos.y, 100, 100), "<color=white><size=60>+    </size></color>" + dispFormula, balanceStyle);
+			GUI.Box(new Rect(prod3Pos.x + 56, prod3Pos.y, 40, 60), prod3Coeff, balanceStyle);
 			//        addButtons(o2Pos.x, o2Pos.y, ref o2Count);
 			addButtons(prod3Pos.x + 106, prod3Pos.y, ref prod3Count);
 		}
@@ -439,13 +453,13 @@ For example: A2 + 2B2 -> 2A2B.</size>";
             string labeltext = "";
             if (balanceSuccessful == true)
             {
-                labeltext = "<color=blue>Equation successfully balanced!</color>";
+                labeltext = "<size=20><color=green>Equation successfully balanced!</color></size>";
             }
             else
             {
-                labeltext = "<color=purple>Balance unsuccessful- try again.</color>";
+                labeltext = "<size=20><color=red>Balance unsuccessful- try again.</color></size>";
             }
-            GUI.Label(new Rect(100, Screen.height - 160, 300, 20), labeltext, guiStyle);
+            GUI.Label(new Rect(100, Screen.height - 180, 300, 20), labeltext, balanceStyle);
         }
 
         // Make exit button for player to click and exit
@@ -465,13 +479,13 @@ For example: A2 + 2B2 -> 2A2B.</size>";
 
     void addButtons(float xPos, float yPos, ref int count)
     {
-        if (GUI.Button(new Rect(xPos - 58, yPos - 50, 40, 60), "<color=white><size=50>▲</size></color>", guiStyle) && !balanceSuccessful)
+        if (GUI.Button(new Rect(xPos - 58, yPos - 50, 40, 60), "<color=white><size=50>▲</size></color>", balanceStyle) && !balanceSuccessful)
         {
 
             count = Math.Min(count + 1, 9);
 			changeColor = false;
         }
-        if (GUI.Button(new Rect(xPos - 58, yPos + 65, 40, 60), "<color=white><size=50>▼</size></color>", guiStyle) && !balanceSuccessful)
+        if (GUI.Button(new Rect(xPos - 58, yPos + 65, 40, 60), "<color=white><size=50>▼</size></color>", balanceStyle) && !balanceSuccessful)
         {
             count = Math.Max(count - 1, 1);
         }
