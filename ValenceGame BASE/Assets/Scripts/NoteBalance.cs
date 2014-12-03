@@ -23,6 +23,7 @@ public class NoteBalance : MonoBehaviour {
 	public bool isNear = false;
 
     public Chemical.Reaction chemReaction;
+	public int reactionNum;
 
 	public int react1Count;
 	public int react2Count;
@@ -51,10 +52,10 @@ public class NoteBalance : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		GameObject temp = GameObject.Find("Reactions");
+		Chemical.Reaction[] chems = temp.GetComponents<Chemical.Reaction>();
+		chemReaction = chems[reactionNum];
 
-//        h2Count = 1;
-//        o2Count = 1;
-//        h2oCount = 1;
         guiStyle = new GUIStyle();
         guiStyle.richText = true;
 	}
