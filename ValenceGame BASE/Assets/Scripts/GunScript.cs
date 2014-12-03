@@ -99,6 +99,7 @@ public class GunScript : MonoBehaviour
 	public bool startReactLoop;
 	public bool startVacuumLoop;
 	public bool startFlameLoop;
+	public bool startShootLoop;
 //	public bool endReact;
 
 	public AudioSource[] audios;
@@ -112,9 +113,12 @@ public class GunScript : MonoBehaviour
 		//7		flame start
 		//8		flame loop
 		//9		flame end
-		//10	vent
-		//11	
-		//12	
+		//10	liquid spray
+		//11	gas spray
+		//12	vent
+		//13	footsteps
+		//14	error
+		//15
 
 
     //used for different particle emitters
@@ -156,6 +160,7 @@ public class GunScript : MonoBehaviour
 		startReactLoop = false;
 		startFlameLoop = false;
 		startVacuumLoop = false;
+		startShootLoop = false;
 
 		audios = GetComponents<AudioSource>();
 		Debug.Log (audios.Length);
@@ -180,7 +185,7 @@ public class GunScript : MonoBehaviour
 
 		//audio
 		//gunAudio.PlayOneShot(ACvent);
-		audios[10].Play();
+		audios[12].Play();
     }
 
     public void selectTank(Tank selectTank)
@@ -513,6 +518,11 @@ public class GunScript : MonoBehaviour
 									audios[2].Play ();
                                 }
                             }
+							else {
+								//if(!audios[14].isPlaying) {
+									audios[14].Play ();
+								//}
+							}
                         }
                         if (reactTank2.substance != null)
                         {
@@ -533,8 +543,18 @@ public class GunScript : MonoBehaviour
 										audios[2].Play ();
 									}
                                 }
+								else {
+									//if(!audios[14].isPlaying) {
+										audios[14].Play ();
+									//}
+								}
                             }
                         }
+						else {
+							//if(!audios[14].isPlaying) {
+								audios[14].Play ();
+							//}
+						}
                         if (reactTank3.substance != null)
                         {
                             if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank3.substance.Formula)
@@ -554,8 +574,18 @@ public class GunScript : MonoBehaviour
 										audios[2].Play ();
 									}
                                 }
+								else {
+									//if(!audios[14].isPlaying) {
+										audios[14].Play ();
+									//}
+								}
                             }
                         }
+						else {
+							//if(!audios[14].isPlaying) {
+								audios[14].Play ();
+							//}
+						}
                     }
                     else     //if there is no active reaction, must select tank to fill
                     {
@@ -601,8 +631,18 @@ public class GunScript : MonoBehaviour
 										audios[2].Play ();
 									}
                                 }
+								else {
+									//if(!audios[14].isPlaying) {
+										audios[14].Play ();
+									//}
+								}
                                 break;
                             }
+							else {
+								//if(!audios[14].isPlaying) {
+									audios[14].Play ();
+								//}
+							}
                         }
                     }
                 }
@@ -768,8 +808,25 @@ public class GunScript : MonoBehaviour
             {
                 isEmitting = true;
                 shootEffect.particleSystem.Play();
+
+				if(chemToShoot.state == Chemical.Compound.stateOfMatter.liquid) {
+					if(!audios[10].isPlaying && !audios[11].isPlaying) {
+						audios[10].Play ();
+					}
+				}
+				if(chemToShoot.state == Chemical.Compound.stateOfMatter.gas) {
+					if(!audios[11].isPlaying && !audios[10].isPlaying) {
+						audios[11].Play ();
+					}
+				}
+
 				Debug.Log("shooting effect: " + shootEffect.name);
             }
+			else {
+				//if(!audios[14].isPlaying) {
+					audios[14].Play ();
+				//}
+			}
         }
         if (Input.GetButton("Fire1"))
         {
@@ -794,6 +851,8 @@ public class GunScript : MonoBehaviour
                 if(shootEffect != null)
                 {
                     shootEffect.particleSystem.Stop();
+					audios[10].Stop ();
+					audios[11].Stop ();
                 }
             }
         }
@@ -803,6 +862,8 @@ public class GunScript : MonoBehaviour
             {
                 isEmitting = false;
                 shootEffect.particleSystem.Stop();
+				audios[10].Stop ();
+				audios[11].Stop ();
 
                 Tank[] nonemptyTanks = Array.FindAll(allTanks, x => x.capacity > 0);
                 if (nonemptyTanks.Length == 0)
