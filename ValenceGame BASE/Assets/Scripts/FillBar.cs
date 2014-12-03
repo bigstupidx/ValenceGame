@@ -102,6 +102,7 @@ public class FillBar : MonoBehaviour {
 
         prod2 = (float)player.GetComponent<GunScript>().prodTank2.capacity;
         fillBar5.size = prod2 / 400f;
+        text5.text = "";
         text5.text = player.GetComponent<GunScript>().prodTank2.substance.getFormula();
         fillBar5.image.color = player.GetComponent<GunScript>().prodTank2.substance.color;
 
