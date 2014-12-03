@@ -45,21 +45,30 @@ public class NoteBalance : MonoBehaviour {
 
 	public bool initializer = false;
 	public bool error = false;
+    public Font noteFont;
 
     private GUIStyle noteStyle;
+    private GUIStyle noteTextStyle;
     private GUIStyle balanceStyle;
 
 	// Use this for initialization
 	void Start () {
 
+        noteStyle = new GUIStyle();
         Texture2D white = new Texture2D(1, 1);
         white.SetPixel(0, 0, Color.white);
-        noteStyle = new GUIStyle();
         noteStyle.normal.background = white;
 
+        noteTextStyle = new GUIStyle();
 
         balanceStyle = new GUIStyle();
         balanceStyle.richText = true;
+
+        if(noteFont != null)
+        {
+            noteTextStyle.font = noteFont;
+            balanceStyle.font = noteFont;
+        }
 	}
 
 	void init() {
