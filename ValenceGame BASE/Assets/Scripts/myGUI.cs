@@ -119,7 +119,6 @@ public class myGUI : MonoBehaviour
         //{
 
         // REACTANT BARS
-            
             //First reactant bar
             Rect reactBar1 = new Rect(10 * ratW, (Screen.height) - 130*ratH, 20 * ratW, 100*ratH - 75);
             Rect box = new Rect(10 * ratW, (Screen.height) - 30*ratH, 20 * ratW, 100*ratH-(100*ratH+reactLength1/3));
