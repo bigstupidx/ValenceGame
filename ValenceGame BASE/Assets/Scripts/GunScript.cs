@@ -320,7 +320,7 @@ public class GunScript : MonoBehaviour
 
 					//gunAudio.PlayOneShot(ACflameLoop);
 					//startFlameLoop = true;
-					if(!audios[8].isPlaying) {
+					if(!audios[8].isPlaying && !audios[7].isPlaying) {
 						audios[8].Play ();
 					}
 				}
@@ -335,7 +335,7 @@ public class GunScript : MonoBehaviour
 				if(startReactLoop && !startFlameLoop) {
 					//					reactLoop.Play ();
 					//gunAudio.PlayOneShot(ACreactLoop);
-					if(!audios[5].isPlaying) {
+					if(!audios[5].isPlaying && !audios[4].isPlaying) {
 						audios[5].Play ();
 					}
 				}
@@ -388,16 +388,15 @@ public class GunScript : MonoBehaviour
 				audios[8].Stop ();
 				pyro.particleSystem.Stop();
 //				reactLoop.Stop ();
+				if(startFlameLoop) {
+					startFlameLoop = false;
+					audios[9].Play ();
+				}
 				if(startReactLoop) {
 					startReactLoop = false;
 					//gunAudio.PlayOneShot(ACreactEnd);
 					audios[6].Play ();
 				}
-				if(startFlameLoop) {
-					startFlameLoop = false;
-					audios[9].Play ();
-				}
-
 			}
         }
 		else {
@@ -407,14 +406,14 @@ public class GunScript : MonoBehaviour
 //			reactLoop.Stop ();
 //			startReactLoop = false;
 //			gunAudio.PlayOneShot(reactEnd);
+			if(startFlameLoop) {
+				startFlameLoop = false;
+				audios[9].Play ();
+			}
 			if(startReactLoop) {
 				startReactLoop = false;
 				//gunAudio.PlayOneShot(ACreactEnd);
 				audios[6].Play ();
-			}
-			if(startFlameLoop) {
-				startFlameLoop = false;
-				audios[9].Play ();
 			}
 		}
 
@@ -530,9 +529,9 @@ public class GunScript : MonoBehaviour
 										audios[1].Play ();
 										startVacuumLoop = true;
 									}
-						//			if(startVacuumLoop && !audios[2].isPlaying) {
-						//				audios[2].Play ();
-						//			}
+									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
+										audios[2].Play ();
+									}
                                 }
                             }
                         }
@@ -551,9 +550,9 @@ public class GunScript : MonoBehaviour
 										audios[1].Play ();
 										startVacuumLoop = true;
 									}
-							//		if(startVacuumLoop && !audios[2].isPlaying) {
-							//			audios[2].Play ();
-							//		}
+									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
+										audios[2].Play ();
+									}
                                 }
                             }
                         }
@@ -576,9 +575,9 @@ public class GunScript : MonoBehaviour
 									audios[1].Play ();
 									startVacuumLoop = true;
 								}
-						//		if(startVacuumLoop && !audios[2].isPlaying) {
-						//			audios[2].Play ();
-						//		}
+								if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
+									audios[2].Play ();
+								}
 
                                 break;
                             }
@@ -597,6 +596,9 @@ public class GunScript : MonoBehaviour
 									if(!startVacuumLoop) {
 										audios[1].Play ();
 										startVacuumLoop = true;
+									}
+									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
+										audios[2].Play ();
 									}
                                 }
                                 break;
@@ -628,7 +630,7 @@ public class GunScript : MonoBehaviour
                             {
                                 reactTank1.capacity += 2;
 
-								if(startVacuumLoop && !audios[2].isPlaying) {
+								if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 									audios[2].Play ();
 								}
                             }
@@ -653,7 +655,7 @@ public class GunScript : MonoBehaviour
                                 {
                                     reactTank2.capacity += 2;
 
-									if(startVacuumLoop && !audios[2].isPlaying) {
+									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 										audios[2].Play ();
 									}
                                     
@@ -679,7 +681,7 @@ public class GunScript : MonoBehaviour
                                 {
                                     reactTank3.capacity += 2;
 
-									if(startVacuumLoop && !audios[2].isPlaying) {
+									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 										audios[2].Play ();
 									}
 
@@ -709,7 +711,7 @@ public class GunScript : MonoBehaviour
 
                                 activeTanks[i].capacity += 2;
 
-								if(startVacuumLoop && !audios[2].isPlaying) {
+								if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 									audios[2].Play ();
 								}
 
@@ -724,7 +726,7 @@ public class GunScript : MonoBehaviour
                                 {
                                     activeTanks[i].capacity += 2;
 
-									if(startVacuumLoop && !audios[2].isPlaying) {
+									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 										audios[2].Play ();
 									}
                                 }
