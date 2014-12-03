@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class myGUI : MonoBehaviour
 {
@@ -34,8 +36,10 @@ public class myGUI : MonoBehaviour
     public Texture highlightTexture;
     public Material mat; 
     public GameObject player;
+    public Chemical.Reaction activeReaction;
     
     private GUIStyle guiStyle;
+    private Chemical.Reaction guiReaction;
     
     public string productName;
 
@@ -46,11 +50,33 @@ public class myGUI : MonoBehaviour
         guiStyle.richText = true;
         guiStyle.fontSize = 24;     //how to change wrt width/height?
         guiStyle.normal.textColor = Color.white;
+        guiReaction = null;
         
         fullCap = player.GetComponent<GunScript>().getFullCap();
     
         productName = "";
     }
+
+    /*
+    // Changes GUI to display new reaction
+    // Triggered when active reaction changes
+    void SetGUIReaction(Chemical.Reaction reaction)
+    {
+        // Change Informal Reaction Text
+        Text informalReactText = GameObject.Find("InformalReactionText").GetComponent<Text>();
+        informalReactText.text = "Found it!";
+        if (reaction != null)
+        {
+        }
+        else
+        {
+        }
+
+        // Formal Reaction Text
+        Text formalReactText = GameObject.Find("FormalReactionText").GetComponent<Text>();
+        formalReactText.text = "Found it!";
+    }
+    */
     
     void OnGUI()
     {
@@ -85,6 +111,22 @@ public class myGUI : MonoBehaviour
 
         GUI.matrix = m;
         */
+
+        Chemical.Reaction activeReaction = player.GetComponent<GunScript>().activeReact;
+        /*
+        if(activeReaction != guiReaction)
+        {
+            guiReaction = activeReaction;
+            SetGUIReaction(activeReaction);
+        }
+        */
+        
+        if(activeReaction != null)
+        {
+            List<Chemical.Compound> activeReactants = activeReaction.Reactants;
+            List<Chemical.Compound> activeProducts = activeReaction.Products;
+        }
+
         ratH = (float)Screen.height / (float)relScreenH;
         ratW = (float)Screen.width / (float)relScreenW;
 
@@ -108,6 +150,8 @@ public class myGUI : MonoBehaviour
         Tank prodTank1 = player.GetComponent<GunScript> ().prodTank1;
         Tank prodTank2 = player.GetComponent<GunScript> ().prodTank2;
         Tank prodTank3 = player.GetComponent<GunScript> ().prodTank3;
+
+
 
         GUI.skin = mySkin;
         
@@ -201,6 +245,7 @@ public class myGUI : MonoBehaviour
                 GUI.color = Color.yellow;
                 GUI.DrawTexture(prodBar3, highlightTexture);
             }
+
         //Selected Reaction
             mySkin.font = font;
             GUI.Box(new Rect(10 * ratW, (Screen.height) - 160*ratH, 80 * ratW, 30*ratH), productName);

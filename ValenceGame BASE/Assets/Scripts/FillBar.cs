@@ -22,20 +22,65 @@ public class FillBar : MonoBehaviour {
     public float prod1;
     public float prod2;
     public float prod3;
+
+    private Chemical.Reaction guiReaction;
+
 	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
+        SetGUIReaction(null);
+        guiReaction = null;
+
         fillBar1.size = 0;
         fillBar2.size = 0;
         //fillBar3.size = 0;
         fillBar4.size = 0;
         fillBar5.size = 0;
-       // fillBar6.size = 0;
+        // fillBar6.size = 0;
         fillBar5.image.color = Color.cyan;
-	}
+    }
+
+    // Changes GUI to display new reaction
+    // Triggered when active reaction changes
+    void SetGUIReaction(Chemical.Reaction reaction)
+    {
+        // Change Informal Reaction Text
+        Text informalReactText = GameObject.Find("InformalReactionText").GetComponent<Text>();
+        if (reaction != null)
+        {
+            informalReactText.text = reaction.ReactName;
+        }
+        else
+        {
+            informalReactText.text = "";            
+        }
+
+
+        // Change Formal Reaction Text
+        Text formalReactText = GameObject.Find("FormalReactionText").GetComponent<Text>();
+        if(reaction != null)
+        {
+            formalReactText.text = reaction.EquationString;
+        }
+        else
+        {
+            formalReactText.text = "";
+        }
+    }
+    
 	
 	// Update is called once per frame
 	void Update () {
+        
+        // Detect change in active reaction and change GUI accordingly
+        Chemical.Reaction activeReaction = player.GetComponent<GunScript>().activeReact;
+        if(activeReaction != guiReaction)
+        {
+            guiReaction = activeReaction;
+            SetGUIReaction(activeReaction);
+        }
+
         react1 = (float)player.GetComponent<GunScript>().reactTank1.capacity;
         fillBar1.size = react1 / 400f;
         text1.text = player.GetComponent<GunScript>().reactTank1.substance.getFormula();

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Chemical {
 
@@ -20,6 +22,24 @@ namespace Chemical {
 			}
 		}
 		public bool unlocked;
+
+        // Compiles string version of equation
+        // Based on names of reactants and products
+        public string EquationString
+        {
+            get
+            {
+                var equationString = new StringWriter();
+                IEnumerable<string> reactantNames = Reactants.Select(react => react.Formula);
+                IEnumerable<string> productNames = Products.Select(prod => prod.Formula);
+
+                equationString.Write(string.Join(" + ", reactantNames.ToArray()));
+                equationString.Write(" → ");
+                equationString.Write(string.Join(" + ", productNames.ToArray()));
+
+                return equationString.ToString();
+            }
+        }
 
 //		public GameObject holder;	//for holding Components
 		//public string ReactName {
@@ -168,8 +188,38 @@ namespace Chemical {
 //			reactName = rN;
 //		}
 
+        public List<Chemical.Compound> Reactants
+        {
+            get
+            {
+                var reactants = new List<Compound>();
+                if (reactant1 != null)
+                    reactants.Add(reactant1);
+                if (reactant2 != null)
+                    reactants.Add(reactant2);
+                if (reactant3 != null)
+                    reactants.Add(reactant3);
+
+                return reactants;
+            }
+        }
 
 
+        public List<Chemical.Compound> Products
+        {
+            get
+            {
+                var products = new List<Compound>();
+                if (product1 != null)
+                    products.Add(product1);
+                if (product2 != null)
+                    products.Add(product2);
+                if (product3 != null)
+                    products.Add(product3);
+
+                return products;
+            }
+        }
 
 		public virtual void Start () {}
 		
