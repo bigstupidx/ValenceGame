@@ -60,6 +60,7 @@ public class NoteBalance : MonoBehaviour {
         noteStyle.normal.background = white;
 
         noteTextStyle = new GUIStyle();
+        noteTextStyle.wordWrap = true;
 
         balanceStyle = new GUIStyle();
         balanceStyle.richText = true;
@@ -241,15 +242,15 @@ Large numbers multiply across the entire compound, while subscripts only apply t
 
 For example: A2 + 2B2 -> 2A2B.</color></size>";
 
-        GUI.Label(new Rect(40, 50, Screen.width - 80f, 100), noteText1);
+        GUI.Label(new Rect(40, 50, Screen.width - 80f, 100), noteText1, noteTextStyle);
 
         // Make button for balancing equation. If pressed, open equation panel
-        if (GUI.Button(new Rect(40, 200, 400, 50), "<size=30>_ H2 + _ O2 -> _ H2O</size>"))
+        if (GUI.Button(new Rect(40, 200, 400, 50), "<size=30>☐ H2 + ☐ O2 -> ☐ H2O</size>", noteTextStyle))
         {
             activateBalancingPanel = true;
         }
 
-        GUI.Label(new Rect(40, 300, Screen.width - 80f, 150), noteText2);
+        GUI.Label(new Rect(40, 300, Screen.width - 80f, 150), noteText2, noteTextStyle);
     }
 
 	string parseFormula(string formula) {
