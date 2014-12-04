@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class GunParticleSwitcher : MonoBehaviour {
-    public GameObject particleSystem;
+    public GameObject partSystem;
     public Color c;
 
     public void Start()
     {
-        particleSystem = GameObject.Find("End");
+        partSystem = GameObject.Find("End");
     }
 
     public GameObject setParticleSystem(Chemical.Compound.stateOfMatter state, Color color)
@@ -29,12 +29,12 @@ public class GunParticleSwitcher : MonoBehaviour {
         }
         else if (state == Chemical.Compound.stateOfMatter.solid)
         {
-            return particleSystem;
+            return partSystem;
 
         }
         else
         {
-            return particleSystem;
+            return partSystem;
 
         }
         /*switch (state)
