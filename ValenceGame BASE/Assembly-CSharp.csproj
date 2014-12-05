@@ -81,6 +81,7 @@
      <Compile Include="Assets\Scripts\ToggleMouseLook.cs" />
      <Compile Include="Assets\Scripts\deleteEffect.cs" />
      <Compile Include="Assets\Scripts\iceCollision.cs" />
+     <Compile Include="Assets\Scripts\inGameMenu.cs" />
      <Compile Include="Assets\Scripts\myGUI.cs" />
      <Compile Include="Assets\Scripts\pickUpObject.cs" />
      <Compile Include="Assets\Scripts\reactionMasterList.cs" />
