@@ -5,6 +5,7 @@ public class MakeIce : MonoBehaviour {
 	public GameObject player;
 	public GameObject ice;
 	public GameObject target;
+    public AudioSource iceCrash;
 
 	public int capacity;
 	public int maxCapacity;
@@ -12,6 +13,7 @@ public class MakeIce : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		capacity = 0;
+        iceCrash = this.gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -26,6 +28,9 @@ public class MakeIce : MonoBehaviour {
 					capacity += 1;
 					//Instantiate(ice, new Vector3(target.transform.position.x, target.transform.position.y + 2, target.transform.position.z), Quaternion.identity);
 				}else if(capacity >= maxCapacity){
+
+                    iceCrash.Play();
+
 					Instantiate(ice, new Vector3(target.transform.position.x, target.transform.position.y + 4, target.transform.position.z), Quaternion.identity);
 					capacity = 0;
 				}

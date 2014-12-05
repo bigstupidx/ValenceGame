@@ -520,11 +520,11 @@ public class GunScript : MonoBehaviour
                             }
 							else {
 								//if(!audios[14].isPlaying) {
-									audios[14].Play ();
+		//							audios[14].Play ();
 								//}
 							}
                         }
-                        if (reactTank2.substance != null)
+                        else if (reactTank2.substance != null)
                         {
 
                             if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank2.substance.Formula)
@@ -545,17 +545,12 @@ public class GunScript : MonoBehaviour
                                 }
 								else {
 									//if(!audios[14].isPlaying) {
-										audios[14].Play ();
+		//								audios[14].Play ();
 									//}
 								}
                             }
                         }
-						else {
-							//if(!audios[14].isPlaying) {
-								audios[14].Play ();
-							//}
-						}
-                        if (reactTank3.substance != null)
+                        else if (reactTank3.substance != null)
                         {
                             if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank3.substance.Formula)
                             {
@@ -576,14 +571,14 @@ public class GunScript : MonoBehaviour
                                 }
 								else {
 									//if(!audios[14].isPlaying) {
-										audios[14].Play ();
+				//						audios[14].Play ();
 									//}
 								}
                             }
                         }
 						else {
 							//if(!audios[14].isPlaying) {
-								audios[14].Play ();
+		//						audios[14].Play ();
 							//}
 						}
                     }
@@ -612,6 +607,7 @@ public class GunScript : MonoBehaviour
                                 break;
                             }
                         }
+                        bool error = true;
                         for (int i = 0; i < activeTanks.Length; ++i)
                         {
                             if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeTanks[i].substance.Formula)
@@ -633,16 +629,15 @@ public class GunScript : MonoBehaviour
                                 }
 								else {
 									//if(!audios[14].isPlaying) {
-										audios[14].Play ();
+				//						audios[14].Play ();
 									//}
 								}
+                                error = false;
                                 break;
                             }
-							else {
-								//if(!audios[14].isPlaying) {
-									audios[14].Play ();
-								//}
-							}
+                        }
+                        if(error && !audios[14].isPlaying) {
+       //						audios[14].Play ();
                         }
                     }
                 }
@@ -670,6 +665,12 @@ public class GunScript : MonoBehaviour
                             {
                                 reactTank1.capacity += 2;
 
+
+                                if (!startVacuumLoop && !audios[1].isPlaying)
+                                {
+                                    audios[1].Play();
+                                    startVacuumLoop = true;
+                                }
 								if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 									audios[2].Play ();
 								}
@@ -695,6 +696,11 @@ public class GunScript : MonoBehaviour
                                 {
                                     reactTank2.capacity += 2;
 
+                                    if (!startVacuumLoop && !audios[1].isPlaying)
+                                    {
+                                        audios[1].Play();
+                                        startVacuumLoop = true;
+                                    }
 									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 										audios[2].Play ();
 									}
@@ -721,6 +727,11 @@ public class GunScript : MonoBehaviour
                                 {
                                     reactTank3.capacity += 2;
 
+                                    if (!startVacuumLoop && !audios[1].isPlaying)
+                                    {
+                                        audios[1].Play();
+                                        startVacuumLoop = true;
+                                    }
 									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 										audios[2].Play ();
 									}
@@ -751,6 +762,11 @@ public class GunScript : MonoBehaviour
 
                                 activeTanks[i].capacity += 2;
 
+                                if (!startVacuumLoop && !audios[1].isPlaying)
+                                {
+                                    audios[1].Play();
+                                    startVacuumLoop = true;
+                                }
 								if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 									audios[2].Play ();
 								}
@@ -766,6 +782,11 @@ public class GunScript : MonoBehaviour
                                 {
                                     activeTanks[i].capacity += 2;
 
+                                    if (!startVacuumLoop && !audios[1].isPlaying)
+                                    {
+                                        audios[1].Play();
+                                        startVacuumLoop = true;
+                                    }
 									if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 										audios[2].Play ();
 									}
@@ -783,10 +804,14 @@ public class GunScript : MonoBehaviour
                                 }
                                 break;
                             }
+                  //          audios[2].Stop();
                         }
                     }
                 }
-            }else{
+            }
+            else
+            {
+                Debug.Log("testing move off thing");
 				absorbEffect.particleSystem.Stop();
 				
 				audios[2].Stop ();
@@ -832,7 +857,7 @@ public class GunScript : MonoBehaviour
             }
 			else {
 				//if(!audios[14].isPlaying) {
-					audios[14].Play ();
+		//			audios[14].Play ();
 				//}
 			}
         }

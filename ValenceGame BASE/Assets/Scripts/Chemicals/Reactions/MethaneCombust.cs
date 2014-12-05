@@ -6,8 +6,6 @@ public class MethaneCombust : Chemical.Reaction {
 	// Use this for initialization
    public override void Start()
     {
-		unlocked = true;
-
 		reactName = "Methane Combustion";
 		
 		reactant1 = this.gameObject.AddComponent<Methane> ();
