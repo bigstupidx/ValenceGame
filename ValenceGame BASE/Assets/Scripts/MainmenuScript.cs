@@ -24,12 +24,14 @@ public class MainmenuScript : MonoBehaviour
     //public Texture2D level1Active;
     public Texture2D level2;
     public Texture2D level2Hover;
+    public Texture2D level2Inactive;
     //public Texture2D level2Active;
     public Texture2D back;
     public Texture2D backHover;
     //public Texture2D backActive;
 
     public bool titleScreenActive;
+    public bool level1Complete;
 
     private float buttonWidth;
     private float buttonHeight;
@@ -110,11 +112,17 @@ public class MainmenuScript : MonoBehaviour
             {
                 Application.LoadLevel("testScene");
             }
-            myGUISkin.button.normal.background = level2;
-            myGUISkin.button.hover.background = level2Hover;
-            if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart + buttonHeight + buttonSpacing, buttonWidth, buttonHeight), ""))
-            {
-                Application.LoadLevel("Level1");
+
+            if (level1Complete) {
+                myGUISkin.button.normal.background = level2;
+                myGUISkin.button.hover.background = level2Hover;
+                if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart + buttonHeight + buttonSpacing, buttonWidth, buttonHeight), ""))
+                {
+                    Application.LoadLevel("Level1");
+                }
+            }
+            else{
+               GUI.DrawTexture(new Rect(buttonColumnXPos, buttonColumnYStart + buttonHeight + buttonSpacing, buttonWidth, buttonHeight), level2Inactive, ScaleMode.StretchToFill);
             }
             myGUISkin.button.normal.background = back;
             myGUISkin.button.hover.background = backHover;
