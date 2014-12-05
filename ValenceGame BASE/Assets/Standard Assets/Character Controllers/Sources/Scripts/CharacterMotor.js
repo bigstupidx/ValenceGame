@@ -175,9 +175,17 @@ private var tr : Transform;
 
 private var controller : CharacterController;
 
+public var audios : AudioSource[];
+
 function Awake () {
 	controller = GetComponent (CharacterController);
 	tr = transform;
+	
+	//************* ADDED
+	audios = this.gameObject.GetComponents.<AudioSource>();
+	Debug.Log (audios.Length);
+		//footsteps is 11
+	//*******************
 }
 
 private function UpdateFunction () {
@@ -254,6 +262,21 @@ private function UpdateFunction () {
 		var projectedNewVelocity : float = Vector3.Dot(newHVelocity, oldHVelocity) / oldHVelocity.sqrMagnitude;
 		movement.velocity = oldHVelocity * Mathf.Clamp01(projectedNewVelocity) + movement.velocity.y * Vector3.up;
 	}
+	
+	//******************* ADDED
+	if(grounded  && (movement.velocity.x != 0.0f || movement.velocity.z != 0.0f)) {
+	//if((directionVector.x == 0.0F || directionVector.z == 0.0F) && directionVector.y != 0.0F) {
+		
+		Debug.Log("steppin time");
+		
+		if(!audios[13].isPlaying) {
+			audios[13].Play();
+		}
+	}
+	else {
+		audios[13].Stop();
+	}
+	//*************************
 	
 	if (movement.velocity.y < velocity.y - 0.001) {
 		if (movement.velocity.y < 0) {
