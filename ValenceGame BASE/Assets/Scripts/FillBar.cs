@@ -15,6 +15,7 @@ public class FillBar : MonoBehaviour {
     public Text text4;
     public Text text5;
     public Text text6;
+	public Text alert;
     public GameObject player;
     public float react1;
     public float react2;
@@ -72,7 +73,41 @@ public class FillBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+		if(Input.GetButton("React") && prod1 == 400f){
+			alert.text = "Product tank is full";		
+			text4.color = Color.red;
+		}
+
+		if(Input.GetButton("React") && prod2 == 400f){
+			alert.text = "Product tank is full";
+			text5.color = Color.red;
+		}
+		if(Input.GetButton("React") && react1 == 0f){
+			alert.text = "Reactant tank is empty";		
+			text1.color = Color.red;
+		}
+		
+		if(Input.GetButton("React") && react2 == 0f){
+			alert.text = "Reactant tank is empty";
+			text2.color = Color.red;
+		}
+		/*
+		if(Input.GetKeyDown(KeyCode.R) && prod3 == 400f){
+			alert.text = "Product tank is full";
+			text6.color = Color.red;
+		}
+		*/
+		if(!Input.GetButton("React")){
+			wait (3);
+			alert.text = "";
+			text1.color = Color.white;
+			text2.color = Color.white;
+			text4.color = Color.white;
+			text5.color = Color.white;
+			//text6.color = Color.white;
+		}
+
+		
         // Detect change in active reaction and change GUI accordingly
         Chemical.Reaction activeReaction = player.GetComponent<GunScript>().activeReact;
         if(activeReaction != guiReaction)
@@ -109,5 +144,9 @@ public class FillBar : MonoBehaviour {
         //prod3 = (float)player.GetComponent<GunScript>().prodTank3.capacity;
        // fillBar6.size = prod3 / 400f;
         //text6.text = player.GetComponent<GunScript>().prodTank3.substance.getFormula();
+	}
+
+	private IEnumerator wait(int seconds){
+		yield return new WaitForSeconds ((float)seconds);
 	}
 }
