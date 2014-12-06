@@ -79,7 +79,7 @@ public class IceWater : Chemical.Compound {
 //			Vector3 aPosition = new Vector3(1, 1, 1);
 //			this.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.localScale, new Vector3(0.99F, 0.99F, 0.99F));
             Debug.Log (Time.deltaTime);
-            this.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.localScale, new Vector3((1F - Time.deltaTime), (1F - Time.deltaTime), (1F - Time.deltaTime)));
+            this.gameObject.transform.parent.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.parent.gameObject.transform.localScale, new Vector3((1F - Time.deltaTime), (1F - Time.deltaTime), (1F - Time.deltaTime)));
 			
 			/*if(this.gameObject.transform.localScale.x < 0.25F) {
 				//this.gameObject.gameObject.SetActive(false);
@@ -101,7 +101,8 @@ public class IceWater : Chemical.Compound {
 			Destroy (this.gameObject.gameObject);
 		}*/
 
-		if(this.gameObject.transform.localScale.x < 0.50F) {
+        if (this.gameObject.transform.parent.gameObject.transform.localScale.x < 0.50F)
+        {
 			this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 100, this.gameObject.transform.position.z);
 			isMoved = true;
 		}
