@@ -651,28 +651,32 @@ public class GunScript : MonoBehaviour
     }
 	public void nextSelection(){
 		if (reactTank1.isActive) {
-				selectTank (reactTank2);
-		} else if (reactTank2.isActive) {
-				selectTank (prodTank1);
-		} else if (prodTank1.isActive) {
+			selectTank (reactTank2);
+		} else if (reactTank2.isActive && activeReact.Product2 != null) {
 				selectTank (prodTank2);
+		} else if (reactTank2.isActive) {
+			selectTank (prodTank1);
 		} else if (prodTank2.isActive) {
+			selectTank (prodTank1);
+		} else if (prodTank1.isActive ) {
 				selectTank (reactTank1);
 		} else {
 			selectTank (reactTank1);
 		}
 	}
 	public void previousSelection(){
-		if (reactTank1.isActive) {
-			selectTank (prodTank2);
-		} else if (reactTank2.isActive) {
+		if (reactTank2.isActive) {
 			selectTank (reactTank1);
+		} else if (reactTank1.isActive) {
+			selectTank (prodTank1);
+		} else if (prodTank1.isActive && activeReact.Product2 != null) {
+			selectTank (prodTank2);
 		} else if (prodTank1.isActive) {
 			selectTank (reactTank2);
-		} else if (prodTank2.isActive) {
-			selectTank (prodTank1);
+		} else if (prodTank2.isActive ) {
+			selectTank (reactTank2);
 		} else {
-			selectTank (prodTank2);
+			selectTank (reactTank1);
 		}
 	}
 }
