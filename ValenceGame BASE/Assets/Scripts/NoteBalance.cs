@@ -277,20 +277,7 @@ public class NoteBalance : MonoBehaviour
 
 
         // Display note text
-        string noteText1 = @"<color=black>This is the hydrogen and oxygen lab. You’ll need to utilize all your resources to make it out of here in one piece. 
-I know it’s still a prototype, but maybe the Catalyst can help you. Its database is still incomplete, so you’ll have to program it yourself. I don’t have much time, but I’ll leave you with this unbalanced equation to get you started...
-
-☐ H2 + ☐ O2 -> ☐ H2O
-
-Just in case you forgot, chemistry is not magic. Elements must be combined in certain proportions to react - they cannot violate the laws of conservation of mass. 
-In each reaction, there must be the same amount of each element on both sides of the equation. 
-
-Large numbers multiply across the entire compound, while subscripts only apply to the element they are attached to. 
-For example: A2 + 2B2 -> 2A2B.</color>";
-
-        //string noteText1 = string.Format("({0},{1})", Screen.width, Screen.height);
-
-        GUI.Label(new Rect(40, 50, Screen.width - 80f, (balanceButtonRect.y - 20) - 50), noteText1, noteTextStyle);
+        GUI.Label(new Rect(40, 50, Screen.width - 80f, (balanceButtonRect.y - 20) - 50), chemReaction.NoteText, noteTextStyle);
 
         //GUI.Label(new Rect(40, 300, Screen.width - 80f, 150), noteText2, noteTextStyle);
     }
