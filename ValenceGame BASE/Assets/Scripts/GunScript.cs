@@ -263,30 +263,14 @@ public class GunScript : MonoBehaviour
         //Tank selection---------------------------------------------------------------------
         //Sets what is shot out based on what tank is selected
         //if tank is empty with no assigned value, will set what is shot to null
-        if (Input.GetKeyDown("1"))
+		if (Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyDown(KeyCode.N))
         {
-            selectTank(reactTank1);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            selectTank(reactTank2);
-        }
-        if (Input.GetKeyDown("3"))
-        {
-            selectTank(reactTank3);
-        }
-        if (Input.GetKeyDown ("4")) 
-        {
-            selectTank(prodTank1);
-        }
-        if (Input.GetKeyDown("5"))
-        {
-            selectTank(prodTank2);
-        }
-        if (Input.GetKeyDown("6"))
-        {
-            selectTank(prodTank3);
-        }
+			nextSelection();
+		}
+		if (Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.P))
+		{
+			previousSelection();
+		}
 
         // React Button
         if (Input.GetKey("r") && activeReact != null)
@@ -423,7 +407,7 @@ public class GunScript : MonoBehaviour
 		}
 
         //reaction selection-----------------------------------------------------------------
-        if(Input.GetAxis("Mouse ScrollWheel") > 0) //scrollup
+        if(Input.GetKeyDown(KeyCode.Tab)) //scrollup
         {
             ++reactIndex;
             if(reactIndex > reactions.Length - 1){
@@ -435,6 +419,7 @@ public class GunScript : MonoBehaviour
             }
             
         }
+		/*
         if (Input.GetAxis("Mouse ScrollWheel") < 0)//scrolldown
         {
             --reactIndex;
@@ -447,6 +432,7 @@ public class GunScript : MonoBehaviour
             }
            
         }
+        */
         //need way to "lock" reaction when selected
 
         //initializing for new reaction -----------------------------------------------
@@ -917,4 +903,34 @@ public class GunScript : MonoBehaviour
         
 
     }
+	public void nextSelection(){
+		if (reactTank1.isActive) {
+			selectTank (reactTank2);
+		} else if (reactTank2.isActive && activeReact.Product2 != null) {
+				selectTank (prodTank2);
+		} else if (reactTank2.isActive) {
+			selectTank (prodTank1);
+		} else if (prodTank2.isActive) {
+			selectTank (prodTank1);
+		} else if (prodTank1.isActive ) {
+				selectTank (reactTank1);
+		} else {
+			selectTank (reactTank1);
+		}
+	}
+	public void previousSelection(){
+		if (reactTank2.isActive) {
+			selectTank (reactTank1);
+		} else if (reactTank1.isActive) {
+			selectTank (prodTank1);
+		} else if (prodTank1.isActive && activeReact.Product2 != null) {
+			selectTank (prodTank2);
+		} else if (prodTank1.isActive) {
+			selectTank (reactTank2);
+		} else if (prodTank2.isActive ) {
+			selectTank (reactTank2);
+		} else {
+			selectTank (reactTank1);
+		}
+	}
 }
