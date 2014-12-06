@@ -432,7 +432,7 @@ For example: A2 + 2B2 -> 2A2B.</color>";
 
         // GUI elements for Product 2
         if (prod2Exist) {
-            Vector2 prod2Pos = new Vector2(arrowPos.x + 430, arrowPos.y - 100);
+            Vector2 prod2Pos = new Vector2(arrowPos.x + 330, arrowPos.y - 100);
 
             dispFormula = parseFormula(chemReaction.Product2.Formula);
             Rect pCoeff2Rect = new Rect(prod2Pos.x + 75, prod2Pos.y, 80, 100);
@@ -443,7 +443,7 @@ For example: A2 + 2B2 -> 2A2B.</color>";
 
         // GUI elements for Product 3
         if (prod3Exist && !prod2Exist) {
-            Vector2 prod3Pos = new Vector2(arrowPos.x + 740, arrowPos.y - 100);
+            Vector2 prod3Pos = new Vector2(arrowPos.x + 640, arrowPos.y - 100);
 
             dispFormula = parseFormula(chemReaction.Product3.Formula);
             Rect pCoeff3Rect = new Rect(prod3Pos.x + 75, prod3Pos.y, 80, 100);
@@ -453,7 +453,7 @@ For example: A2 + 2B2 -> 2A2B.</color>";
         }
 
         if (prod3Exist && prod2Exist) {
-            Vector2 prod3Pos = new Vector2(arrowPos.x + 740, arrowPos.y - 100);
+            Vector2 prod3Pos = new Vector2(arrowPos.x + 640, arrowPos.y - 100);
 
             dispFormula = parseFormula(chemReaction.Product3.Formula);
             Rect pCoeff3Rect = new Rect(prod3Pos.x + 75, prod3Pos.y, 80, 100);
