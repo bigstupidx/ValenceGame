@@ -228,11 +228,6 @@ public class GunScript : MonoBehaviour
         }
     }
 
-	//Flamethrowing method
-	void ejectFire() {
-    }
-
-
     // Update is called once per frame
     void Update()
     {
@@ -313,8 +308,6 @@ public class GunScript : MonoBehaviour
 						audios[8].Play ();
 					}
 				}
-
-
 
 				if(!startReactLoop && !startFlameLoop) {
 //					gunAudio.PlayOneShot(ACreactStart);
@@ -570,16 +563,14 @@ public class GunScript : MonoBehaviour
                     }
                     else     //if there is no active reaction, must select tank to fill
                     {
-                        Tank[] activeTanks = getActiveTanks();
-                        for (int i = 0; i < activeTanks.Length; ++i)
-                        {
-                            if (activeTanks[i].substance == null)  //can absorb anything into tank1
+                            if (reactTank1.substance == null)  //can absorb anything into tank1
                             {
-                                activeTanks[i].substance = hit2.transform.GetComponent<Chemical.Compound>();
+                                selectTank(reactTank1);
+                                reactTank1.substance = hit2.transform.GetComponent<Chemical.Compound>();
 
-                                activeTanks[i].capacity += 2;
+                                reactTank1.capacity += 2;
 
-                                absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(activeTanks[i].substance);
+                                absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank1.substance);
                                 absorbEffect.particleSystem.Play();
 
 								if(!startVacuumLoop) {
@@ -589,20 +580,16 @@ public class GunScript : MonoBehaviour
 								if(startVacuumLoop && !audios[2].isPlaying && !audios[1].isPlaying) {
 									audios[2].Play ();
 								}
-
-                                break;
+                               // break;
                             }
-                        }
                         bool error = true;
-                        for (int i = 0; i < activeTanks.Length; ++i)
-                        {
-                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeTanks[i].substance.Formula)
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank1.substance.Formula)
                             {
-                                if (activeTanks[i].capacity < fullCap)
+                                if (reactTank1.capacity < fullCap)
                                 {
-                                    activeTanks[i].capacity += 2;
+                                    reactTank1.capacity += 2;
 
-                                    absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(activeTanks[i].substance);
+                                    absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank1.substance);
                                     absorbEffect.particleSystem.Play();
 
 									if(!startVacuumLoop) {
@@ -619,9 +606,8 @@ public class GunScript : MonoBehaviour
 									//}
 								}
                                 error = false;
-                                break;
+                               // break;
                             }
-                        }
                         if(error && !audios[14].isPlaying) {
        //						audios[14].Play ();
                         }
@@ -739,14 +725,12 @@ public class GunScript : MonoBehaviour
                     }
                     else     //if there is no active reaction, must select tank to fill
                     {
-                        Tank[] activeTanks = getActiveTanks();
-                        for (int i = 0; i < activeTanks.Length; ++i)
-                        {
-                            if (activeTanks[i].substance == null)  //can absorb anything into tank1
-                            {
-                                activeTanks[i].substance = hit2.transform.GetComponent<Chemical.Compound>();
 
-                                activeTanks[i].capacity += 2;
+                        if (reactTank1.substance == null)  //can absorb anything into tank1
+                            {
+                                reactTank1.substance = hit2.transform.GetComponent<Chemical.Compound>();
+
+                                reactTank1.capacity += 2;
 
                                 if (!startVacuumLoop && !audios[1].isPlaying)
                                 {
@@ -757,16 +741,15 @@ public class GunScript : MonoBehaviour
 									audios[2].Play ();
 								}
 
-                                break;
+                               // break;
                             }
-                        }
-                        for (int i = 0; i < activeTanks.Length; ++i)
-                        {
-                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == activeTanks[i].substance.Formula)
+                        
+                        
+                            if (hit2.transform.GetComponent<Chemical.Compound>().getFormula() == reactTank1.substance.Formula)
                             {
-                                if (activeTanks[i].capacity < fullCap)
+                                if (reactTank1.capacity < fullCap)
                                 {
-                                    activeTanks[i].capacity += 2;
+                                    reactTank1.capacity += 2;
 
                                     if (!startVacuumLoop && !audios[1].isPlaying)
                                     {
@@ -788,10 +771,10 @@ public class GunScript : MonoBehaviour
 									}
 
                                 }
-                                break;
+                                //break;
                             }
                   //          audios[2].Stop();
-                        }
+                        
                     }
                 }
             }
@@ -867,6 +850,7 @@ public class GunScript : MonoBehaviour
             else
             {
                 isEmitting = false;
+
                 if(shootEffect != null)
                 {
                     shootEffect.particleSystem.Stop();

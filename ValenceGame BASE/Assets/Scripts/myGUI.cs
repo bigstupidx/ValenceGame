@@ -130,14 +130,14 @@ public class myGUI : MonoBehaviour
         ratH = (float)Screen.height / (float)relScreenH;
         ratW = (float)Screen.width / (float)relScreenW;
 
-        if (Event.current.type.Equals(EventType.Repaint))
+       /* if (Event.current.type.Equals(EventType.Repaint))
         {
             Rect temp = new Rect(10 * ratW, (Screen.height) - 130 * ratH, 200 * ratW, 30 * ratH);
             Rect temp2 = new Rect(10 * ratW, (Screen.height) - 130 * ratH, 200 * ratW, 30 * ratH);
             Rect pos = new Rect(10 * ratW, (Screen.height) - 130 * ratH, 200, 200);
             Graphics.DrawTexture(temp2, texture1, reactFillbar1);
         }
-        
+        */
         reactLength1 = (float)player.GetComponent<GunScript>().reactTank1.capacity * (((float)Screen.height - (100 * (float)ratH)) / (float)fullCap); //is relative to screen size
         reactLength2 = (float)player.GetComponent<GunScript>().reactTank2.capacity * (((float)Screen.height - (100 * (float)ratH)) / (float)fullCap);
         reactLength3 = (float)player.GetComponent<GunScript>().reactTank3.capacity * (((float)Screen.height - (100 * (float)ratH)) / (float)fullCap);
