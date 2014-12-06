@@ -17,7 +17,7 @@ public class Selection : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		react1.color = Color.clear;
+		//react1.color = Color.clear;
 		react2.color = Color.clear;
 		//react3.color = Color.black;
 		prod1.color = Color.clear;
@@ -67,9 +67,6 @@ public class Selection : MonoBehaviour {
 		if (player.GetComponent<GunScript> ().activeReact.Reactant1 != null) {
 			react1.color = Color.white;
 		} 
-		else {
-			react1.color = Color.clear;
-		}
 		if (player.GetComponent<GunScript> ().activeReact.Reactant2 != null) {
 			react2.color = Color.white;
 		}
