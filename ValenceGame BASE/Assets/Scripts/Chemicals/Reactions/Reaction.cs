@@ -183,6 +183,14 @@ namespace Chemical {
 			Exotherm, Endotherm, Combust, Refreshing, None
 		};
 
+        protected string noteText;
+        public string NoteText
+        {
+            get {
+                return noteText;
+            }
+        }
+
 
 //		protected Reaction(string rN) {
 //			reactName = rN;
