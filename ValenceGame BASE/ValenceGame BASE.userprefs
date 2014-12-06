@@ -1,20 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GunScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\FillBar.cs">
     <Files>
-      <File FileName="Assets\Scripts\FillBar.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Compounds\CarbDiox.cs" Line="1" Column="1" />
-      <File FileName="Assets\MakeIce.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\iceCollision.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GunScript.cs" Line="456" Column="5" />
-      <File FileName="Assets\Scripts\NoteBalance.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Reactions\WaterReac.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Reactions\MethaneCombust.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\pickUpObject.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Compounds\H2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Compounds\Methane.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Compounds\O2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Chemicals\Compounds\H2O.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FillBar.cs" Line="3" Column="1" />
+      <File FileName="Assets\Scripts\Selection.cs" Line="44" Column="29" />
+      <File FileName="Assets\Scripts\GunScript.cs" Line="16" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
