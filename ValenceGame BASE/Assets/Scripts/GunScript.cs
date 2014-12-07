@@ -565,9 +565,8 @@ public class GunScript : MonoBehaviour
                     {
                             if (reactTank1.substance == null)  //can absorb anything into tank1
                             {
-                                selectTank(reactTank1);
                                 reactTank1.substance = hit2.transform.GetComponent<Chemical.Compound>();
-
+                                selectTank(reactTank1);
                                 reactTank1.capacity += 2;
 
                                 absorbEffect = this.GetComponent<absorbEffectSwitcher>().switchEffect(reactTank1.substance);
@@ -729,6 +728,8 @@ public class GunScript : MonoBehaviour
                         if (reactTank1.substance == null)  //can absorb anything into tank1
                             {
                                 reactTank1.substance = hit2.transform.GetComponent<Chemical.Compound>();
+
+                                selectTank(reactTank1);
 
                                 reactTank1.capacity += 2;
 

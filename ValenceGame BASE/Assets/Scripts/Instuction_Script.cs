@@ -26,7 +26,7 @@ public class Instuction_Script : MonoBehaviour {
 		if(display)
 		{
 			GUI.Box (new Rect (200, 200, 250, 200), "WASD - Movement\nSpace - Jump\nRight Click - Absorb elements\nLeft Click - Fire elements\n" +
-				"Mouse Scroll Wheel - Choose reaction\n1-6 - Choose tank to shoot\nR - React\nQ - Vent\nE - Read\nI - Open and close instructions");
+				"Mouse Scroll Wheel - Choose element\n Tab - Choose Reaction\nR - React\nQ - Vent\nE - Read\nI - Open and close instructions");
 
 			GUI.Box(new Rect(275,370,100,30),"Press I to exit");
 		}
