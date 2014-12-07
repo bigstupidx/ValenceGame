@@ -8,7 +8,7 @@ public class EndCondition : MonoBehaviour {
         if (col.transform.name == "Level1")
         {
             coll = true;
-            Application.LoadLevel("Level1");
+            Application.LoadLevel("QuentinLeel");
         }
         if (col.transform.name == "End")
         {
