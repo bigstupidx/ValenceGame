@@ -57,6 +57,17 @@ public class WaterReac : Chemical.Reaction {
 		pCoeff3 = 0;
 		
 		energyType = energy.Refreshing;
+
+        noteText = @"<color=black>This is the hydrogen and oxygen lab. You’ll need to utilize all your resources to make it out of here in one piece. 
+I know it’s still a prototype, but maybe the Catalyst can help you. Its database is still incomplete, so you’ll have to program it yourself. I don’t have much time, but I’ll leave you with this unbalanced equation to get you started...
+
+☐ H2 + ☐ O2 -> ☐ H2O
+
+Just in case you forgot, chemistry is not magic. Elements must be combined in certain proportions to react - they cannot violate the laws of conservation of mass. 
+In each reaction, there must be the same amount of each element on both sides of the equation. 
+
+Large numbers multiply across the entire compound, while subscripts only apply to the element they are attached to. 
+For example: A2 + 2B2 -> 2A2B.</color>";
 	}
 	
 	// Update is called once per frame
