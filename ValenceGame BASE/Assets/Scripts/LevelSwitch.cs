@@ -8,7 +8,7 @@ public class LevelSwitch : MonoBehaviour {
         if (col.transform.name == "Player")
         {
             coll = true;
-            Application.LoadLevel("Level1");
+            Application.LoadLevel(1);
         }
     }
 }
