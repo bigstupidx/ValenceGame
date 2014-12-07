@@ -111,7 +111,7 @@ public class IceWater : Chemical.Compound {
     public void OnCollisionExit(Collision col){
         if (col.gameObject.GetComponent<iceCollision>() != null && isMoved)    //collision has ice collision
         {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject.transform.parent.gameObject);
         }
     }
 }
