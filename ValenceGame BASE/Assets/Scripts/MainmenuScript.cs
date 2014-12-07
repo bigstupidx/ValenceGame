@@ -81,9 +81,9 @@ public class MainmenuScript : MonoBehaviour
         descriptionXPos = Screen.width / 2 - descriptionWidth / 2;
         descriptionYPos = buttonColumnYStart + buttonHeight * 2 + buttonSpacing * 3;
 
-        GUI.DrawTexture(new Rect(0, 0, menuBackgroundWidth, menuBackgroundHeight), menuBackground, ScaleMode.ScaleToFit);
-        menuBackground.Play();
-		menuBackground.loop = true;
+       // GUI.DrawTexture(new Rect(0, 0, menuBackgroundWidth, menuBackgroundHeight), menuBackground, ScaleMode.ScaleToFit);
+        //menuBackground.Play();
+		//menuBackground.loop = true;
         GUI.skin = myGUISkin;
         GUI.DrawTexture(new Rect(titleXPos, titleYPos, titleWidth, titleHeight), valenceTitle, ScaleMode.ScaleToFit);
 

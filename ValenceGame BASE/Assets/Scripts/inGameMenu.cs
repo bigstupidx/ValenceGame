@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class inGameMenu : MonoBehaviour {
+public class inGameMenu : MonoBehaviour
+{
 
     public GUISkin myGUISkin;
 
@@ -17,31 +18,40 @@ public class inGameMenu : MonoBehaviour {
     public Texture2D exitHover;
     //public Texture2D exitActive;
 
+    public Texture2D menuBackground;
+
     private float buttonWidth;
     private float buttonHeight;
     private float buttonSpacing;
     private float buttonColumnXPos;
     private float buttonColumnYStart;
+    private float menuBackgroundWidth;
+    private float menuBackgroundHeight;
 
     public bool menuActive;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown("escape")) {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
             if (!menuActive)
             {
                 menuActive = true;
             }
         }
-	}
+    }
 
-    void OnGUI() {
-        if (menuActive) {
+    void OnGUI()
+    {
+        if (menuActive)
+        {
             Time.timeScale = 0.0f;
             Camera.main.GetComponent<MouseLook>().enabled = false;
             GameObject.FindWithTag("Player").GetComponent<MouseLook>().enabled = false;
@@ -54,21 +64,17 @@ public class inGameMenu : MonoBehaviour {
             buttonColumnXPos = Screen.width / 2 - buttonWidth / 2;
             buttonColumnYStart = Screen.height / 2;
 
+            menuBackgroundWidth = buttonWidth * 1.5f;
+            menuBackgroundHeight = buttonHeight * 5;
             GUI.skin = myGUISkin;
+
+            GUI.DrawTexture(new Rect(Screen.width / 2 - menuBackgroundWidth / 2, Screen.height / 2 - menuBackgroundHeight / 2, menuBackgroundWidth, menuBackgroundHeight), menuBackground, ScaleMode.StretchToFill);
 
             myGUISkin.button.normal.background = resume;
             myGUISkin.button.hover.background = resumeHover;
 
-            if (Input.GetKeyDown("escape"))
+            if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart - buttonHeight - buttonSpacing, buttonWidth, buttonHeight), ""))
             {
-                Time.timeScale = 1.0f;
-                Screen.showCursor = false;
-                menuActive = false;
-                Camera.main.GetComponent<MouseLook>().enabled = true;
-                GameObject.FindWithTag("Player").GetComponent<MouseLook>().enabled = true;
-            }
-
-            if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart, buttonWidth, buttonHeight), "")) {
                 Time.timeScale = 1.0f;
                 Screen.showCursor = false;
                 menuActive = false;
@@ -79,7 +85,8 @@ public class inGameMenu : MonoBehaviour {
             myGUISkin.button.normal.background = restart;
             myGUISkin.button.hover.background = restartHover;
 
-            if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart + buttonHeight + buttonSpacing, buttonWidth, buttonHeight), "")) {
+            if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart, buttonWidth, buttonHeight), ""))
+            {
                 Application.LoadLevel(Application.loadedLevelName);
                 Time.timeScale = 1.0f;
                 Screen.showCursor = false;
@@ -91,8 +98,11 @@ public class inGameMenu : MonoBehaviour {
             myGUISkin.button.normal.background = exit;
             myGUISkin.button.hover.background = exitHover;
 
-            if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart + buttonHeight * 2 + buttonSpacing * 2, buttonWidth, buttonHeight), "")) {
+            if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart + buttonHeight + buttonSpacing, buttonWidth, buttonHeight), ""))
+            {
                 Application.LoadLevel("MainMenu");
+                Time.timeScale = 1.0f;
+                menuActive = false;
             }
         }
     }
