@@ -27,6 +27,7 @@ public class inGameMenu : MonoBehaviour
     private float buttonColumnYStart;
     private float menuBackgroundWidth;
     private float menuBackgroundHeight;
+    private float textSize;
 
     public bool menuActive;
 
@@ -69,6 +70,11 @@ public class inGameMenu : MonoBehaviour
             GUI.skin = myGUISkin;
 
             GUI.DrawTexture(new Rect(Screen.width / 2 - menuBackgroundWidth / 2, Screen.height / 2 - menuBackgroundHeight / 2, menuBackgroundWidth, menuBackgroundHeight), menuBackground, ScaleMode.StretchToFill);
+
+
+            textSize = buttonHeight * .6f;
+            myGUISkin.label.fontSize = (int)textSize;
+            GUI.Label(new Rect(buttonColumnXPos, buttonColumnYStart - buttonHeight * 2 - buttonSpacing * 2, buttonWidth, buttonHeight), "paused");
 
             myGUISkin.button.normal.background = resume;
             myGUISkin.button.hover.background = resumeHover;

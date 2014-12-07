@@ -48,7 +48,7 @@ public class MainmenuScript : MonoBehaviour
     private float descriptionYPos;
     private float descriptionWidth;
     private float descriptionHeight;
-
+    private float textSize;
 
     void OnGUI()
     {
@@ -102,7 +102,9 @@ public class MainmenuScript : MonoBehaviour
             {
                 Application.Quit();
             }
-            GUI.DrawTexture(new Rect(descriptionXPos, descriptionYPos, descriptionWidth, descriptionHeight), valenceDescription, ScaleMode.ScaleToFit);
+            textSize = buttonHeight / 4;
+            myGUISkin.label.fontSize = (int)textSize;
+            GUI.Label(new Rect(descriptionXPos, descriptionYPos, descriptionWidth, descriptionHeight), "a first person chemistry game created by students at Texas A&M University");
         }
         else
         {
