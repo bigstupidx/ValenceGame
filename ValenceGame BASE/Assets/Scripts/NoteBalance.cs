@@ -286,14 +286,14 @@ public class NoteBalance : MonoBehaviour
     string parseFormula(string formula) {
         System.IO.StringWriter scribe = new System.IO.StringWriter ();
 
-        scribe.Write ("<color=white><size=100>");
+        scribe.Write ("<color=white><size=80>");
 
         foreach (char c in formula) {
             if(Char.IsLetter(c)) {
                 scribe.Write(c);
             }
             else {
-                scribe.Write("<size=50>" + c + "</size>");
+                scribe.Write("<size=40>" + c + "</size>");
             }
         }
 
