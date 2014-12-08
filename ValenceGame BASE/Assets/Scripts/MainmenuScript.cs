@@ -114,7 +114,7 @@ public class MainmenuScript : MonoBehaviour
             myGUISkin.button.hover.background = level1Hover;
             if (GUI.Button(new Rect(buttonColumnXPos, buttonColumnYStart, buttonWidth, buttonHeight), ""))
             {
-                Application.LoadLevel("testScene");
+                Application.LoadLevel("StoryIntro");
             }
 
             if (level1Complete) {
