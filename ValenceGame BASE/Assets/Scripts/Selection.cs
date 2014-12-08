@@ -64,27 +64,29 @@ public class Selection : MonoBehaviour {
 		}
 	}
 	private void clearUnusedFrames(){
-		if (player.GetComponent<GunScript> ().activeReact.Reactant1 != null) {
-			react1.color = Color.white;
-		} 
-		if (player.GetComponent<GunScript> ().activeReact.Reactant2 != null) {
-			react2.color = Color.white;
-		}
-		else {
-			react2.color = Color.clear;
-		}
-		if (player.GetComponent<GunScript> ().activeReact.Product1 != null) {
-			prod1.color = Color.white;
-		}
-		else {
-			prod1.color = Color.clear;
-		}
-		if (player.GetComponent<GunScript> ().activeReact.Product2 != null) {
-			prod2.color = Color.white;
-		}
-		else {
-			prod2.color = Color.clear;
-		}
+        if (player.GetComponent<GunScript>().activeReact != null) { 
+		    if (player.GetComponent<GunScript> ().activeReact.Reactant1 != null) {
+			    react1.color = Color.white;
+		    } 
+		    if (player.GetComponent<GunScript> ().activeReact.Reactant2 != null) {
+			    react2.color = Color.white;
+		    }
+		    else {
+			    react2.color = Color.clear;
+		    }
+		    if (player.GetComponent<GunScript> ().activeReact.Product1 != null) {
+			    prod1.color = Color.white;
+		    }
+		    else {
+			    prod1.color = Color.clear;
+		    }
+		    if (player.GetComponent<GunScript> ().activeReact.Product2 != null) {
+			    prod2.color = Color.white;
+		    }
+		    else {
+			    prod2.color = Color.clear;
+		    }
+        }
 		//} else {
 			//react1.color = Color.white;
 		//}

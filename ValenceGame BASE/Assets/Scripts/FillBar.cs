@@ -110,37 +110,47 @@ public class FillBar : MonoBehaviour {
 		
         // Detect change in active reaction and change GUI accordingly
         Chemical.Reaction activeReaction = player.GetComponent<GunScript>().activeReact;
+        
         if(activeReaction != guiReaction)
         {
             guiReaction = activeReaction;
             SetGUIReaction(activeReaction);
         }
 
-        react1 = (float)player.GetComponent<GunScript>().reactTank1.capacity;
-        fillBar1.size = react1 / 400f;
-        text1.text = player.GetComponent<GunScript>().reactTank1.substance.getFormula();
-        fillBar1.image.color = player.GetComponent<GunScript>().reactTank1.substance.color;
+        if (player.GetComponent<GunScript>().reactTank1.substance != null)
+        { 
+            react1 = (float)player.GetComponent<GunScript>().reactTank1.capacity;
+            fillBar1.size = react1 / 400f;
+            text1.text = player.GetComponent<GunScript>().reactTank1.substance.getFormula();
+            fillBar1.image.color = player.GetComponent<GunScript>().reactTank1.substance.color;
+        }
 
-        react2 = (float)player.GetComponent<GunScript>().reactTank2.capacity;
-        fillBar2.size = react2 / 400f;
-        text2.text = player.GetComponent<GunScript>().reactTank2.substance.getFormula();
-        fillBar2.image.color = player.GetComponent<GunScript>().reactTank2.substance.color;
-
+        if (player.GetComponent<GunScript>().reactTank2.substance != null)
+        { 
+            react2 = (float)player.GetComponent<GunScript>().reactTank2.capacity;
+            fillBar2.size = react2 / 400f;
+            text2.text = player.GetComponent<GunScript>().reactTank2.substance.getFormula();
+            fillBar2.image.color = player.GetComponent<GunScript>().reactTank2.substance.color;
+        }
         //react3 = (float)player.GetComponent<GunScript>().reactTank3.capacity;
         //fillBar3.size = react3 / 400f;
         //text3.text = player.GetComponent<GunScript>().reactTank3.substance.getFormula();
+        if (player.GetComponent<GunScript>().prodTank1.substance != null)
+        {
+            prod1 = (float)player.GetComponent<GunScript>().prodTank1.capacity;
+            fillBar4.size = prod1 / 400f;
+            text4.text = player.GetComponent<GunScript>().prodTank1.substance.getFormula();
+            fillBar4.image.color = player.GetComponent<GunScript>().prodTank1.substance.color;
+        }
 
-        prod1 = (float)player.GetComponent<GunScript>().prodTank1.capacity;
-        fillBar4.size = prod1 / 400f;
-        text4.text = player.GetComponent<GunScript>().prodTank1.substance.getFormula();
-        fillBar4.image.color = player.GetComponent<GunScript>().prodTank1.substance.color;
-
-        prod2 = (float)player.GetComponent<GunScript>().prodTank2.capacity;
-        fillBar5.size = prod2 / 400f;
-        text5.text = "";
-        text5.text = player.GetComponent<GunScript>().prodTank2.substance.getFormula();
-        fillBar5.image.color = player.GetComponent<GunScript>().prodTank2.substance.color;
-
+        if (player.GetComponent<GunScript>().prodTank2.substance != null)
+        {
+            prod2 = (float)player.GetComponent<GunScript>().prodTank2.capacity;
+            fillBar5.size = prod2 / 400f;
+            text5.text = "";
+            text5.text = player.GetComponent<GunScript>().prodTank2.substance.getFormula();
+            fillBar5.image.color = player.GetComponent<GunScript>().prodTank2.substance.color;
+        }
         //prod3 = (float)player.GetComponent<GunScript>().prodTank3.capacity;
        // fillBar6.size = prod3 / 400f;
         //text6.text = player.GetComponent<GunScript>().prodTank3.substance.getFormula();
