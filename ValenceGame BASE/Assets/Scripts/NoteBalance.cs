@@ -166,6 +166,7 @@ public class NoteBalance : MonoBehaviour
             if (hit.transform != null && hit.transform.tag == "Note")
             {
                 activateNote = true;
+                GameObject.Find("Player").GetComponent<Instuction_Script>().display = false;
             }
         }
     }

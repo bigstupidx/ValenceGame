@@ -4,7 +4,7 @@ using System.Collections;
 public class Instuction_Script : MonoBehaviour {
 
 	public GUISkin mySkin;
-	bool display=true;
+	public bool display=true;
 
 	// Use this for initialization
 	void Start () {

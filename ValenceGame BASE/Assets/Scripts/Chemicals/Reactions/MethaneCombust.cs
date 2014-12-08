@@ -25,7 +25,7 @@ public class MethaneCombust : Chemical.Reaction {
 		
 		energyType = energy.Combust;
 
-        noteText = @"This is the Thermal Reaction lab. Some of the pipes burst in the series of explosions, but I think the ice machine over there is still functional...
+        noteText = @"This is the Thermal Reaction lab. Some of the pipes burst in the explosions, but I think the ice machine over there is still functional...
 
 I don’t know what use it is without water though. To be honest, I don’t know why I’m working here... I don’t know anything about chemistry. 
 
