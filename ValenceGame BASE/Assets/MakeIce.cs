@@ -31,7 +31,8 @@ public class MakeIce : MonoBehaviour {
 
                     iceCrash.Play();
 
-					Instantiate(ice, new Vector3(target.transform.position.x, target.transform.position.y + 4, target.transform.position.z), Quaternion.identity);
+					Instantiate(ice, new Vector3(target.transform.position.x, target.transform.position.y - 10, target.transform.position.z), Quaternion.identity);
+                    GameObject.Find("IceCube").transform.position = new Vector3(target.transform.position.x, target.transform.position.y+1, target.transform.position.z);
 					capacity = 0;
 				}
 			}
