@@ -13,6 +13,7 @@ public class EndCondition : MonoBehaviour {
         if (col.transform.name == "End")
         {
             coll = true;
+            Screen.showCursor = true;
             Application.LoadLevel("MainMenu");
         }
     }

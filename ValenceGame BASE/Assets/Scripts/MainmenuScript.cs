@@ -60,9 +60,11 @@ public class MainmenuScript : MonoBehaviour
             buttonWidth = buttonHeight * 3;
         }
         else {*/
+        if (menuBackground != null)
+        {
             menuBackgroundHeight = Screen.height;
             menuBackgroundWidth = menuBackgroundHeight / 0.5625f;
-
+        }
             buttonWidth = Screen.width / 6;
             buttonHeight = buttonWidth / 3;
         //}
