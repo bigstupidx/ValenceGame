@@ -524,6 +524,8 @@ public class NoteBalance : MonoBehaviour
     }
 
     void showText(){
-        GUI.Label(new Rect(Screen.width/2 - 60, 80, Screen.width, Screen.height), "<size=24>Press 'E' to look at lab note.</size>");
+        GUIStyle g = new GUIStyle();
+        g.normal.textColor = Color.black;
+        GUI.Label(new Rect(Screen.width/2 - 60, 80, Screen.width, Screen.height), "<size=24>Press 'E' to look at lab note.</size>", g);
     }
 }
