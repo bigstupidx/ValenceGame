@@ -13,7 +13,7 @@ public class EndCondition : MonoBehaviour {
         if (col.transform.name == "End")
         {
             coll = true;
-            Application.Quit();
+            Application.LoadLevel("MainMenu");
         }
     }
 }
