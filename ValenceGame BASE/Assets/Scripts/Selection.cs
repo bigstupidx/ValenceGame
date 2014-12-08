@@ -32,36 +32,38 @@ public class Selection : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		clearUnusedFrames ();
-		if (player.GetComponent<GunScript> ().reactTank1.isActive) {
-			highlight1.color = Color.yellow;
-		}
-		else{
-			highlight1.color = Color.clear;
-		}
-		if (player.GetComponent<GunScript> ().reactTank2.isActive) {
-			highlight2.color = Color.yellow;
-		}
-		else{
-			highlight2.color = Color.clear;
-		}
-		if (player.GetComponent<GunScript> ().prodTank1.isActive) {
-			highlight3.color = Color.yellow;
-		}
-		else{
-			highlight3.color = Color.clear;
-		}
-		if (player.GetComponent<GunScript> ().prodTank2.isActive && player.GetComponent<GunScript> ().activeReact.Product2 != null) {
-			highlight4.color = Color.yellow;
-		}
-		else{
-			highlight4.color = Color.clear;
-		}
-		if(Input.GetKeyDown(KeyCode.Tab)){
-			highlight1.color = Color.clear;
-			highlight2.color = Color.clear;
-			highlight3.color = Color.clear;
-			highlight4.color = Color.clear;
-		}
+        if (player.GetComponent<GunScript>().activeReact != null) { 
+		    if (player.GetComponent<GunScript> ().reactTank1.isActive) {
+			    highlight1.color = Color.yellow;
+		    }
+		    else{
+			    highlight1.color = Color.clear;
+		    }
+		    if (player.GetComponent<GunScript> ().reactTank2.isActive) {
+			    highlight2.color = Color.yellow;
+		    }
+		    else{
+			    highlight2.color = Color.clear;
+		    }
+		    if (player.GetComponent<GunScript> ().prodTank1.isActive) {
+			    highlight3.color = Color.yellow;
+		    }
+		    else{
+			    highlight3.color = Color.clear;
+		    }
+		    if (player.GetComponent<GunScript> ().prodTank2.isActive && player.GetComponent<GunScript> ().activeReact.Product2 != null) {
+			    highlight4.color = Color.yellow;
+		    }
+		    else{
+			    highlight4.color = Color.clear;
+		    }
+		    if(Input.GetKeyDown(KeyCode.Tab)){
+			    highlight1.color = Color.clear;
+			    highlight2.color = Color.clear;
+			    highlight3.color = Color.clear;
+			    highlight4.color = Color.clear;
+		    }
+         }
 	}
 	private void clearUnusedFrames(){
         if (player.GetComponent<GunScript>().activeReact != null) { 
