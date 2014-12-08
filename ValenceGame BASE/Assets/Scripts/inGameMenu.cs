@@ -67,6 +67,8 @@ public class inGameMenu : MonoBehaviour
 
             menuBackgroundWidth = buttonWidth * 1.5f;
             menuBackgroundHeight = buttonHeight * 5;
+            Debug.Log(menuBackgroundWidth);
+            Debug.Log(menuBackgroundHeight);
             GUI.skin = myGUISkin;
 
             GUI.DrawTexture(new Rect(Screen.width / 2 - menuBackgroundWidth / 2, Screen.height / 2 - menuBackgroundHeight / 2, menuBackgroundWidth, menuBackgroundHeight), menuBackground, ScaleMode.StretchToFill);
