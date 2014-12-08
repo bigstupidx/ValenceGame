@@ -13,7 +13,7 @@ public class Instuction_Script : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.I))
+		if (Input.GetKeyDown(KeyCode.F1))
 		{
 			if(display==true){display=false;}
 			else if(display==false){display=true;}
@@ -25,10 +25,10 @@ public class Instuction_Script : MonoBehaviour {
 
 		if(display)
 		{
-			GUI.Box (new Rect (200, 200, 250, 200), "WASD - Movement\nSpace - Jump\nRight Click - Absorb elements\nLeft Click - Fire elements\n" +
-				"Mouse Scroll Wheel - Choose element\n Tab - Choose Reaction\nR - React\nQ - Vent\nE - Read\nI - Open and close instructions");
+			GUI.Box (new Rect (200, 200, 250, 230), "WASD - Movement\nSpace - Jump\nRight Click - Absorb elements\nLeft Click - Fire elements\n" +
+				"Mouse Scroll Wheel - Choose element\n Tab - Choose Reaction\nR - React\nQ - Vent\nE - Read\nF1 - Open and close instructions");
 
-			GUI.Box(new Rect(275,370,100,30),"Press I to exit");
+			GUI.Box(new Rect(250,400,150,30),"Press F1 to exit");
 		}
 	}
 }

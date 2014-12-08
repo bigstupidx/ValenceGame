@@ -556,9 +556,9 @@ public class GunScript : MonoBehaviour
                             }
                         }
 						else {
-							//if(!audios[14].isPlaying) {
-		//						audios[14].Play ();
-							//}
+							if(!audios[14].isPlaying) {
+								audios[14].Play ();
+							}
 						}
                     }
                     else     //if there is no active reaction, must select tank to fill
@@ -600,9 +600,9 @@ public class GunScript : MonoBehaviour
 									}
                                 }
 								else {
-									//if(!audios[14].isPlaying) {
-				//						audios[14].Play ();
-									//}
+									if(!audios[14].isPlaying) {
+										audios[14].Play ();
+									}
 								}
                                 error = false;
                                // break;
